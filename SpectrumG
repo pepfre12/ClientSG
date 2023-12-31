@@ -1,34 +1,4 @@
-local SE=false
-for _, x in pairs(listfiles("")) do
-if string.find(x, "SPECTRUM") then
-SE=true
-end
-end
-if SE == false then
 
-local SPECTRUM=makefolder("SPECTRUM")
-game:GetService("StarterGui"):SetCore("SendNotification", { 
-    Title = "NEPTUNE";
-    Text = "First time load. Downloading needed songs: 129mb";
-     Icon = "rbxthumb://type=Asset&id=5107182114&w=150&h=150"})
- Duration = 16;
-
-local MY=writefile("SPECTRUM/MAYHEM.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1nyEnpmhx5hwR7jH3kms8p6dDSeRR4PLB&export=download"))
-local PR=writefile("SPECTRUM/PURITY.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1x4AwILCCl7PKYDeipgU7whGT5R36hbhY&export=download"))
-local CR=writefile("SPECTRUM/CORRUPTION.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1UzdNlG1qqbwvS6Dzu4k0axa5YdjGHO9g&export=download"))
-local CS=writefile("SPECTRUM/CHAOS.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=13DrWmZCWp4fRxGq6CkhjofByNmjONUTS&export=download"))
-local DV=writefile("SPECTRUM/DIVINITY.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1EDG3FhvOtkYt7SjTfjDsixq9wC9r11kf&export=download"))
-local DT=writefile("SPECTRUM/DESTINY.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1N-TjxBDHH6yKMv8OGJw3GAG3vbF959qD&export=download"))
-local OM=writefile("SPECTRUM/OMEGA.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1fqbM2a2TPXQtEImk6V-P3WsezDyO2bPX&export=download"))
-local CZ=writefile("SPECTRUM/CRAZED.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1vjdZ0xX0MY8F42HaQ0ksDGPcaKU4w_-7&export=download"))
-local VX=writefile("SPECTRUM/VANTA-X.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1Su5GzNqzb7oJjOqq55Yra_jLnEjVgC0x&export=download"))
-local FX=writefile("SPECTRUM/FALLENX.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1VNk_b26eXK_2T_fwcwHV5f09tzV-USmH&export=download"))
-local TH=writefile("SPECTRUM/THEORIES.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1wXT5oKDYQP35o8Nq6JgxawBjdCCueDMs&export=download"))
-local EQ=writefile("SPECTRUM/EQAULITY.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1MuUqyOk_lqmAKlvw0BzzqRiebehKUXoC&export=download"))
-local CA=writefile("SPECTRUM/CALAMITY.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1kZqgiSGKI4F8LvaT42jvrRDw_C0sEyye&export=download"))
-local CT=writefile("SPECTRUM/CATASTROPHE.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1J3xNd0YKygDdQRbBeiz6D88hPiIsLBg1&export=download"))
-local PD=writefile("SPECTRUM/PANDORA.mp3", game:HttpGet("https://drive.google.com/u/0/uc?id=1NxHIJZi64cLXzwyaNfdbI3mz_nfe3SxF&export=download"))
-end
 
 Player = game.Players.LocalPlayer
 Mouse = Player:GetMouse()
