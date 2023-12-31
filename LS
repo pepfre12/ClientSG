@@ -1,34 +1,6 @@
 --[[
-//Last Star Fe v.2//
--Credits:
---SS to Fe--
--Jemasco123- dummy#1569
---Align, Fix--
---Maxilito- maxilito#4395
--(GH HATS)
--gh 11280403158, 11280335305, 11280386368, 11280443018, 11280428354, 11280299133, 4773932088
-Thx For Buying My Last Star Script If you Notice Errors Or Some Glitches Notice Me!--
--- ]]
---[[
 
-██╗░░░░░░█████╗░░██████╗████████╗  ░██████╗████████╗░█████╗░██████╗░
-██║░░░░░██╔══██╗██╔════╝╚══██╔══╝  ██╔════╝╚══██╔══╝██╔══██╗██╔══██╗
-██║░░░░░███████║╚█████╗░░░░██║░░░  ╚█████╗░░░░██║░░░███████║██████╔╝
-██║░░░░░██╔══██║░╚═══██╗░░░██║░░░  ░╚═══██╗░░░██║░░░██╔══██║██╔══██╗
-███████╗██║░░██║██████╔╝░░░██║░░░  ██████╔╝░░░██║░░░██║░░██║██║░░██║
-╚══════╝╚═╝░░╚═╝╚═════╝░░░░╚═╝░░░  ╚═════╝░░░░╚═╝░░░╚═╝░░╚═╝╚═╝░░╚═╝
--- ]]
-
-local aerguijhdfcvkejigknfd = "Script RE-Made by: Ronald McDonald SS dev#2194"
-local fury = false
-local chatlines = true
-local AnimationPlayer = game:GetObjects("rbxassetid://12088767913")[1]
-local script = game:GetObjects("rbxassetid://13868824901")[1]
-local Owner = game.Players.LocalPlayer
-
-local repStorage = game:GetService("ReplicatedStorage")
-
---[[
+Script Status: non-FE/Client-sided
 
 Script written from scratch by Asarii_IV.
 A month-long project orientated around creating the ultimate multi-purpose glitcher.
@@ -38,20 +10,29 @@ Asarii_IV - Original creator and owner.
 StratopshericAero - CFrame animation base.
 GunsForGunsKidd - CFrame animation rigs.
 
+FE Credits:
+SkiddedDumb - FE Last Star owner
+Epiconister - Bug-fix/Extra
+
+Stupid Credit:
+pepfre - annoying creature
+
 ]]
+
+local aerguijhdfcvkejigknfd = "Script RE-Made by: Ronald McDonald SS dev#2194"
+local fury = false
+local chatlines = true
+local script = game:GetObjects("rbxassetid://13868824901")[1]
+local Owner = game:GetService("Players").LocalPlayer
 
 -- /// CORE FUNCTIONS
 
-CFA = function(X,Y,Z)
-	return(CFrame.Angles(math.rad(X),math.rad(Y),math.rad(Z)))
-end
+CFA = CFrame.Angles
 CFN = CFrame.new
 V3 = Vector3.new
-function rand(x,z)
-	return(math.random(x,z))
-end
+rand = math.random
 function CFR(nX,mX,nY,mY,nZ,mZ)
-	return (CFrame.Angles(math.rad(rand(nX,nX)),math.rad(rand(nY,mY)),math.rad(rand(nZ,mZ))))
+    return(CFrame.Angles(0,0,0))
 end
 
 local In,Out,InOut = Enum.EasingDirection.In,Enum.EasingDirection.Out,Enum.EasingDirection.InOut
@@ -177,17 +158,7 @@ if not game.StarterPlayer.StarterCharacterScripts:WaitForChild("LastStarEffects"
 	a.Disabled=false
 end
 
--- SAFETY CHECK FOR DESTROYING ALL CFRAME SCRIPTS
-plr.Humanoid.Died:Connect(function()
-	for i,v in pairs(workspace:GetDescendants()) do
-		if v:IsA("LocalScript") and v.Name == "CFrame"..plr.Name then
-			v:Destroy()
-		end
-	end
-end)
-
-script.LocalCFrame:Destroy()
-
+local Hum = plr:WaitForChild("Humanoid")
 local Head = plr:WaitForChild("Head")
 local Torso = plr:WaitForChild("Torso")
 local Root = plr:WaitForChild("HumanoidRootPart")
@@ -201,14 +172,13 @@ local RV = Root.Velocity/4
 
 local count = 0
 local Loudness = 0
-local wing1, wing2, wing3, wing4, wing5, wing6, wing7,wing8,wing9,wing10,wing11,wing12 = script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(),script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone()
 local core = script.Core
 
-core.Base.Cog.Transparency = 1
-core.Base.Cyli.Transparency = 1
-core.Base.Double.Transparency = 1
-core.Base.Dupli.Transparency = 1
-core.Base.Penta.Transparency = 1
+core.Base.Cog.Transparency = 0
+core.Base.Cyli.Transparency = 0
+core.Base.Double.Transparency = 0
+core.Base.Dupli.Transparency = 0
+core.Base.Penta.Transparency = 0
 core.Base.Anchored=false
 core.Parent = plr
 
@@ -216,6 +186,8 @@ local w = Instance.new("Motor6D",core)
 w.Part0 = core.Base
 w.Part1 = Torso
 w.Name = "CoreWeld"
+
+local wing1, wing2, wing3, wing4, wing5, wing6, wing7,wing8,wing9,wing10,wing11,wing12 = script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(),script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone(), script.Wing:Clone()
 
 local W1PC,W1SC = wing1.Primary.Color,wing1.Secondary.Color
 
@@ -234,23 +206,38 @@ for i,v in ipairs({w1,w2,w3,w4,w5,w6,w7,w8,w9,w10,w11,w12}) do
 end
 w1.Part1 = wing1.Core		w2.Part1 = wing2.Core		w3.Part1 = wing3.Core		w4.Part1 = wing4.Core		w5.Part1 = wing5.Core		w6.Part1 = wing6.Core		w7.Part1 = wing7.Core		w8.Part1 = wing8.Core		w9.Part1 = wing9.Core		w10.Part1 = wing10.Core		w11.Part1 = wing11.Core		w12.Part1 = wing12.Core
 
+for i,v in pairs({wing7,wing8,wing9,wing10,wing11,wing12}) do
+	v.Primary.Transparency=1
+	v.Secondary.Transparency=1
+	v.Spin.Transparency=1
+	v.Trail.Enabled=false
+	v.Primary.Main.Enabled=false
+	v.Secondary.Main.Enabled=false
+	v.Primary.PointLight.Enabled=false
+	v.Beam.Enabled=false
+	for _,c in pairs(v.Particle["0"]:GetChildren()) do
+		c.Enabled=false
+	end
+end
 
-local pointlight = Instance.new("PointLight",Torso)
+local pointlight = Instance.new("PointLight")
 pointlight.Color = C3R(255,0,0)
 pointlight.Brightness = 1.5
 pointlight.Range = 20
 
+local gui = script.PlayerGui
+
 local NG = script.NameGui
+NG.Adornee = Head
 NG.Parent = Head
 
-NG.LowerHalf.ScriptName.Text = "Skidded Dumb's Last Star "..nametodisplay
+NG.LowerHalf.ScriptName.Text = "LASTâ˜…STAR // "..nametodisplay
 
 local chat = script.ChatGui
-chat.Parent = Head
 
 local textserv = game:GetService("TextService")
 
-local player = game:GetService("Players"):WaitForChild(plr.Name)
+local player = game:GetService("Players").LocalPlayer
 local filter = ""
 
 local Theme = Instance.new("Sound",Root)
@@ -270,7 +257,7 @@ script.Events.VisualizerEvent.OnServerEvent:Connect(function(plr,LocalLoudness)
 end)
 
 if not workspace:FindFirstChild("LastStarMouseIgnore") then
-	script.LastStarMouseIgnore.Parent = workspace
+	script.LastStarMouseIgnore.Parent = game:GetService("Players").LocalPlayer.Character
 else
 	script.LastStarMouseIgnore:Destroy()
 end
@@ -282,20 +269,81 @@ for i,v in pairs({"LastStarEffects","LastStarCamShake","LastStarChatRemote"}) do
 	end
 end
 
-function chatmsg(msg)
-	if chatlines == true then	
-		local ChatRemote = game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageRequest
-		ChatRemote.FireServer(ChatRemote, msg, "All");
-	else		
+function chatfunc(msg)
+	local stupid = task.spawn(function()
+	    tween = function(stuff, time, customize)
+            local TweenService = game:GetService("TweenService")
+            local TimeInfo = TweenInfo.new(time)
+            TweenService:Create(stuff, TimeInfo, customize):Play()
+        end
+	    if Head:FindFirstChild("LastStarChat") then
+			Head:FindFirstChild("LastStarChat"):Destroy()
+		end
+		local chatsound = script.Sounds.ChatSound
+		local clonedchat = chat:Clone()
+		clonedchat.Name = "LastStarChat"
+		clonedchat.Parent = Head
+		clonedchat.Adornee = clonedchat.Parent
+		local Content,Content1,Content2 = clonedchat.Content,clonedchat.Content1,clonedchat.Content2
+		Content.Text,Content1.Text,Content2.Text = msg,msg,msg
+		coroutine.resume(coroutine.create(function()
+			while clonedchat ~= nil do
+				task.wait()
+				tween(Content,.2,{Rotation=math.random(-7,7)})
+				tween(Content1,.2,{Rotation=math.random(-7,7)})
+				tween(Content2,.2,{Rotation=math.random(-7,7)})
+				
+				tween(Content,.2,{Size=UDim2.new(1,0,1,math.random(-2,2))})
+				tween(Content1,.2,{Size=UDim2.new(1,0,1,math.random(-2,2))})
+				tween(Content2,.2,{Size=UDim2.new(1,0,1,math.random(-2,2))})
+				
+				Content.TextColor3,Content1.TextColor3,Content2.TextColor3 = NG.LowerHalf.FormName.TextColor3,NG.LowerHalf.FormName.TextColor3,NG.LowerHalf.FormName.TextColor3
+				Content.TextStrokeColor3,Content1.TextStrokeColor3,Content2.TextStrokeColor3 = NG.LowerHalf.FormName.TextStrokeColor3,NG.LowerHalf.FormName.TextStrokeColor3,NG.LowerHalf.FormName.TextStrokeColor3
+			end
+		end))
+		for i = 1,string.len(msg),1 do
+			task.wait()
+			chatsound1 = Instance.new("Sound", Head)
+			chatsound1.SoundId = "rbxassetid://177266782"
+			chatsound1.Volume = 3
+			chatsound1.PlayOnRemove = true
+			chatsound1.Playing = true
+			Content.Text,Content1.Text,Content2.Text = string.sub(msg,1,i),string.sub(msg,1,i),string.sub(msg,1,i)
+		end
+		repeat task.wait() until Content.Text == msg
+		task.wait(4)
+		tween(Content,.5,{TextTransparency=1})
+		tween(Content1,.5,{TextTransparency=1})
+		tween(Content2,.5,{TextTransparency=1})
+		repeat task.wait() until Content.TextTransparency == 1
+		clonedchat:Destroy()
+	end)
+end
+
+function camshake(pos,power,time)
+    for index, child in pairs(workspace:GetChildren()) do
+		if child:FindFirstChildOfClass("Humanoid") then
+			local human = child:FindFirstChildOfClass("Humanoid")
+			local root = child:FindFirstChild("HumanoidRootPart")
+			if root and game.Players:GetPlayerFromCharacter(child) then
+				if (root.Position - pos).Magnitude <= 35 then
+					local timer = math.ceil(time) or 35
+                    local power = math.ceil(power) or 5
+                    if hum then
+	                    local fader = power/timer
+	                    for i = 1, timer do
+		                    task.wait()
+		                    Hum.CameraOffset = V3(rand(-(power-(fader*i)),(SHAKE-(FADER*i)))/10,rand(-(power-(fader*i)),(power-(fader*i)))/10,rand(-(power-(fader*i)),(power-(fader*i)))/10)
+	                    end
+	                    Hum.CameraOffset = V3()
+                    end
+				end
+			end
+		end
 	end
 end
 
-local d = workspace:WaitForChild("LastStarMouseIgnore")
-for i,v in pairs(d:GetChildren()) do
-	if not v:IsA("Folder") then
-		v.Position = V3(99999,99999,99999)
-	end
-end
+local d = game:GetService("Players").LocalPlayer.Character:WaitForChild("LastStarMouseIgnore")
 
 function effect(shape,cframe,sizevector,color,material,transparency,tweentime,easingstyle,easingdirection,reverse,tableprop,newtransparency,transparencystyle)
 	game:GetService("ReplicatedStorage").LastStarEffects:FireAllClients(shape,cframe,sizevector,color,material,transparency,tweentime,easingstyle,easingdirection,reverse,tableprop,newtransparency,transparencystyle)
@@ -336,8 +384,6 @@ function sound(cframe,id,volume,playbackspeed,timeposition,distance)
 		a:Destroy()
 	end)
 end
-
-local Hum = plr:WaitForChild("Humanoid")
 
 Hum:SetStateEnabled(Enum.HumanoidStateType.FallingDown, false)
 Hum:SetStateEnabled(Enum.HumanoidStateType.Ragdoll, false)
@@ -395,29 +441,29 @@ if true == false then
 		local a = rand(1,2)
 		local c = W1SC
 		if a == 1 then c = W1PC end
-		effect("Sphere",Root.CFrame*CFR(0,360,0,360,0,360),V3(s*0.5,5,s*0.5),c,Neon,0,0.4,Quint,Out,false,{Size=V3(s*0.1,s*3,s*0.1)},1,Linear)
+		effect("Sphere",Root.CFrame,V3(s*0.5,5,s*0.5),c,Neon,0,0.4,Quint,Out,false,{Size=V3(s*0.1,s*3,s*0.1)},1,Linear)
 
 		local a = rand(1,2)
 		local c = W1SC
 		if a == 1 then c = W1PC end
-		local cf = Root.CFrame*CFR(0,360,0,360,0,360)
-		effect("HoleTornado",cf,V3(5,0.05,5),c,Neon,0,0.4,Sine,Out,false,{Size=V3(s*2,0.05,s*2);CFrame=cf*CFR(-50,50,-50,50,-50,50)},1,Linear)
+		local cf = Root.CFrame
+		effect("HoleTornado",cf,V3(5,0.05,5),c,Neon,0,0.4,Sine,Out,false,{Size=V3(s*2,0.05,s*2);CFrame=cf},1,Linear)
 
 		local ray = Ray.new(Root.Position,V3(0,-5,0))
 		local RPA,RPS,NO = workspace:FindPartOnRayWithIgnoreList(ray,{d,plr},false,true)
 		if RPA then
-			local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)*CFR(0,0,0,360,0,0)
+			local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)
 			local a = rand(1,2)
 			local c = W1SC
 			if a == 1 then c = W1PC end
 			local x = rand(900,1500)
-			effect("LightWind",cf,V3(100,0.05,100),c,Neon,0,rand(30,60)/100,Sine,Out,false,{Size=V3(x,0.05,x);CFrame=cf*CFR(0,0,-50,50,0,0)},1,Sine)
+			effect("LightWind",cf,V3(100,0.05,100),c,Neon,0,rand(30,60)/100,Sine,Out,false,{Size=V3(x,0.05,x);CFrame=cf},1,Sine)
 		end
 
 		local a = rand(1,2)
 		local c = W1SC
 		if a == 1 then c = W1PC end
-		local cf = Root.CFrame*CFR(0,360,0,360,0,360)
+		local cf = Root.CFrame
 		effect("Sphere",cf,V3(10,10,10),c,Neon,0,rand(30,50)/100,Sine,Out,false,{Size=V3(80,800,80);CFrame=cf*CFN(0,rand(1000,2000),0)},1,Sine)
 	end
 
@@ -426,15 +472,13 @@ if true == false then
 	camshake(Root.Position,200,70)
 end
 
-pointlight.Enabled = true
-
 for i,v in pairs({wing1,wing2,wing3,wing4,wing5,wing6}) do
-	v.Primary.Transparency=1
-	v.Secondary.Transparency=1
+	v.Primary.Transparency=0
+	v.Secondary.Transparency=0
 	v.Spin.Transparency=0
-	v.Trail.Enabled=false
-	v.Primary.Main.Enabled=false
-	v.Secondary.Main.Enabled=false
+	v.Trail.Enabled=true
+	v.Primary.Main.Enabled=true
+	v.Secondary.Main.Enabled=true
 	v.Primary.PointLight.Enabled=false
 	for _,c in pairs(v.Particle["0"]:GetChildren()) do
 		c.Enabled=true
@@ -546,16 +590,15 @@ if game:GetService("RunService"):IsStudio() then
 	--beeify()
 end
 
-task.wait(1)
 local voice = Instance.new("Sound")
 voice.SoundId = "rbxassetid://819341264"
 voice.Volume = 1
-voice.Parent = workspace
+voice.Parent = game:GetService("Players").LocalPlayer.Character
 voice.RollOffMode = Enum.RollOffMode.Inverse
 voice.RollOffMinDistance = 300
 voice:Play()
 game:GetService("Debris"):AddItem(voice,5)
-chatmsg("[Apex]: You're a goner, man.")
+chatfunc("[Apex]: You're a goner, man.")
 
 local RPA,RPS,NO = ray(Root.Position,V3(0,-1000,0))
 if RPA then
@@ -646,9 +689,9 @@ local canswitch = true
 local activedynamic = false
 
 local altindex = 0
-local gui = script.PlayerGui
 local switchcooldown = 0
 gui.Enabled=true
+gui.ResetOnSpawn=false
 
 local comebackidle = "APEX"
 local altswitchcooldown = 0
@@ -695,7 +738,7 @@ function formswitch(textcolor,textstrokecolor,theme,primary,secondary,walkspeed,
 		secondary = textstrokecolor
 		Theme.SoundId = "rbxassetid://9048375035"
 		Theme.Volume = 2.5
-		themename = "Ultra Skidded Dumb \|/ (Has Gone InSanE)"
+		themename = "We going INsAne with this one"
 	end
 	NG.LowerHalf.FormName.TextColor3 = textcolor
 	NG.LowerHalf.ScriptName.TextColor3 = textcolor
@@ -835,6 +878,26 @@ function cooldown(duration)
 	end
 end
 
+function damage(pos,range,dam)
+	local children = workspace:GetDescendants()
+	for index, child in pairs(children) do
+		if child:IsA("Model") and child ~= game:GetService("Players").LocalPlayer.Character then
+			if child:FindFirstChildOfClass("Humanoid") then
+			    local someone = child
+				local rootpart = someone:FindFirstChild("HumanoidRootPart")
+				if rootpart then
+					if (rootpart.Position - pos).Magnitude <= range then
+						--damage script should be here
+					end
+				end
+			end
+		end
+	end 
+end
+
+function heal(pos,range,healvalue,no,yes)
+end
+
 holdingf = false
 holdingz = false
 function teleport()
@@ -843,14 +906,15 @@ function teleport()
 		canswitch = false
 		Root.Anchored=true
 		script.Values.Anim.Value = "TELEPORT"
+		local cf = Root.CFrame
 		repeat
 			wait()
 			p = math.clamp(p+0.1,0,1)
 		until holdingf == false or p >= 1
 		if p == 1 then
 			sound(Root.CFrame,847061203,0.5,1,0,50)
-			local cf = Root.CFrame*CFN(0,5,0)*CFR(0,360,0,360,0,360)
-			local cf2 = cf*CFR(-10,10,-10,10,-10,10)
+			local cf = Root.CFrame*CFN(0,5,0)
+			local cf2 = cf
 			effect("Star",cf,V3(0,50,50),W1PC,Neon,0,0.5,Quint,Out,false,{Size=V3(200,3,3);CFrame=cf2},1,Sine)
 			effect("Star",cf,V3(0,60,60),W1SC,Neon,0.5,0.5,Quint,Out,false,{Size=V3(220,4,4);CFrame=cf2},1,Sine)
 			repeat
@@ -870,11 +934,10 @@ function teleport()
 		if p == 1 then
 
 			sound(Root.CFrame,1905343596,1,1,0,50)
-			effect("InvertedSpike",cf*CFR(0,360,0,360,0,360),V3(0,0,0),W1PC,Neon,0,0.2,Quad,Out,false,{Size=V3(90,90,90)},1,Linear)
 			for i = 1,4 do
-				local cf = Root.CFrame*CFR(0,360,0,360,0,360)
+				local cf = Root.CFrame
 				local a = rand(90,150)
-				effect("LightWind",cf,V3(0.05,0.05,0.05),W1SC,Neon,0,rand(3,8)/10,Sine,Out,false,{Size=V3(a,0.05,a);CFrame=cf*CFR(-40,40,-40,40,-40,40)},1,Sine)
+				effect("LightWind",cf,V3(0.05,0.05,0.05),W1SC,Neon,0,rand(3,8)/10,Sine,Out,false,{Size=V3(a,0.05,a);CFrame=cf},1,Sine)
 			end
 			if script.Values.CurrentBaseForm.Value ~= "VIRTUE" then
 				damage(Root.Position,30,rand(50000,80000))
@@ -893,7 +956,7 @@ function teleport()
 			if count > 0 then
 				local dist = 0
 				repeat
-					count = count - 1
+					count = 0
 					dist = dist + 20
 					local info = TweenInfo.new(rand(5,15)/10,Sine,In,0,false,0)
 					local prop = {Transparency=1}
@@ -914,7 +977,7 @@ function teleport()
 					end
 					game:GetService("Debris"):AddItem(d,1.5)
 					d.Center.CFrame = CFN(startingpos,endingpos)*CFN(0,0,-dist)
-					d.Parent = workspace.LastStarMouseIgnore
+					d.Parent = game:GetService("Players").LocalPlayer.Character.LastStarMouseIgnore
 				until count == 0
 			end
 		end
@@ -984,7 +1047,7 @@ function apexslam()
 	if target then
 		if target.Humanoid.Health > target.Humanoid.MaxHealth*0.3 and fury == false and instakill == false then
 			target = nil
-			chatmsg("Not weak enough.")
+			chatfunc("Not weak enough.")
 		end
 	end
 	if target == nil then
@@ -999,9 +1062,9 @@ function apexslam()
 		s.Playing=true
 		if script.Values.CurrentForm.Value == "OBSCURITY" then
 			s.SoundId = "rbxassetid://907330011"
-			chatmsg("P i t a f u l")
+			chatfunc("P i t a f u l")
 		else
-			chatmsg("!!SHUT UP and DIE!! -Ronald McDonald told me :)")
+			chatfunc("!!SHUT UP and DIE!! -Ronald McDonald told me :)")
 		end
 		game:GetService("Debris"):AddItem(s,3)
 		local w = Instance.new("Weld",Root)
@@ -1041,16 +1104,16 @@ function apexslam()
 			effect("Sphere",CFN(RPS,RPS+NO)*CFA(-90,0,0),V3(300,0,300),W1PC,Neon,1,1.4,Quad,In,true,{Size=V3(0.05,0,0.05)},0,Quint)
 		end
 		for i = 1,15 do
-			local cf = Root.CFrame*CFR(0,360,0,360,0,360)
-			effect("Sphere",cf,V3(10,10,10),W1PC,Neon,0,rand(5,15)/10,Sine,Out,false,{CFrame=cf*CFN(0,rand(90,120),0)*CFR(-160,160,-160,160,-160,160)},1,Sine)
+			local cf = Root.CFrame
+			effect("Sphere",cf,V3(10,10,10),W1PC,Neon,0,rand(5,15)/10,Sine,Out,false,{CFrame=cf*CFN(0,rand(90,120),0)},1,Sine)
 		end
 		effect("Sphere",Root.CFrame,V3(60,60,60),W1PC,Neon,0,0.7,Sine,In,false,{Size=V3(0.05,0.05,0.05)},1,Sine)
-		local cf = Root.CFrame*CFR(0,360,0,360,0,360)
-		effect("HoleSphere2",cf,V3(0.05,0.05,0.05),W1SC,Neon,0,1,Sine,Out,false,{Size=V3(80,80,80);CFrame=cf*CFR(-30,30,-30,30,-30,30)},1,Sine)
+		local cf = Root.CFrame
+		effect("HoleSphere2",cf,V3(0.05,0.05,0.05),W1SC,Neon,0,1,Sine,Out,false,{Size=V3(80,80,80);CFrame=cf},1,Sine)
 		for i = 1,4 do
-			local cf = Root.CFrame*CFR(0,360,0,360,0,360)
+			local cf = Root.CFrame
 			local a = rand(110,180)
-			effect("LightWind",cf,V3(0.05,0.05,0.05),W1PC,Neon,0,rand(7,14)/10,Sine,Out,false,{Size=V3(a,0.05,a);CFrame=cf*CFR(-40,40,-40,40,-40,40)},1,Linear)
+			effect("LightWind",cf,V3(0.05,0.05,0.05),W1PC,Neon,0,rand(7,14)/10,Sine,Out,false,{Size=V3(a,0.05,a);CFrame=cf},1,Linear)
 		end
 
 		crater(Root.CFrame,1.5,25)
@@ -1079,9 +1142,9 @@ function cocacola()
 		sound(Root.CFrame,2965762659,1,1,0,70)
 		sound(Root.CFrame,151776180,1.5,1,0,70)
 		sound(Root.CFrame,3744400428,2,1,0,70)
+		local cf = Root.CFrame
 		local p = Instance.new("Part",d)
 		local addon = math.random(0,200)/1000
-		game:GetService("Debris"):AddItem(p,0.3+(20-u)/20+addon)
 		p.Color = W1SC
 		p.Material = Neon
 		p.Anchored=true
@@ -1091,25 +1154,25 @@ function cocacola()
 		local tween = tweens:Create(p,info,prop)
 		tween:Play()
 
-		local p = Instance.new("Part",d)
-		game:GetService("Debris"):AddItem(p,(0.3+20-u)/20+addon)
-		table.insert(destroytable,#destroytable+1,p)
-		p.Color = W1SC
-		p.Shape = "Ball"
-		p.Material = Neon
-		p.Anchored=true
-		p.CFrame = cf*CFN(0,0,15)
-		p.Size = V3(3,3,3)
-		p.CanCollide=false
-		local tween = tweens:Create(p,info,prop)
-		tween:Play()
-
-		cf = cf*CFN(0,0,15)*CFA(0,rand(-60,60),0)*CFN(0,0,15)
+		local pie = Instance.new("Part",d)
+		pie.Color = W1SC
+		pie.Shape = "Ball"
+		pie.Material = Neon
+		pie.Anchored=true
+		pie.CFrame = cf*CFN(0,0,15)
+		pie.Size = V3(3,3,3)
+		pie.CanCollide=false
+		local tween = tweens:Create(pie,info,prop)
+		tween:Play() 
+		wait(1)
+		p:Destroy()
+		pie:Destroy()
+		script.Values.Anim.Value = res
+        Root.Anchored=false
+        canswitch = true
 	end
 end
-wait(2)
-Root.Anchored=false
-canswitch = true
+
 function YOU()
 	cancelchain =  false
 	if canswitch == false then return end
@@ -1141,7 +1204,7 @@ function YOU()
 				canswitch = true
 				Root.Anchored=false
 				cancelchain = true
-				chatmsg("I'm not a coward.")
+				chatfunc("I'm not a coward.")
 			end
 		end
 	end
@@ -1149,7 +1212,7 @@ function YOU()
 		canswitch = true
 		Root.Anchored=false
 		cancelchain = true
-		chatmsg("I'm not a coward.")
+		chatfunc("I'm not a coward.")
 	end
 	local res = script.Values.Anim.Value
 	if cancelchain == false then
@@ -1167,12 +1230,12 @@ function YOU()
 		effect("Sphere",root.CFrame,V3(1,1,1),W1PC,Neon,0,0.6,Circular,Out,false,{Size=V3(10,10,10);Color=W1SC},1,Sine)
 		effect("Sphere",root.CFrame,V3(1,1,1),W1SC,Neon,0,0.3,Circular,Out,false,{Size=V3(20,20,20);Color=W1PC},1,Sine)
 		for i = 1,3 do
-			local cf = root.CFrame*CFR(0,360,0,360,0,360)
+			local cf = root.CFrame
 			local a = rand(90,110)/100
 			effect("LightWind",cf,V3(0,0,0),W1PC,Neon,0,rand(30,60)/100,Circular,Out,false,{Size=V3(60,0,60)*a},1,Sine)
 		end
 		for i = 1,3 do
-			local cf = root.CFrame*CFR(0,360,0,360,0,360)
+			local cf = root.CFrame
 			local a = rand(90,110)/100
 			effect("LightWind",cf,V3(0,0,0),W1SC,Forcefield,0,rand(30,60)/100,Circular,Out,false,{Size=V3(60,0,60)*a},1,Sine)
 		end
@@ -1202,8 +1265,8 @@ function YOU()
 
 		local magnitude = (Root.Position-root.Position).Magnitude
 		local info = TweenInfo.new(20*magnitude/10000,Sine,Out,0,false,0)
-		local prop = {CFrame = Root.CFrame*CFN(0,0,-2)*CFA(0,180,0)}
-		local tween = tweens:Create(root,info,prop)
+		local prop = {CFrame = root.CFrame*CFN(0,0,-2)*CFA(0,180,0)}
+		local tween = tweens:Create(Root,info,prop)
 		damage(root.Position,2,rand(20000,30000),0,0,20*magnitude/10000+2)
 		wait(0.5)
 		tween:Play()
@@ -1224,7 +1287,7 @@ function YOU()
 	Root.Anchored=false
 	if not target or not hum or not root or not torso then
 		if script.Values.Safezone.Value == 0 and cancelchain == false then
-			chatmsg("I need a target.")
+			chatfunc("I need a target.")
 		end
 	end
 end
@@ -1251,13 +1314,13 @@ function AEROnt()
 			local RPA,RPS,NO = workspace:FindPartOnRayWithIgnoreList(ray,{plr,d},false,true)
 			if RPA then
 				damage(RPS,size/2,rand(20000,30000))
-				local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)*CFR(0,0,0,360,0,0)
+				local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)
 				local t = rand(30,70)/100
 				effect("Sphere",cf,V3(.05,.05,.05),W1PC,Neon,0,t,Sine,Out,false,{Size=V3(size,size*2,size)},1,Linear)
 				effect("HoleSphere",cf,V3(.05,.05,.05),W1SC,Neon,0,t,Sine,Out,false,{Size=V3(size+1,size*2+1,size+1)},1,Linear)
-				effect("Wind",cf,V3(.05,.05,.05),W1SC,Neon,0,t,Sine,Out,false,{Size=V3(size*1.5,05,size*1.5);CFrame=cf*CFR(0,0,-50,50,0,0)},1,Linear)
+				effect("Wind",cf,V3(.05,.05,.05),W1SC,Neon,0,t,Sine,Out,false,{Size=V3(size*1.5,05,size*1.5);CFrame=cf
 			end
-			local cf = Root.CFrame*CFR(0,360,0,360,0,360)
+			local cf = Root.CFrame
 			local a = rand(1,2)
 			local c = W1SC
 			if a == 1 then c = W1PC end
@@ -1266,7 +1329,7 @@ function AEROnt()
 		wait()
 	end]]
 	for i = 1,10 do
-		effect("LightWind",Root.CFrame*CFR(0,360,0,360,0,360),V3(900+i*100,0,900+i*100)*rand(80,120)/100,W1SC,Neon,1,i/5,Quint,In,false,{Size=V3(0,0,0)},0,Quint)
+		effect("LightWind",Root.CFrame,V3(900+i*100,0,900+i*100)*rand(80,120)/100,W1SC,Neon,1,i/5,Quint,In,false,{Size=V3(0,0,0)},0,Quint)
 		effect("Sphere",Root.CFrame,V3(1500-i*100,1500-i*100,1500-i*100),W1PC,Neon,1,i/5,Quint,In,false,{Size=V3(0,0,0)},0,Quint)
 		effect("Sphere",Root.CFrame,V3(1000-i*50,1000-i*50,1000-i*50),W1SC,Neon,1,i/5,Quint,In,false,{Size=V3(0,0,0)},0,Quint)
 	end
@@ -1297,29 +1360,29 @@ function AEROnt()
 		local a = rand(1,2)
 		local c = W1SC
 		if a == 1 then c = W1PC end
-		effect("Sphere",Root.CFrame*CFR(0,360,0,360,0,360),V3(s*0.5,5,s*0.5),c,Neon,0,0.4,Quint,Out,false,{Size=V3(s*0.1,s*3,s*0.1)},1,Linear)
+		effect("Sphere",Root.CFrame,V3(s*0.5,5,s*0.5),c,Neon,0,0.4,Quint,Out,false,{Size=V3(s*0.1,s*3,s*0.1)},1,Linear)
 
 		local a = rand(1,2)
 		local c = W1SC
 		if a == 1 then c = W1PC end
-		local cf = Root.CFrame*CFR(0,360,0,360,0,360)
-		effect("HoleTornado",cf,V3(5,0.05,5),c,Neon,0,0.4,Sine,Out,false,{Size=V3(s*2,0.05,s*2);CFrame=cf*CFR(-50,50,-50,50,-50,50)},1,Linear)
+		local cf = Root.CFrame
+		effect("HoleTornado",cf,V3(5,0.05,5),c,Neon,0,0.4,Sine,Out,false,{Size=V3(s*2,0.05,s*2);CFrame=cf},1,Linear)
 
 		local ray = Ray.new(Root.Position,V3(0,-5,0))
 		local RPA,RPS,NO = workspace:FindPartOnRayWithIgnoreList(ray,{d,plr},false,true)
 		if RPA then
-			local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)*CFR(0,0,0,360,0,0)
+			local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)
 			local a = rand(1,2)
 			local c = W1SC
 			if a == 1 then c = W1PC end
 			local x = rand(900,1500)
-			effect("LightWind",cf,V3(100,0.05,100),c,Neon,0,rand(30,60)/100,Sine,Out,false,{Size=V3(x,0.05,x);CFrame=cf*CFR(0,0,-50,50,0,0)},1,Sine)
+			effect("LightWind",cf,V3(100,0.05,100),c,Neon,0,rand(30,60)/100,Sine,Out,false,{Size=V3(x,0.05,x);CFrame=cf},1,Sine)
 		end
 
 		local a = rand(1,2)
 		local c = W1SC
 		if a == 1 then c = W1PC end
-		local cf = Root.CFrame*CFR(0,360,0,360,0,360)
+		local cf = Root.CFrame
 		effect("Sphere",cf,V3(10,10,10),c,Neon,0,rand(30,50)/100,Sine,Out,false,{Size=V3(80,800,80);CFrame=cf*CFN(0,rand(1000,2000),0)},1,Sine)
 
 		wait()
@@ -1384,13 +1447,13 @@ function repressionbombs()
 		v:Destroy()
 		effect("Sphere",cf,V3(10,10,10),W1PC,Neon,0,0.5,Quad,Out,false,{Size=V3(60,60,60)},1,Sine)
 		effect("Sphere",cf,V3(10,10,10),W1SC,Neon,0,0.7,Quad,Out,false,{Size=V3(50,50,50)},1,Sine)
-		local cf2 = cf*CFR(0,360,0,360,0,360)
+		local cf2 = cf
 		local a = rand(100,150)
-		effect("LightWind",cf2,V3(0.05,0.05,0.05),W1PC,Neon,0,rand(5,10)/10,Sine,Out,false,{Size=V3(a,0.05,a);CFrame=cf2*CFR(-50,50,-50,50,-50,50)},1,Sine)
+		effect("LightWind",cf2,V3(0.05,0.05,0.05),W1PC,Neon,0,rand(5,10)/10,Sine,Out,false,{Size=V3(a,0.05,a);CFrame=cf2},1,Sine)
 		damage(cf.Position,35,rand(15000,25000))
 		camshake(cf.Position,200,5)
-		local cf2 = cf*CFR(0,360,0,360,0,360)
-		effect("Wind",cf,V3(0.05,0.05,0.05),W1SC,Neon,0,0.2,Sine,Out,false,{Size=V3(120,100,120);CFrame=cf2*CFR(0,0,-50,50,0,0)},1,Sine)
+		local cf2 = cf
+		effect("Wind",cf,V3(0.05,0.05,0.05),W1SC,Neon,0,0.2,Sine,Out,false,{Size=V3(120,100,120);CFrame=cf2},1,Sine)
 		sound(cf,5855423156,1,rand(90,110)/100,0,50)
 		zxc = zxc + 1
 		if zxc == 1 then
@@ -1416,8 +1479,8 @@ function circlesofdeath()
 		if RPA and RPS and NO then
 			effect("Sphere",CFN(RPS,RPS+NO)*CFA(-90,0,0),V3(150,1,150),W1SC,Neon,0,0.3,Sine,Out,false,{Size=V3(0.05,0.05,0.05)},1,Sine)
 			effect("Sphere",CFN(RPS,RPS+NO)*CFA(-90,0,0),V3(75,1,75),W1PC,Neon,0,0.4,Sine,Out,false,{Size=V3(0.05,0.05,0.05)},1,Sine)
-			local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)*CFR(0,0,0,360,0,0)
-			effect("Fire",cf,V3(150,0.05,150),W1PC,Neon,0,0.3,Sine,Out,false,{Size=V3(250,0.05,250);CFrame=cf*CFR(0,0,-50,50,0,0)},1,Sine)
+			local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)
+			effect("Fire",cf,V3(150,0.05,150),W1PC,Neon,0,0.3,Sine,Out,false,{Size=V3(250,0.05,250);CFrame=cf},1,Sine)
 			sound(CFN(pos),1283290053,1,1,0,50)
 		end
 	end
@@ -1460,9 +1523,9 @@ function bigepic()
 	sound(Root.CFrame,581516887,1,1,0,50)
 	for i = 1,3 do
 		wait(0.2)
-		local cf = CFN(Root.Position)*CFR(0,360,0,360,0,360)
-		effect("LightWind",cf,V3(400,0,400),W1SC,Neon,1,0.5,Quint,In,false,{Size=V3(0,0,0);CFrame=cf*CFR(-50,50,-50,50,-50,50)},0,Quad)
-		effect("HoleSphere2",cf,V3(300,300,300),W1PC,Neon,1,0.5,Sine,In,false,{Size=V3(0,0,0);CFrame=cf*CFR(-50,50,-50,50,-50,50)},0,Sine)
+		local cf = CFN(Root.Position)
+		effect("LightWind",cf,V3(400,0,400),W1SC,Neon,1,0.5,Quint,In,false,{Size=V3(0,0,0);CFrame=cf},0,Quad)
+		effect("HoleSphere2",cf,V3(300,300,300),W1PC,Neon,1,0.5,Sine,In,false,{Size=V3(0,0,0);CFrame=cf},0,Sine)
 		local RPA,RPS,NO = ray(Root.Position,V3(0,-5,0))
 		if RPA then
 			effect("ThinRing",CFN(RPS,RPS+NO)*CFA(-90,0,0),V3(400,10,400),W1PC,Neon,1,0.5,Sine,In,false,{Size=V3(0,0,0)},0,Sine)
@@ -1481,7 +1544,7 @@ function bigepic()
 	effect("Sphere",Root.CFrame,V3(0,0,0),W1SC,Neon,0,0.5,Sine,Out,false,{Size=V3(500,500,500)},1,Linear)
 	effect("Sphere",Root.CFrame,V3(0,0,0),W1PC,Neon,0,0.25,Sine,Out,false,{Size=V3(500,500,500)},1,Linear)
 	for i = 1,3 do
-		local cf = Root.CFrame*CFR(0,360,0,360,0,360)
+		local cf = Root.CFrame
 		effect("HoleSphere2",cf,V3(0,0,0),W1PC,Neon,0,1,Sine,Out,false,{Size=V3(500,500,500)},1,Sine)
 	end
 	local angle = 0
@@ -1520,13 +1583,13 @@ function burger()
 		if target:FindFirstChild("LastStar") then
 			if target.LastStar:FindFirstChild("Safezone") then
 				if target.LastStar.Safezone.Value == 1 then
-					chatmsg("I'm not a coward.")
+					chatfunc("I'm not a coward.")
 					return
 				end
 			end
 		end
 		if script.Values.Safezone.Value == 1 then
-			chatmsg("I'm not a coward.")
+			chatfunc("I'm not a coward.")
 			return
 		end
 		canswitch = false
@@ -1537,13 +1600,13 @@ function burger()
 		local animstorage = script.Values.Anim.Value
 
 		sound(cfb,1177785010,1,1,0,50)
-		local cf = cfb*CFR(0,360,0,360,0,360)
-		effect("Sphere",cf,V3(3,3,3),W1SC,Forcefield,0,0.3,Sine,Out,false,{Size=V3(50,50,50);CFrame=cf*CFR(-40,40,-40,40,-40,40)},1,Sine)
-		effect("HoleSphere",cf*CFR(0,360,0,360,0,360),V3(3,3,3),W1PC,Neon,0,0.2,Sine,Out,false,{Size=V3(80,80,80)},1,Sine)
+		local cf = cfb
+		effect("Sphere",cf,V3(3,3,3),W1SC,Forcefield,0,0.3,Sine,Out,false,{Size=V3(50,50,50);CFrame=cf},1,Sine)
+		effect("HoleSphere",cf,V3(3,3,3),W1PC,Neon,0,0.2,Sine,Out,false,{Size=V3(80,80,80)},1,Sine)
 		effect("Sphere",cf,V3(3,3,3),W1PC,Neon,0,0.4,Sine,Out,false,{Size=V3(40,40,40)},1,Sine)
 		for i = 1,2 do
-			local cf2 = cf*CFR(0,360,0,360,0,360)
-			effect("LightWind",cf2,V3(0,0,0),W1SC,Neon,0,0.3,Sine,Out,false,{Size=V3(100,0,100);CFrame=cf2*CFR(0,0,-50,50,0,0)},1,Linear)
+			local cf2 = cf
+			effect("LightWind",cf2,V3(0,0,0),W1SC,Neon,0,0.3,Sine,Out,false,{Size=V3(100,0,100);CFrame=cf2},1,Linear)
 		end
 
 		script.Values.Anim.Value = "ExecutionGrab"
@@ -1566,13 +1629,13 @@ function burger()
 		wait(0.6)
 		Root.CFrame = cfb*CFN(0,80,0)
 		sound(cfb,1177785010,1,1,0,50)
-		local cf = cfb*CFN(0,80,0)*CFR(0,360,0,360,0,360)
-		effect("Sphere",cf,V3(3,3,3),W1SC,Forcefield,0,0.3,Sine,Out,false,{Size=V3(50,50,50);CFrame=cf*CFR(-40,40,-40,40,-40,40)},1,Sine)
-		effect("HoleSphere",cf*CFR(0,360,0,360,0,360),V3(3,3,3),W1PC,Neon,0,0.2,Sine,Out,false,{Size=V3(80,80,80)},1,Sine)
+		local cf = cfb*CFN(0,80,0)
+		effect("Sphere",cf,V3(3,3,3),W1SC,Forcefield,0,0.3,Sine,Out,false,{Size=V3(50,50,50);CFrame=cf},1,Sine)
+		effect("HoleSphere",cf,V3(3,3,3),W1PC,Neon,0,0.2,Sine,Out,false,{Size=V3(80,80,80)},1,Sine)
 		effect("Sphere",cf,V3(3,3,3),W1PC,Neon,0,0.4,Sine,Out,false,{Size=V3(40,40,40)},1,Sine)
 		for i = 1,2 do
-			local cf2 = cf*CFR(0,360,0,360,0,360)
-			effect("LightWind",cf2,V3(0,0,0),W1SC,Neon,0,0.3,Sine,Out,false,{Size=V3(100,0,100);CFrame=cf2*CFR(0,0,-50,50,0,0)},1,Linear)
+			local cf2 = cf
+			effect("LightWind",cf2,V3(0,0,0),W1SC,Neon,0,0.3,Sine,Out,false,{Size=V3(100,0,100);CFrame=cf2},1,Linear)
 		end
 		script.Values.Anim.Value = "ExecutionCharge"
 		sound(cfb,615910787,1,1,0,50)
@@ -1610,8 +1673,8 @@ function burger()
 		effect("Sphere",cfb*CFN(0,80,0),V3(0,0,0),W1PC,Neon,0,0.4,Sine,Out,false,{Size=V3(200,200,200)},1,Sine)
 		effect("Sphere",cfb*CFN(0,80,0),V3(0,0,0),W1SC,Forcefield,0,0.3,Sine,Out,false,{Size=V3(300,300,300)},1,Sine)
 		for i = 1,2 do
-			local cf = cfb*CFN(0,80,0)*CFR(0,360,0,360,0,360)
-			effect("HoleSphere2",cf,V3(0,0,0),W1PC,Neon,0,0.6,Sine,Out,false,{Size=V3(250,250,250);CFrame=cf*CFR(-50,50,-50,50,-50,50)},1,Sine)
+			local cf = cfb*CFN(0,80,0)
+			effect("HoleSphere2",cf,V3(0,0,0),W1PC,Neon,0,0.6,Sine,Out,false,{Size=V3(250,250,250);CFrame=cf},1,Sine)
 		end
 		effect("ThinRing",cfb*CFN(0,80,0),V3(0,0,0),W1SC,Neon,0,1,Quart,Out,false,{Size=V3(100,3,100)},1,Sine)
 		effect("ThinRing",cfb*CFN(0,80,0),V3(0,0,0),W1SC,Neon,0,0.5,Quad,Out,false,{Size=V3(100,3,100)*2},1,Sine)
@@ -1625,7 +1688,7 @@ function burger()
 		Root.Anchored=false
 	else
 		if cancelchain == false then
-			chatmsg("I need a target.")
+			chatfunc("I need a target.")
 		end
 	end
 end
@@ -1676,7 +1739,7 @@ function bigbolt()
 		effect("Cylinder",cf*CFA(0,0,-90),V3(2048,10,10),W1SC,Neon,0,0.5,Sine,Out,false,{Size=V3(2048,30,30)},1,Sine)
 
 		for y = 1,3 do
-			effect("LightWind",cf*CFR(0,360,0,360,0,360),V3(0,0,0),W1SC,Neon,0,rand(60,80)/100,Sine,Out,false,{Size=V3(300,0,300)*rand(80,120)/100},1,Sine)
+			effect("LightWind",cf,V3(0,0,0),W1SC,Neon,0,rand(60,80)/100,Sine,Out,false,{Size=V3(300,0,300)*rand(80,120)/100},1,Sine)
 		end
 		for x = 1,6 do
 			effect("Cylinder",cf*CFA(0,x*60,-90)*CFN(0,0,15),V3(2048,2,2),W1PC,Neon,0,0.7,Sine,Out,false,{Size=V3(2048,10,10)},1,Sine)
@@ -1726,7 +1789,6 @@ function bombo()
 	core.Massless = true
 
 	projectile.Parent = d.Projectiles
-	projectile.PrimaryPart:SetNetworkOwner(nil)
 	local BV = Instance.new("BodyVelocity",core)
 	BV.MaxForce =V3(math.huge,math.huge,math.huge)
 	BV.Velocity = Root.CFrame.LookVector.Unit*200+V3(0,140,0)
@@ -1748,12 +1810,12 @@ function bombo()
 			effect("Sphere",core.CFrame,V3(50,50,50)*mult,core.Color,Neon,0,0.7,Sine,Out,false,{Size=V3(200,200,200)*mult;Color=hitbox.Color},1,Sine)
 			effect("Sphere",core.CFrame,V3(50,50,50)*mult,hitbox.Color,Neon,0,1.3,Sine,Out,false,{Size=V3(120,120,120)*mult;Color=core.Color},1,Sine)
 			for i = 1,5 do
-				local cf = core.CFrame*CFR(0,360,0,360,0,360)
+				local cf = core.CFrame
 				local xd = rand(80,120)/100
 				effect("LightWind",cf,V3(0,0,0),hitbox.Color,Neon,0,rand(50,150)/100,Circular,Out,false,{Size=V3(200,0,200)*xd},1,Linear)
 			end
 			for i = 1,5 do
-				local cf = core.CFrame*CFR(0,360,0,360,0,360)
+				local cf = core.CFrame
 				local xd = rand(80,120)/100
 				effect("LightWind",cf,V3(0,0,0),core.Color,Forcefield,0,rand(50,150)/100,Circular,Out,false,{Size=V3(200,0,200)*xd},1,Linear)
 			end
@@ -1781,8 +1843,8 @@ function burst()
 	effect("Sphere",RCF+RV,V3(5,5,5),W1SC,Neon,0,0.2,Quad,Out,false,{Size=V3(50,50,50)},1,Linear)
 	for i = 1,5 do
 		effect("Sphere",RCF+RV,V3(5,5,5),W1PC,Forcefield,0,0.6-(i/30),Quint,Out,false,{Size=V3(50+i,50+i,50+i)},1,Linear)
-		effect("Sphere",RCF*CFR(0,360,0,360,0,360)+RV,V3(5,0,5),W1SC,Neon,0,rand(40,60)/100,Sine,Out,false,{Size=V3(3,rand(150,300),3)},1,Linear)
-		effect("LightWind",RCF*CFR(0,360,0,360,0,360)+RV,V3(0,0,0),W1PC,Neon,0,rand(30,80)/100,Sine,Out,false,{Size=V3(150,0,150)*rand(90,100)/100},1,Linear)
+		effect("Sphere",RCF+RV,V3(5,0,5),W1SC,Neon,0,rand(40,60)/100,Sine,Out,false,{Size=V3(3,rand(150,300),3)},1,Linear)
+		effect("LightWind",RCF+RV,V3(0,0,0),W1PC,Neon,0,rand(30,80)/100,Sine,Out,false,{Size=V3(150,0,150)*rand(90,100)/100},1,Linear)
 	end
 	effect("Sphere",RCF+RV,V3(5,5,5),W1SC,Neon,0,0.7,Quad,Out,false,{Size=V3(50,50,50)},1,Linear)
 	effect("Sphere",RCF+RV,V3(5,5,5),W1PC,Neon,0,0.9,Quad,Out,false,{Size=V3(40,40,40)},1,Linear)
@@ -1855,9 +1917,9 @@ function pyrotf2()
 	sound(Root.CFrame,438666343,1,1,0,50)
 	for i = 1,10 do
 		wait()
-		local cf = Root.CFrame*CFN(0,4,1)*CFR(0,360,0,360,0,360)
-		effect("Sphere",cf,V3(2,2,2),W1PC,Neon,0,0.4,Sine,Out,false,{Size=V3(1,8,1);Color=W1SC;CFrame=cf*CFR(-50,50,-50,50,-50,50)},1,Linear)
-		effect("LightWind",cf,V3(15,0,15),W1SC,Neon,1,0.2,Sine,In,false,{Size=V3(0,0,0);Color=W1PC;CFrame=cf*CFR(-50,50,-50,50,-50,50)},0,Linear)
+		local cf = Root.CFrame*CFN(0,4,1)
+		effect("Sphere",cf,V3(2,2,2),W1PC,Neon,0,0.4,Sine,Out,false,{Size=V3(1,8,1);Color=W1SC;CFrame=cf},1,Linear)
+		effect("LightWind",cf,V3(15,0,15),W1SC,Neon,1,0.2,Sine,In,false,{Size=V3(0,0,0);Color=W1PC;CFrame=cf},0,Linear)
 	end
 	script.Values.Anim.Value = "FLAMETHROWEREND"
 	wait()
@@ -1876,10 +1938,10 @@ function pyrotf2()
 		camshake(pos,100,1)
 		for x = 1,2 do
 			local cf = Root.CFrame*CFN(0,0.25,-1.5)
-			effect("Cube",cf*CFR(0,360,0,360,0,360),V3(0,0,0),W1PC,Neon,0,0.5,Linear,In,false,{Color=W1SC;Size=V3(50,50,50);CFrame=cf*CFR(-5,5,-5,5,-5,5)*CFN(0,0,-180)*CFR(0,360,0,360,0,360)*CFN(0,rand(-10,10),0)},1,Sine)
+			effect("Cube",cf,V3(0,0,0),W1PC,Neon,0,0.5,Linear,In,false,{Color=W1SC;Size=V3(50,50,50);CFrame=cf*CFN(0,0,-180)*CFN(0,rand(-10,10),0)},1,Sine)
 			for p = 1,2 do
 				local cf = Root.CFrame*CFN(0,0.25,-3)
-				effect("Cube",cf*CFR(0,360,0,360,0,360),V3(0,0,0),W1PC,Neon,0,rand(20,40)/100,Linear,In,false,{Color=W1SC;Size=V3(1,1,1)*(rand(70,140)/100);CFrame=cf*CFR(-40,40,-40,40,-40,40)*CFN(0,0,rand(-250,-50))*CFR(0,360,0,360,0,360)*CFN(0,rand(-10,10),0)},1,Sine)
+				effect("Cube",cf,V3(0,0,0),W1PC,Neon,0,rand(20,40)/100,Linear,In,false,{Color=W1SC;Size=V3(1,1,1)*(rand(70,140)/100);CFrame=cf*CFN(0,0,rand(-250,-50))*CFN(0,rand(-10,10),0)},1,Sine)
 			end
 		end
 	end
@@ -1903,9 +1965,9 @@ function hadouken()
 	camshake(Root.Position,10,2)
 	for i = 1,40 do
 		heartbeat:Wait()
-		local cf = Root.CFrame*CFN(2,-1,0.7)*CFR(0,360,0,360,0,360)
+		local cf = Root.CFrame*CFN(2,-1,0.7)
 		effect("Sphere",cf,V3(1.5,1.5,1.5),W1PC,Neon,0,0.4,Sine,Out,false,{Size=V3(1,4,1)},1,Sine)
-		cf = Root.CFrame*CFN(2,-1,0.7)*CFR(0,360,0,360,0,360)
+		cf = Root.CFrame*CFN(2,-1,0.7)
 		effect("Sphere",cf,V3(1,1,1),W1PC,Neon,0,0.4,Sine,Out,false,{Size=V3(0.5,0.5,0.5);CFrame=cf*CFN(0,rand(40,60)/10,0)},1,Sine)
 		effect("Sphere",cf,V3(8,8,8),W1SC,Forcefield,1,0.2,Sine,In,false,{Size=V3(0,0,0)},0.5,Sine)
 	end
@@ -1924,7 +1986,6 @@ function hadouken()
 	part.Shape = "Ball"
 	part.CFrame = Root.CFrame*CFN(0,0,-5)
 	projectile.Parent = d.Projectiles
-	projectile.PrimaryPart:SetNetworkOwner(nil)
 	local c = W1SC
 	game:GetService("Debris"):AddItem(projectile,10)
 	local bv = Instance.new("BodyVelocity",part)
@@ -1944,27 +2005,27 @@ function hadouken()
 			effect("Sphere",part.CFrame,V3(30,30,30),part.Color,Neon,0,0.1,Sine,Out,false,{Size=V3(100,100,100)},1,Linear)
 			effect("Sphere",part.CFrame,V3(30,30,30),c,Neon,0,0.25,Sine,Out,false,{Size=V3(100,100,100)},1,Linear)
 			for i = 1,5 do
-				local cf = part.CFrame*CFR(0,360,0,360,0,360)
+				local cf = part.CFrame
 				effect("Sphere",cf,V3(25,0,25)*1.5,part.Color,Neon,0,rand(30,60)/100,Sine,Out,false,{Size=V3(10,rand(70,140),10)*1.5},1,Linear)
-				cf = part.CFrame*CFR(0,360,0,360,0,360)
+				cf = part.CFrame
 				effect("Star",cf,V3(50,0,50)*1.5,part.Color,Neon,0,rand(30,60)/100,Sine,Out,false,{Size=V3(0,rand(140,180),0)*1.5},1,Linear)
 			end
 			for i = 1,3 do
-				local cf = part.CFrame*CFR(0,360,0,360,0,360)
-				effect("LightWind",cf,V3(0,0,0),c,Neon,0,rand(30,50)/100,Sine,Out,false,{Size=V3(200,0,200)*(rand(80,120)/100);CFrame=cf*CFR(-30,30,-30,30,-30,30)},1,Linear)
+				local cf = part.CFrame
+				effect("LightWind",cf,V3(0,0,0),c,Neon,0,rand(30,50)/100,Sine,Out,false,{Size=V3(200,0,200)*(rand(80,120)/100);CFrame=cf},1,Linear)
 			end
 			for i = 1,40 do
-				local cf = part.CFrame*CFR(0,360,0,360,0,360)
+				local cf = part.CFrame
 				local s = rand(30,50)/10
 				effect("Cube",cf,V3(s,s,s),part.Color,Neon,0,rand(40,80)/100,Sine,Out,false,{Size=V3(s,s,s)*0.7;CFrame=cf*CFN(0,rand(10,100),0)},1,Linear)
 			end
 			effect("Sphere",part.CFrame,V3(25,25,25),c,Neon,0,0.25,Sine,Out,false,{Size=V3(200,200,200)},1,Linear)
 			local RPA,RPS,NO = ray(part.Position,V3(0,-50,0))
 			if RPA then
-				local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)*CFR(0,0,0,360,0,0)
+				local cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)
 				for i = 1,2 do
-					cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)*CFR(0,0,0,360,0,0)
-					effect("LightWind",cf,V3(25,0,25),part.Color,Neon,0,0.9,Sine,Out,false,{Size=V3(300,0,300);CFrame=cf*CFR(0,0,-30,30,0,0)},1,Sine)
+					cf = CFN(RPS,RPS+NO)*CFA(-90,0,0)
+					effect("LightWind",cf,V3(25,0,25),part.Color,Neon,0,0.9,Sine,Out,false,{Size=V3(300,0,300);CFrame=cf},1,Sine)
 				end
 			end
 			projectile:Destroy()
@@ -1981,10 +2042,10 @@ function erase()
 	if canswitch == false then return end
 	if script.Values.CurrentForm.Value ~= "EUPHORIA" then
 		sound(Root.CFrame,6551054010,1,1,0,200)
-		chatmsg("TIME TO FINISH THIS!")
+		chatfunc("TIME TO FINISH THIS!")
 	else
 		sound(Root.CFrame,6460148774,1,1,0,200)
-		chatmsg("uwu")
+		chatfunc("uwu")
 	end
 	Root.Anchored=true
 	canswitch = false
@@ -2017,7 +2078,7 @@ function erase()
 	effect("Sphere",Root.CFrame,V3(50,50,50),W1PC,Neon,0,2,Quint,Out,false,{Size=V3(2048,2048,2048)},1,Linear)
 	effect("Sphere",Root.CFrame,V3(50,50,50),W1SC,Neon,0,3,Quint,Out,false,{Size=V3(2048,2048,2048)/2},1,Linear)
 	local roar = script.Sounds.Roar:Clone()
-	roar.Parent = workspace
+	roar.Parent = game:GetService("Players").LocalPlayer.Character
 	roar:Play()
 	game:GetService("Debris"):AddItem(roar,5)
 	light.TintColor = W1PC
@@ -2071,7 +2132,7 @@ function changewheel(altBool,i1,i2,i3,i4,i5,i6,i7,i8,i9,i10,f1,f2,f3,f4,f5,f6,f7
 			v.Marble.Inner.Pattern.Image = "rbxassetid://6595974497"
 		elseif name == "REPRESSION" or name == "ANNIHILATION" or name == "CONTINUUM" or name == "ECLIPSE" or name == "FOCUS" or name == "DEVIANCE" or name == "RUST" or name == "CRIMSON" or name == "CREVASSE" or name == "CHAOS" or name == "STIGMA" then
 			v.Marble.Inner.Pattern.Image = "rbxassetid://6593357327"
-		elseif name == "EXECUTION" or name == "SPECTRAFIELD" or name == "PROHIBITION" or name == "ΣTERNITY" or name == "NEBULA" or name == "AURORA" or name == "UTTERANCE" or name == "SOMNAMBULIST" then
+		elseif name == "EXECUTION" or name == "SPECTRAFIELD" or name == "PROHIBITION" or name == "Ä‚ÂŽÃ‚Â£TERNITY" or name == "NEBULA" or name == "AURORA" or name == "UTTERANCE" or name == "SOMNAMBULIST" then
 			v.Marble.Inner.Pattern.Image = "rbxassetid://6593369926"
 		elseif name == "ANARCHY" or name == "HYPERTRANCE" or name == "DESTINY" or name == "LUNAR" or name == "SURREPTITIOUS" or name == "EXHAUSTION" or name == "KATHASTROPHE" or name == "EXTERMINATION" or name == "NOCTURNALITY" or name == "UPHEAVAL" or name == "SILENCE" then
 			v.Marble.Inner.Pattern.Image = "rbxassetid://6595974803"
@@ -2114,24 +2175,24 @@ local OHGODWHYHELPMESOMEBODYPLEASE = {"[Pepsiman]: There is no coca-cola around 
 
 local returnwheel = "BASE"
 local baseformtable = {
-	["APEX"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(255,0,0),1839526957,C3R(255,0,0),C3R(0,0,0),16,50,1,"APEX","Antique","APEX","APEX",0.4,true,0,true,"LAST★STAR",false,"C a l m | D o w n",false,"rbxassetid://1841647093") chatmsg(apexlines[rand(1,3)]) returnwheel = "BASE" end end;
-	["REPRESSION"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(255,130,0),1847588523,C3R(255,100,0),C3R(0,0,0),20,40,1,"REPRESSION","Oswald","REPRESSION","REPRESSION",0.4,true,0,true,"LAST★STAR",false,"Calm Down Buddy",false,"rbxassetid://6593357327") chatmsg(repressionlines[rand(1,3)]) end end;
-	["EXECUTION"]=function() if altwheel == false then formswitch(C3R(255,255,255),C3R(0,170,255),1839931160,script.Dynamics.Execution.Value,C3R(200,200,200),100,100,1,"EXECUTION","Bodoni","EXECUTION","EXECUTION",0.4,true,0,true,"LAST★STAR",true,"8 Bit Dubstep",false,"rbxassetid://6593369926") chatmsg(executionlines[rand(1,3)]) end end;
-	["ANARCHY"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(100,0,255),9245552700,C3R(80,0,255),C3R(0,0,0),60,100,1,"ANARCHY","Antique","ANARCHY","ANARCHY",0.6,true,0,true,"LAST★STAR",false,"TacoBot 3,000",false,"rbxassetid://6595974803") chatmsg(anarchylines[rand(1,3)]) end end;
-	["VIRTUE"]=function() if altwheel == false then formswitch(C3R(0,230,255),C3R(255,255,255),9046862941,C3R(80,190,255),C3R(180,180,180),55,50,1,"VIRTUE","FredokaOne","VIRTUE","VIRTUE",0.4,true,0,true,"LAST★STAR",false,"Sunset Chill (Bed Version)",false,"rbxassetid://6595997907") chatmsg(virtuelines[rand(1,3)]) end end;
-	["ABSOLUTION"]=function() if altwheel == false then formswitch(C3R(255,80,80),C3R(255,0,0),9045344148,C3R(255,0,0),C3R(255,80,80),300,100,1,"ABSOLUTION","Fondamento","ABSOLUTION","ABSOLUTION",0.4,true,0,true,"LAST★STAR",false,"Forgotten Dreams",false,"rbxassetid://6595974875") chatmsg(absolutionlines[rand(1,3)]) end end;
-	["INFERNUM"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(255,70,0),1839526985,C3R(255,70,0),C3R(0,0,0),14,50,1,"INFERNUM","JosefinSans","INFERNUM","INFERNUM",0.4,true,0,true,"LAST★STAR",false,"Dubstep Hero",false,"rbxassetid://6595974633") chatmsg(infernumlines[rand(1,3)]) end end;
-	["DISSONANCE"]=function() if altwheel == false then formswitch(C3R(0,21,128),C3R(107,0,128),1847523310,C3R(107,0,128),C3R(0,21,128),50,50,1,"DISSONANCE","Kalam","DISSONANCE","DISSONANCE",0.35,true,0,true,"LAST★STAR",true,"Robot Electronic's",false,"rbxassetid://6595974744") chatmsg(dissonancelines[rand(1,3)]) end end;
-	["WARPSPEED"]=function() if altwheel == false then formswitch(C3R(70, 181, 255),C3R(208, 241, 255),1839527296,C3R(151, 165, 255),C3R(64, 121, 255),400,50,1,"WARPSPEED","Michroma","WARPSPEED","WARPSPEED",0.4,true,0,true,"LAST★STAR",false,"100% S P E E D",false,"rbxassetid://6596658428") chatmsg(warpspeedlines[rand(1,3)]) end end;
-	["INTRICACY"]=function() if altwheel == false then formswitch(C3R(0,255,0),C3R(255,255,255),1847754836,C3R(0,255,0),C3R(255,255,255),200,150,1,"INTRICACY","RobotoCondensed","INTRICACY","INTRICACY",0.55,true,0,true,"LAST★STAR",false,"Deleted Files",false,"rbxassetid://6595974565") chatmsg(intricacylines[rand(1,3)]) end end;
+	["APEX"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(255,0,0),1839526957,C3R(255,0,0),C3R(0,0,0),16,50,1,"APEX","Antique","APEX","APEX",0.4,true,0,true,"LASTâ˜…STAR",false,"C a l m | D o w n",false,"rbxassetid://1841647093") chatfunc(apexlines[rand(1,3)]) returnwheel = "BASE" end end;
+	["REPRESSION"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(255,130,0),1847588523,C3R(255,100,0),C3R(0,0,0),20,40,1,"REPRESSION","Oswald","REPRESSION","REPRESSION",0.4,true,0,true,"LASTâ˜…STAR",false,"Calm Down Buddy",false,"rbxassetid://6593357327") chatfunc(repressionlines[rand(1,3)]) end end;
+	["EXECUTION"]=function() if altwheel == false then formswitch(C3R(255,255,255),C3R(0,170,255),1839931160,script.Dynamics.Execution.Value,C3R(200,200,200),100,100,1,"EXECUTION","Bodoni","EXECUTION","EXECUTION",0.4,true,0,true,"LASTâ˜…STAR",true,"8 Bit Dubstep",false,"rbxassetid://6593369926") chatfunc(executionlines[rand(1,3)]) end end;
+	["ANARCHY"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(100,0,255),9245552700,C3R(80,0,255),C3R(0,0,0),60,100,1,"ANARCHY","Antique","ANARCHY","ANARCHY",0.6,true,0,true,"LASTâ˜…STAR",false,"TacoBot 3,000",false,"rbxassetid://6595974803") chatfunc(anarchylines[rand(1,3)]) end end;
+	["VIRTUE"]=function() if altwheel == false then formswitch(C3R(0,230,255),C3R(255,255,255),9046862941,C3R(80,190,255),C3R(180,180,180),55,50,1,"VIRTUE","FredokaOne","VIRTUE","VIRTUE",0.4,true,0,true,"LASTâ˜…STAR",false,"Sunset Chill (Bed Version)",false,"rbxassetid://6595997907") chatfunc(virtuelines[rand(1,3)]) end end;
+	["ABSOLUTION"]=function() if altwheel == false then formswitch(C3R(255,80,80),C3R(255,0,0),9045344148,C3R(255,0,0),C3R(255,80,80),300,100,1,"ABSOLUTION","Fondamento","ABSOLUTION","ABSOLUTION",0.4,true,0,true,"LASTâ˜…STAR",false,"Forgotten Dreams",false,"rbxassetid://6595974875") chatfunc(absolutionlines[rand(1,3)]) end end;
+	["INFERNUM"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(255,70,0),1839526985,C3R(255,70,0),C3R(0,0,0),14,50,1,"INFERNUM","JosefinSans","INFERNUM","INFERNUM",0.4,true,0,true,"LASTâ˜…STAR",false,"Dubstep Hero",false,"rbxassetid://6595974633") chatfunc(infernumlines[rand(1,3)]) end end;
+	["DISSONANCE"]=function() if altwheel == false then formswitch(C3R(0,21,128),C3R(107,0,128),1847523310,C3R(107,0,128),C3R(0,21,128),50,50,1,"DISSONANCE","Kalam","DISSONANCE","DISSONANCE",0.35,true,0,true,"LASTâ˜…STAR",true,"Robot Electronic's",false,"rbxassetid://6595974744") chatfunc(dissonancelines[rand(1,3)]) end end;
+	["WARPSPEED"]=function() if altwheel == false then formswitch(C3R(70, 181, 255),C3R(208, 241, 255),1839527296,C3R(151, 165, 255),C3R(64, 121, 255),400,50,1,"WARPSPEED","Michroma","WARPSPEED","WARPSPEED",0.4,true,0,true,"LASTâ˜…STAR",false,"100% S P E E D",false,"rbxassetid://6596658428") chatfunc(warpspeedlines[rand(1,3)]) end end;
+	["INTRICACY"]=function() if altwheel == false then formswitch(C3R(0,255,0),C3R(255,255,255),1847754836,C3R(0,255,0),C3R(255,255,255),200,150,1,"INTRICACY","RobotoCondensed","INTRICACY","INTRICACY",0.55,true,0,true,"LASTâ˜…STAR",false,"Deleted Files",false,"rbxassetid://6595974565") chatfunc(intricacylines[rand(1,3)]) end end;
 }
 local disgraceformtable = {
-	["DOWNFALL"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(190,60,60),6941090644,C3R(190, 60, 60),C3R(0,0,0),16,50,1,"DOWNFALL","Antique","APEX","DOWNFALL",0.6,true,0,true,"LAST★STAR?",false,"Water Spirit // P.L.U.R",false,"rbxassetid://6595974565") returnwheel = "DISGRACE" end end;
-	["ADMISSION"]=function() formswitch(C3R(0,0,0),C3R(255, 175, 62),1057854857,C3R(170, 130, 60),C3R(0,0,0),20,40,1,"ADMISSION","Oswald","REPRESSION","ADMISSION",0.4,true,0,true,"LAST★STAR?",false,"Bossfight // Mescalink") returnwheel = "DISGRACE" end;  -- REPRESSION
-	["STIGMA"]=function() formswitch(C3R(0,0,0),script.Dynamics.Execution.Value,5113228942,script.Dynamics.Execution.Value,C3R(0,0,0),100,100,1,"STIGMA","Bodoni","EXECUTION","STIGMA",0.4,true,0,true,"LAST★STAR?",true,"Yooh // Heracles (Extended)") returnwheel = "DISGRACE" end; -- EXECUTION
-	["SILENCE"]=function() formswitch(C3R(0,0,0),C3R(70, 0, 255),5097730967,C3R(70, 0, 255),C3R(0, 0, 0),60,100,1,"SILENCE","Antique","ANARCHY","SILENCE",0.3,true,0,true,"LAST★STAR?",false,"This Song is 3:04 Min's LONG LOL") returnwheel = "DISGRACE" end; -- ANARCHY
+	["DOWNFALL"]=function() if altwheel == false then formswitch(C3R(0,0,0),C3R(190,60,60),6941090644,C3R(190, 60, 60),C3R(0,0,0),16,50,1,"DOWNFALL","Antique","APEX","DOWNFALL",0.6,true,0,true,"LASTâ˜…STAR?",false,"Water Spirit // P.L.U.R",false,"rbxassetid://6595974565") returnwheel = "DISGRACE" end end;
+	["ADMISSION"]=function() formswitch(C3R(0,0,0),C3R(255, 175, 62),1057854857,C3R(170, 130, 60),C3R(0,0,0),20,40,1,"ADMISSION","Oswald","REPRESSION","ADMISSION",0.4,true,0,true,"LASTâ˜…STAR?",false,"Bossfight // Mescalink") returnwheel = "DISGRACE" end;  -- REPRESSION
+	["STIGMA"]=function() formswitch(C3R(0,0,0),script.Dynamics.Execution.Value,5113228942,script.Dynamics.Execution.Value,C3R(0,0,0),100,100,1,"STIGMA","Bodoni","EXECUTION","STIGMA",0.4,true,0,true,"LASTâ˜…STAR?",true,"Yooh // Heracles (Extended)") returnwheel = "DISGRACE" end; -- EXECUTION
+	["SILENCE"]=function() formswitch(C3R(0,0,0),C3R(70, 0, 255),5097730967,C3R(70, 0, 255),C3R(0, 0, 0),60,100,1,"SILENCE","Antique","ANARCHY","SILENCE",0.3,true,0,true,"LASTâ˜…STAR?",false,"This Song is 3:04 Min's LONG LOL") returnwheel = "DISGRACE" end; -- ANARCHY
 	["IGNOMINY"]=function() end; -- VIRTUE
-	["RETENTION"]=function() formswitch(C3R(0,0,0),C3R(255, 80, 140),6735674317,C3R(255, 80, 140),C3R(255, 0, 70),300,100,1,"RETENTION","Fondamento","ABSOLUTION","RETENTION",1.1,true,0,true,"LAST★STAR?",false,"Yonaka // Vespertilism") returnwheel = "DISGRACE" end; -- ABSOLUTION
+	["RETENTION"]=function() formswitch(C3R(0,0,0),C3R(255, 80, 140),6735674317,C3R(255, 80, 140),C3R(255, 0, 70),300,100,1,"RETENTION","Fondamento","ABSOLUTION","RETENTION",1.1,true,0,true,"LASTâ˜…STAR?",false,"Yonaka // Vespertilism") returnwheel = "DISGRACE" end; -- ABSOLUTION
 	["DIFFLAMED"]=function() end; -- INFERNUM
 	["RAPTURE"]=function() end; -- DISSONANCE
 	["HINDRANCE"]=function() end; -- WARPSPEED
@@ -2147,7 +2208,7 @@ local changewheeltable = {
 	end;
 	["APEXALTS"]=function() changewheel(true,"APEX","EXCELLENCE","AGONY","PARALLELENCE","CARNAGE","CALAMITY","REVOLTION","PROSPECTUM","OBSCURITY","CRYSTALLIZATION","Antique","GothamSemibold","Antique","GothamBold","Antique","Fondamento","Garamond","Oswald","GothamSemibold","Arcade",c3(255,0,0),c3(0,0,0),c3(255,200,100),c3(255,255,255),c3(200,0,0),c3(0,0,0),c3(255,50,50),c3(255,255,255),c3(130,0,0),c3(255,0,0),c3(50,130,167),c3(20,51,66),c3(167,69,69),c3(230,167,167),c3(143,226,255),c3(255,164,119),c3(200,0,0),c3(0,0,0),c3(255,255,255),c3(150,150,150)) returnwheel = "BASE" end;
 	["REPRESSIONALTS"]=function() changewheel(true,"REPRESSION","ANNIHILATION","CONTINUUM","ECLIPSE","FOCUS","DEVIANCE","RESONANCE","CRIMSON","CREVASSE","CHAOS","Oswald","Antique","GothamBold","Fantasy","Code","Antique","Antique","IndieFlower","SciFi","Arcade",c3(255,100,0),c3(0,0,0),c3(255,55,70),c3(0,0,0),c3(100,255,90),c3(0,0,0),c3(255,80,0),c3(0,0,0),c3(168,43,45),c3(0,0,0),c3(100,0,0),c3(0,0,0),c3(255,0,0),c3(124,0,51),c3(180,0,0),c3(0,0,0),c3(78,113,208),c3(255,255,255),c3(255,255,255),c3(27,42,53)) returnwheel = "BASE" end;
-	["EXECUTIONALTS"]=function() changewheel(true,"EXECUTION","SPECTRAFIELD","PROHIBITION","ΣTERNITY","NEBULA","AURORA","UTTERANCE","SOMNAMBULIST","","","Bodoni","Arcade","ArialBold","SourceSansSemibold","SciFi","GothamBlack","Fondamento","Bodoni","Arial","Arial",c3(255,255,255),c3(255,255,255),c3(45,45,45),c3(0,0,0),c3(255,0,0),c3(80,0,0),c3(255,255,255),c3(200,200,200),c3(210,100,255),c3(100,160,255),c3(130, 200, 255),c3(255,255,255),c3(240,0,40),c3(10,10,10),c3(166, 197, 255),c3(208, 189, 255),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20)) returnwheel = "BASE" end;
+	["EXECUTIONALTS"]=function() changewheel(true,"EXECUTION","SPECTRAFIELD","PROHIBITION","Ä‚ÂŽÃ‚Â£TERNITY","NEBULA","AURORA","UTTERANCE","SOMNAMBULIST","","","Bodoni","Arcade","ArialBold","SourceSansSemibold","SciFi","GothamBlack","Fondamento","Bodoni","Arial","Arial",c3(255,255,255),c3(255,255,255),c3(45,45,45),c3(0,0,0),c3(255,0,0),c3(80,0,0),c3(255,255,255),c3(200,200,200),c3(210,100,255),c3(100,160,255),c3(130, 200, 255),c3(255,255,255),c3(240,0,40),c3(10,10,10),c3(166, 197, 255),c3(208, 189, 255),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20)) returnwheel = "BASE" end;
 	["ANARCHYALTS"]=function() changewheel(true,"ANARCHY","DESTRUCTION","HYPERTRANCE","LUNAR","SURREPTITIOUS","EXHAUSTION","KATHASTROPHE","EXTERMINATION","NOCTURNALITY","UPHEAVAL","Antique","Garamond","GothamBold","Bodoni","Nunito","Bodoni","Antique","Fondamento","Antique","Code",c3(100,0,255),c3(0,0,0),c3(155,0,155),c3(0,0,0),c3(127, 92, 241),c3(249, 196, 255),c3(0,0,255),c3(0,0,0),c3(33,145,126),c3(0,62,76),c3(196, 40, 28),c3(27,42,53),c3(170,85,225),c3(0,0,0),c3(160,0,0),c3(0,0,0),c3(28,9,56),c3(29,24,91),c3(255,140,0),c3(50,50,50)) returnwheel = "BASE" end;
 	["VIRTUEALTS"]=function()changewheel(true,"VIRTUE","DIAPHANOUS","DELICACY","CONTRIVANCE","ENIGMA","MOTIVATION","HEARTFELT","SENTIMENT","","","FredokaOne","Fantasy","GothamBold","Cartoon","SciFi","Nunito","Nunito","IndieFlower","Arial","Arial",c3(0,230,255),c3(255,255,255),c3(255,255,255),c3(150,150,150),c3(255,130,200),c3(255,255,255),c3(255,0,115),c3(255,255,255),c3(0,130,255),c3(0,0,0),C3N(0.0313725, 0.494118, 0.545098),C3N(1, 0.352941, 0.372549),c3(127,96,170),c3(35,14,57),c3(47, 14, 86),c3(255, 182, 99),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20)) returnwheel = "BASE" end;
 }
@@ -2158,89 +2219,89 @@ local apexalttable = {
 	["APEX"]=function()
 		local x = math.random(1,10)
 		if x > 1 then
-			formswitch(C3R(0,0,0),C3R(255,0,0),6454152476,C3R(255,0,0),C3R(0,0,0),16,50,1,"APEX","Antique","APEX","APEX",0.4,false,0,false,"LAST★STAR",false,"C a l m | D o w n")
+			formswitch(C3R(0,0,0),C3R(255,0,0),6454152476,C3R(255,0,0),C3R(0,0,0),16,50,1,"APEX","Antique","APEX","APEX",0.4,false,0,false,"LASTâ˜…STAR",false,"C a l m | D o w n")
 		else
 			formswitch(C3R(255,0,0),C3R(0,0,255),250185257 ,C3R(255,0,0),C3R(0,0,255),16,50,1,"EXASPERATION","Ubuntu","APEX","EXASPERATION",0.4,false,0,false,"DERPZ GLITCHER",true,"Excision & Pegboard Nerds // Bring The Madness")
-			chatmsg("Oh boy here we go again, huh Ronald.")
+			chatfunc("Oh boy here we go again, huh Ronald.")
 		end
 	end;
 	["EXCELLENCE"]=function() formswitch(C3R(255,200,100),C3R(255,255,255),1847588502,C3R(255,170,60),C3R(200,200,200),18,50,0.95,"EXCELLENCE","GothamSemibold","APEX","APEX",0.5,false,1,false,"GREAT TURMOIL",false,"P e r f e c t") end;
-	["AGONY"]=function()  formswitch(C3R(0,0,0),C3R(200,0,0),8703175543,C3R(200,0,0),C3R(0,0,0),14,45,1.1,"AGONY","Antique","APEX","APEX",0.25,false,2,false,"LΔPSΣ",false,"-| D o o M |-") end;
+	["AGONY"]=function()  formswitch(C3R(0,0,0),C3R(200,0,0),8703175543,C3R(200,0,0),C3R(0,0,0),14,45,1.1,"AGONY","Antique","APEX","APEX",0.25,false,2,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"-| D o o M |-") end;
 	["PARALLELENCE"]=function() formswitch(C3R(255,50,50),C3R(255,255,255),1847754660,C3R(255,60,60),C3R(255,200,200),16,60,0.9,"PARALLELENCE","GothamBold","APEX","APEX",0.75,false,3,false,"FORGOTTEN IRIDESCENCE",false,"...oh,ok...") end;
 	["CARNAGE"]=function() formswitch(C3R(255,0,0),C3R(150,0,0),1839527117,C3R(255,0,0),C3R(100,0,0),16,60,0.95,"CARNAGE","Antique","APEX","APEX",0.3,false,4,false,"HESYCHASTIC",false,"Nothing was here") end;
-	["CALAMITY"]=function() formswitch(C3R(20, 51, 66),C3R(50, 130, 167),9038274374,C3R(50, 130, 167),C3R(20, 51, 66),30,40,0.8,"CALAMITY","Fondamento","APEX","APEX",0.4,false,6,false,"LAST★STAR",false,"Dead man's life story") end;
-	["REVOLTION"]=function() formswitch(C3R(230,167,167),C3R(167,69,69),1836057239,C3R(167, 69, 69),C3R(230,167,167),13,70,1.3,"REVOLTION","Garamond","APEX","APEX",0.4,false,-1,false,"LAST★STAR",false,"Ultra Killer // more like Ultra Loser") end;
-	["PROSPECTUM"]=function() formswitch(C3R(255,164,119),C3R(143,226,255),1839542961,C3R(255,164,119),C3R(143,226,255),16,60,0.95,"PROSPECTUM","Oswald","APEX","APEX",0.4,false,-1,false,"LAST★STAR",false,"Don't get dizzy now :)") end;
+	["CALAMITY"]=function() formswitch(C3R(20, 51, 66),C3R(50, 130, 167),9038274374,C3R(50, 130, 167),C3R(20, 51, 66),30,40,0.8,"CALAMITY","Fondamento","APEX","APEX",0.4,false,6,false,"LASTâ˜…STAR",false,"Dead man's life story") end;
+	["REVOLTION"]=function() formswitch(C3R(230,167,167),C3R(167,69,69),1836057239,C3R(167, 69, 69),C3R(230,167,167),13,70,1.3,"REVOLTION","Garamond","APEX","APEX",0.4,false,-1,false,"LASTâ˜…STAR",false,"Ultra Killer // more like Ultra Loser") end;
+	["PROSPECTUM"]=function() formswitch(C3R(255,164,119),C3R(143,226,255),1839542961,C3R(255,164,119),C3R(143,226,255),16,60,0.95,"PROSPECTUM","Oswald","APEX","APEX",0.4,false,-1,false,"LASTâ˜…STAR",false,"Don't get dizzy now :)") end;
 	["OBSCURITY"]=function() formswitch(C3R(0,0,0),C3R(200,0,0),1839527184,C3R(200,0,0),C3R(0,0,0),16,50,1,"OBSCURITY","GothamSemibold","APEX","APEX",0.4,false,0,false,"FORGOTTEN IRIDESCENCE",false,"Dubstep Fight // (Come at me Bro)") end;
 	["CRYSTALLIZATION"]=function() formswitch(C3R(150,150,150),C3R(255,255,255),1839448308,C3R(255,255,255),C3R(150,150,150),20,50,0.9,"CRYSTALLIZATION","Arcade","APEX","APEX",0.3,false,-1,false,"GREAT TURMOIL",false,"Confused Glitcher") end
 }
 local repressionalttable = {
-	["REPRESSION"]=function() formswitch(C3R(0,0,0),C3R(255,130,0),1843404009,C3R(255,100,0),C3R(0,0,0),20,40,1,"REPRESSION","Oswald","REPRESSION","REPRESSION",0.4,false,0,false,"LAST★STAR",false,"Calm Down buddy") end;
+	["REPRESSION"]=function() formswitch(C3R(0,0,0),C3R(255,130,0),1843404009,C3R(255,100,0),C3R(0,0,0),20,40,1,"REPRESSION","Oswald","REPRESSION","REPRESSION",0.4,false,0,false,"LASTâ˜…STAR",false,"Calm Down buddy") end;
 	["ANNIHILATION"]=function() formswitch(C3R(0,0,0),C3R(255,55,70),9048375035,C3R(255,55,70),C3R(0,0,0),22,50,0.95,"ANNIHILATION","Antique","REPRESSION","REPRESSION",0.3,false,1,false,"GREAT TURMOIL",false,"Die Potato") end;
 	["CONTINUUM"]=function() formswitch(C3R(0,0,0),C3R(100,255,90),1837454064,C3R(100,255,90),C3R(0,0,0),18,50,1.1,"CONTINUUM","GothamBold","REPRESSION","REPRESSION",0.3,false,2,false,"FORGOTTEN IRIDESCENCE",false,"OMG it's HIM (again)") end;
 	["ECLIPSE"]=function()
 		local t = {
-			function()formswitch(C3R(0,0,0),C3R(255,80,0),1837301451,C3R(255,80,0),C3R(0,0,0),16,50,1.1,"ECLIPSE","Fantasy","REPRESSION","REPRESSION",0.3,false,3,false,"LΔPSΣ",false,"gmtn. (witch's slave) // Furioso Melodia")end;
-			function()formswitch(C3R(0,0,0),C3R(0,130,255),142376088,C3R(0,130,255),C3R(0,0,0),16,50,1.15,"DARKENING","Highway","REPRESSION","REPRESSION",0.3,false,3,false,"LΔPSΣ",false,"gmtn. (witch's slave) // Furioso Melodia (2017 VIP)")end
+			function()formswitch(C3R(0,0,0),C3R(255,80,0),1837301451,C3R(255,80,0),C3R(0,0,0),16,50,1.1,"ECLIPSE","Fantasy","REPRESSION","REPRESSION",0.3,false,3,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"gmtn. (witch's slave) // Furioso Melodia")end;
+			function()formswitch(C3R(0,0,0),C3R(0,130,255),142376088,C3R(0,130,255),C3R(0,0,0),16,50,1.15,"DARKENING","Highway","REPRESSION","REPRESSION",0.3,false,3,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"gmtn. (witch's slave) // Furioso Melodia (2017 VIP)")end
 		}
 		local x = rand(1,5) if x > 1 then t[1]() else t[2]() end
 	end;
-	["Press Play BRO"]=function() formswitch(C3R(0,0,0),C3R(168,43,45),5410085763,C3R(168,43,45),C3R(0,0,0),10,50,1.4,"FOCUS","Code","REPRESSION","REPRESSION",0.5,false,4,false,"LAST★STAR",false,"This Song is 3:04 Min's LONG LOL") end;
-	["DEVIANCE"]=function() formswitch(C3R(0,0,0),C3R(100,0,0),7023887630,C3R(70,0,0),C3R(0,0,0),16,50,1.1,"DEVIANCE","Antique","REPRESSION","REPRESSION",0.4,false,-1,false,"LAST★STAR",false,"B L O O M") end;
-	["ROXANNE"]=function() formswitch(C3R(124, 0, 51),C3R(255,0,0),6808308228,C3R(255,0,0),C3R(124, 0, 51),16,50,1,"RESONANCE","Antique","REPRESSION","REPRESSION",0.3,false,-1,false,"LAST★STAR",false,"Hyper Potions & Nokae - Expedition: Yeah it's Monstercat :/") end;
+	["Press Play BRO"]=function() formswitch(C3R(0,0,0),C3R(168,43,45),5410085763,C3R(168,43,45),C3R(0,0,0),10,50,1.4,"FOCUS","Code","REPRESSION","REPRESSION",0.5,false,4,false,"LASTâ˜…STAR",false,"This Song is 3:04 Min's LONG LOL") end;
+	["DEVIANCE"]=function() formswitch(C3R(0,0,0),C3R(100,0,0),7023887630,C3R(70,0,0),C3R(0,0,0),16,50,1.1,"DEVIANCE","Antique","REPRESSION","REPRESSION",0.4,false,-1,false,"LASTâ˜…STAR",false,"B L O O M") end;
+	["ROXANNE"]=function() formswitch(C3R(124, 0, 51),C3R(255,0,0),6808308228,C3R(255,0,0),C3R(124, 0, 51),16,50,1,"RESONANCE","Antique","REPRESSION","REPRESSION",0.3,false,-1,false,"LASTâ˜…STAR",false,"Hyper Potions & Nokae - Expedition: Yeah it's Monstercat :/") end;
 	["CRIMSON"]=function() formswitch(C3R(0,0,0),C3R(180,0,0),7024233823,C3R(120,0,0),C3R(0,0,0),16,50,1.1,"CRIMSON","IndieFlower","REPRESSION","REPRESSION",0.2,false,-1,false,"STAR GLITCHER",false,"Nitro Is Fun") end;
 	["CREVASSE"]=function() formswitch(C3R(78,113,208),C3R(255,255,255),7023635858,C3R(78,113,208),C3R(180,180,180),23,50,0.9,"CREVASSE","SciFi","REPRESSION","REPRESSION",0.25,false,-1,false,"HESYCHASTIC",false,"Vex \/ 3:55 ") end;
 	["CHAOS"]=function() formswitch(C3R(27,42,53),C3R(255,255,255),1838074757,C3R(255,255,255),C3R(0,0,0),23,50,0.9,"CHAOS","Arcade","REPRESSION","REPRESSION",0.4,false,10,false,"STAR GLITCHER",true,"Nothing's wrong with a little chaos") end;
 }
 local executionalttable = {
-	["EXECUTION"] = function() formswitch(C3R(255,255,255),C3R(0,170,255),4514914581,script.Dynamics.Execution.Value,C3R(200,200,200),100,100,1,"EXECUTION","Bodoni","EXECUTION","EXECUTION",0.4,false,0,false,"LAST★STAR",true,"8 Bit Dubstep") end;
-	["SPECTRAFIELD"] = function() local x = rand(1,5) if x ~= 1 then formswitch(script.Dynamics.Spectrafield.Value,C3R(255,255,255),5348965486,script.Dynamics.Spectrafield.Value,C3R(255,255,255),200,50,0.85,"SPECTRAFIELD","Arcade","EXECUTION","EXECUTION",0.35,false,1,false,"LAST★STAR",true,"Dude...Just play it cool......") else formswitch(C3R(0,60,255),C3R(255,255,255),6245897503,C3R(0,0,255),C3R(255,255,255),200,50,1,"PEPSIMAN","ArialBold","EXECUTION","EXECUTION",0.2,false,666,false,"HELL ITSELF",true,"Turbo // Pepsiman Pepsiman Pepsiman") chatmsg(OHGODWHYHELPMESOMEBODYPLEASE[rand(1,#OHGODWHYHELPMESOMEBODYPLEASE)]) end end;
+	["EXECUTION"] = function() formswitch(C3R(255,255,255),C3R(0,170,255),4514914581,script.Dynamics.Execution.Value,C3R(200,200,200),100,100,1,"EXECUTION","Bodoni","EXECUTION","EXECUTION",0.4,false,0,false,"LASTâ˜…STAR",true,"8 Bit Dubstep") end;
+	["SPECTRAFIELD"] = function() local x = rand(1,5) if x ~= 1 then formswitch(script.Dynamics.Spectrafield.Value,C3R(255,255,255),5348965486,script.Dynamics.Spectrafield.Value,C3R(255,255,255),200,50,0.85,"SPECTRAFIELD","Arcade","EXECUTION","EXECUTION",0.35,false,1,false,"LASTâ˜…STAR",true,"Dude...Just play it cool......") else formswitch(C3R(0,60,255),C3R(255,255,255),6245897503,C3R(0,0,255),C3R(255,255,255),200,50,1,"PEPSIMAN","ArialBold","EXECUTION","EXECUTION",0.2,false,666,false,"HELL ITSELF",true,"Turbo // Pepsiman Pepsiman Pepsiman") chatfunc(OHGODWHYHELPMESOMEBODYPLEASE[rand(1,#OHGODWHYHELPMESOMEBODYPLEASE)]) end end;
 	["PROHIBITION"] = function() formswitch(C3R(80,0,0),C3R(255,0,0),9045959416,C3R(255,0,0),C3R(80,0,0),400,130,0.65,"PROHIBITION","ArialBold","EXECUTION","EXECUTION",0.3,false,2,false,"CESSATION",false,"Little Bird-i") end;
-	["ΣTERNITY"] = function() formswitch(C3R(200,200,200),C3R(255,255,255),7026389855,C3R(255,255,255),C3R(150,150,150),200,50,0.9,"ΣTERNITY","SourceSansSemibold","EXECUTION","EXECUTION",0.3,false,-1,false,"LAST★STAR",false,"Egipt Rad B)") end;
-	["NEBULA"] = function() formswitch(C3R(210,100,255),C3R(100,160,255),5410080857,C3R(210,100,255),C3R(100,160,255),500,100,0.6,"NEBULA","SciFi","EXECUTION","EXECUTION",0.3,false,5,false,"LΔPSΣ",true,"Who's laughing now bastard") end;
-	["AURORA"] = function() formswitch(C3R(255,255,255),C3R(100,160,255),7024332460,script.Dynamics.Aurora.Value,C3R(255,255,255),500,100,0.6,"AURORA","GothamBlack","EXECUTION","EXECUTION",0.3,false,6,false,"LΔPSΣ",true,"Pegboard Nerds - Shaku |Nothing more to say|") end;
-	["UTTERANCE"] = function() formswitch(C3R(240,0,40),C3R(10,10,10),7023771708,c3(240,0,40),C3R(10,10,10),300,90,0.8,"UTTERANCE","Fondamento","EXECUTION","EXECUTION",0.4,false,30,false,"LAST★STAR",true,"Please...Just stay still :|") end;
+	["Ä‚ÂŽÃ‚Â£TERNITY"] = function() formswitch(C3R(200,200,200),C3R(255,255,255),7026389855,C3R(255,255,255),C3R(150,150,150),200,50,0.9,"Ä‚ÂŽÃ‚Â£TERNITY","SourceSansSemibold","EXECUTION","EXECUTION",0.3,false,-1,false,"LASTâ˜…STAR",false,"Egipt Rad B)") end;
+	["NEBULA"] = function() formswitch(C3R(210,100,255),C3R(100,160,255),5410080857,C3R(210,100,255),C3R(100,160,255),500,100,0.6,"NEBULA","SciFi","EXECUTION","EXECUTION",0.3,false,5,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",true,"Who's laughing now bastard") end;
+	["AURORA"] = function() formswitch(C3R(255,255,255),C3R(100,160,255),7024332460,script.Dynamics.Aurora.Value,C3R(255,255,255),500,100,0.6,"AURORA","GothamBlack","EXECUTION","EXECUTION",0.3,false,6,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",true,"Pegboard Nerds - Shaku |Nothing more to say|") end;
+	["UTTERANCE"] = function() formswitch(C3R(240,0,40),C3R(10,10,10),7023771708,c3(240,0,40),C3R(10,10,10),300,90,0.8,"UTTERANCE","Fondamento","EXECUTION","EXECUTION",0.4,false,30,false,"LASTâ˜…STAR",true,"Please...Just stay still :|") end;
 	["Bad Computer"] = function() formswitch(C3R(166, 197, 255),C3R(208, 189, 255),7023598688,c3(129, 156, 255),C3R(172, 151, 255),100,70,1,"SOMNAMBULIST","Bodoni","EXECUTION","EXECUTION",0.6,false,30,false,"REALITY GLITCHER",true,"Potato PC moment") end;
 }
 local anarchyalttable = {
-	["ANARCHY"]=function() formswitch(C3R(0,0,0),C3R(100,0,255),5671763707,C3R(80,0,255),C3R(0,0,0),60,100,1,"ANARCHY","Antique","ANARCHY","ANARCHY",0.6,false,0,false,"LAST★STAR",false,"meganeko // The Cyber Grind") end;
+	["ANARCHY"]=function() formswitch(C3R(0,0,0),C3R(100,0,255),5671763707,C3R(80,0,255),C3R(0,0,0),60,100,1,"ANARCHY","Antique","ANARCHY","ANARCHY",0.6,false,0,false,"LASTâ˜…STAR",false,"meganeko // The Cyber Grind") end;
 	["DESTRUCTION"]=function() formswitch(C3R(0,0,0),C3R(155,0,155),1248240943,C3R(155,0,155),C3R(0,0,0),60,100,1,"DESTRUCTION","Garamond","ANARCHY","ANARCHY",0.4,false,1,false,"STAR GLITCHER",false,"ALEX // Mainframe") end;
-	["HYPERTRANCE"]=function() formswitch(C3R(249, 196, 255),C3R(127, 92, 241),6770715109,C3R(127, 92, 241),C3R(249, 196, 255),60,100,1,"HYPERTRANCE","GothamBold","ANARCHY","ANARCHY",0.6,false,2,false,"LAST★STAR",false,"meganeko // Robot Language") end;
-	["LUNAR"]=function() formswitch(C3R(0,0,0),C3R(0,0,255),4747259294,C3R(0,0,255),C3R(0,0,0),80,60,1.1,"LUNAR","Bodoni","ANARCHY","ANARCHY",0.3,false,3,false,"LΔPSΣ",false,"Lchavasse // Space Abyss") end;
+	["HYPERTRANCE"]=function() formswitch(C3R(249, 196, 255),C3R(127, 92, 241),6770715109,C3R(127, 92, 241),C3R(249, 196, 255),60,100,1,"HYPERTRANCE","GothamBold","ANARCHY","ANARCHY",0.6,false,2,false,"LASTâ˜…STAR",false,"meganeko // Robot Language") end;
+	["LUNAR"]=function() formswitch(C3R(0,0,0),C3R(0,0,255),4747259294,C3R(0,0,255),C3R(0,0,0),80,60,1.1,"LUNAR","Bodoni","ANARCHY","ANARCHY",0.3,false,3,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"Lchavasse // Space Abyss") end;
 	["SURREPTITIOUS"]=function() formswitch(C3R(0,62,76),C3R(33,145,126),5753498942,C3R(33,145,126),C3R(0,62,76),80,80,1,"SURREPTITIOUS","Nunito","ANARCHY","ANARCHY",0.3,false,3,false,"ARBITRARIUM",false,"Camellia // Dance with Silence") end;
 	["EXHAUSTION"]=function() formswitch(C3R(27,42,53),C3R(196,40,28),4531555639,C3R(255, 50, 36),C3R(27,42,53),300,60,1,"EXHAUSTION","Bodoni","ANARCHY","ANARCHY",0.7,false,3,false,"REALITY GLITCHER",false,"Bravely Default OST // Serpent Eating the Ground") end;
 	["KATHASTROPHE"]=function() formswitch(C3R(0,0,0),C3R(170,85,225),4707166290,C3R(170,85,225),C3R(0,0,0),200,60,1.1,"KATHASTROPHE","Antique","ANARCHY","ANARCHY",0.35,false,3,false,"HESYCHASTIC",false,"Team Grimoire // Kathastrophe") end;
-	["EXTERMINATION"]=function() formswitch(C3R(0,0,0),C3R(160,0,0),4239221655,C3R(130,0,0),C3R(0,0,0),200,70,1,"EXTERMINATION","Fondamento","ANARCHY","ANARCHY",0.4,false,0,false,"LAST★STAR",false,"kenta-v.ez. // ListENiNg to spEEDcorE turNs you iNto An idiot (Kobaryo's FTN-Remix)") end;
+	["EXTERMINATION"]=function() formswitch(C3R(0,0,0),C3R(160,0,0),4239221655,C3R(130,0,0),C3R(0,0,0),200,70,1,"EXTERMINATION","Fondamento","ANARCHY","ANARCHY",0.4,false,0,false,"LASTâ˜…STAR",false,"kenta-v.ez. // ListENiNg to spEEDcorE turNs you iNto An idiot (Kobaryo's FTN-Remix)") end;
 	["NOCTURNALITY"]=function() formswitch(C3R(28,9,56),C3R(29,24,91),5988458430,C3R(29,24,91),C3R(28,9,56),250,100,1,"NOCTURNALITY","Kalam","ANARCHY","ANARCHY",0.6,false,0,false,"PROJECT 2",false,"monoq + RIZARDI // SLEEPWALKER") end;
 	["UPHEAVAL"]=function() formswitch(C3R(50,50,50),C3R(255,140,0),669758193,C3R(255,115,0),C3R(50,50,50),100,100,0.9,"UPHEAVAL","Code","ANARCHY","ANARCHY",0.6,false,0,false,"GREAT TURMOIL",false,"Locknar // Rock & Loaded") end;
 }
 local virtuealttable = {
-	["VIRTUE"]=function() formswitch(C3R(0,230,255),C3R(255,255,255),6289868990,C3R(80,190,255),C3R(180,180,180),55,50,1,"VIRTUE","FredokaOne","VIRTUE","VIRTUE",0.4,false,0,false,"LAST★STAR",false,"Sunset Chill (Bed Version)") end;
-	["DIAPHANOUS"]=function() formswitch(C3R(150,150,150),C3R(255,255,255),586732256,C3R(200,200,200),C3R(120,120,120),60,40,1.25,"DIAPHANOUS","Fantasy","VIRTUE","VIRTUE",0.4,false,1,false,"LΔPSΣ",false,"xi // Happy End of the World") end;
+	["VIRTUE"]=function() formswitch(C3R(0,230,255),C3R(255,255,255),6289868990,C3R(80,190,255),C3R(180,180,180),55,50,1,"VIRTUE","FredokaOne","VIRTUE","VIRTUE",0.4,false,0,false,"LASTâ˜…STAR",false,"Sunset Chill (Bed Version)") end;
+	["DIAPHANOUS"]=function() formswitch(C3R(150,150,150),C3R(255,255,255),586732256,C3R(200,200,200),C3R(120,120,120),60,40,1.25,"DIAPHANOUS","Fantasy","VIRTUE","VIRTUE",0.4,false,1,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"xi // Happy End of the World") end;
 	["DELICACY"]=function() formswitch(C3R(255,255,255),C3R(255,130,200),4669076145,C3R(255,130,200),C3R(170,170,170),45,45,1.4,"DELICACY","GothamBold","VIRTUE","VIRTUE",0.3,false,2,false,"FORGOTTEN IRIDESCENCE",false,"(inappropriate name) // Toromi Hearts 2") end;
-	["CONTRIVANCE"]=function() formswitch(C3R(255,255,255),C3R(255, 0, 115),6382627214,C3R(255,0,115),C3R(220,220,220),23,50,1.75,"CONTRIVANCE","Cartoon","VIRTUE","VIRTUE",0.4,false,3,false,"LAST★STAR",false,"Magic Sword // Uprising") end;
-	["ENIGMA"]=function() formswitch(C3R(0,0,0),C3R(0,130,255),1747455288,C3R(0,110,255),C3R(0,0,0),70,50,0.8,"ENIGMA","SciFi","VIRTUE","VIRTUE",0.4,false,3,false,"LΔPSΣ",false,"XI // Ascension to Heaven") end;
+	["CONTRIVANCE"]=function() formswitch(C3R(255,255,255),C3R(255, 0, 115),6382627214,C3R(255,0,115),C3R(220,220,220),23,50,1.75,"CONTRIVANCE","Cartoon","VIRTUE","VIRTUE",0.4,false,3,false,"LASTâ˜…STAR",false,"Magic Sword // Uprising") end;
+	["ENIGMA"]=function() formswitch(C3R(0,0,0),C3R(0,130,255),1747455288,C3R(0,110,255),C3R(0,0,0),70,50,0.8,"ENIGMA","SciFi","VIRTUE","VIRTUE",0.4,false,3,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"XI // Ascension to Heaven") end;
 	["MOTIVATION"]=function() formswitch(C3N(1, 0.352941, 0.372549),C3N(0.0313725, 0.494118, 0.545098),5413306480,C3N(1, 0.352941, 0.372549),C3N(0.0313725, 0.494118, 0.545098),40,60,1,"MOTIVATION","Nunito","VIRTUE","VIRTUE",0.4,false,3,false,"ASTRAL",false,"Megawolf77 // Happyyyy~!!") end;
-	["HEARTFELT"]=function() formswitch(C3R(35,14,57),C3R(127,96,170),5712004125,C3R(35,14,57),C3R(127,96,170),51,50,1,"HEARTFELT","Nunito","VIRTUE","VIRTUE",0.4,false,3,false,"CHROMOSPHERIC",false,"Cororo // ウエンレラの氷華") end;
+	["HEARTFELT"]=function() formswitch(C3R(35,14,57),C3R(127,96,170),5712004125,C3R(35,14,57),C3R(127,96,170),51,50,1,"HEARTFELT","Nunito","VIRTUE","VIRTUE",0.4,false,3,false,"CHROMOSPHERIC",false,"Cororo // Ä‚Â£Ã¢â‚¬ÂšÃ‚Â¦Ä‚Â£Ã¢â‚¬ÂšÃ‚Â¨Ä‚Â£Ã†â€™Ã‚Â³Ä‚Â£Ã†â€™Ã‚Â¬Ä‚Â£Ã†â€™Ã‚Â©Ä‚Â£Ã‚ÂÃ‚Â®Ä‚Â¦Ã‚Â°Ã‚Â·Ä‚Â¨Ã‚ÂÃ‚Â¯") end;
 	["SENTIMENT"]=function() formswitch(C3R(255, 182, 99),C3R(47, 14, 86),2878659587,C3R(255, 182, 99),C3R(47, 14, 86),70,50,0.8,"SENTIMENT","IndieFlower","VIRTUE","VIRTUE",0.4,false,3,false,"UNIVERSAL GLITCHER",false,"OISHI // Onigiri Freeway") end;
 }
 local dissonancealttable = {
-	["DISSONANCE"]=function() formswitch(C3R(0,21,128),C3R(107,0,128),4857461826,C3R(107,0,128),C3R(0,21,128),50,50,1,"DISSONANCE","Kalam","DISSONANCE","DISSONANCE",0.35,false,0,false,"LAST★STAR",true,"Robot Electronic's") end;
-	["DISTORTION"]=function() formswitch(C3R(255,0,0),C3R(0,0,0),3108672499,C3R(255,0,0),C3R(0,0,0),60,40,1.1,"DISTORTION","SciFi","DISSONANCE","DISSONANCE",0.35,false,1,false,"LΔPSΣ",true,"Kobaryo // Necrophagiatoast") end;
-	["ALTERATION"]=function() formswitch(C3R(255,255,255),C3R(0,0,0),833792144,C3R(255,255,255),C3R(0,0,0),130,30,0.8,"ALTERATION","Bodoni","DISSONANCE","DISSONANCE",0.4,false,2,false,"LΔPSΣ",true,"The Quick Brown Fox - PROSELYTISM") end
+	["DISSONANCE"]=function() formswitch(C3R(0,21,128),C3R(107,0,128),4857461826,C3R(107,0,128),C3R(0,21,128),50,50,1,"DISSONANCE","Kalam","DISSONANCE","DISSONANCE",0.35,false,0,false,"LASTâ˜…STAR",true,"Robot Electronic's") end;
+	["DISTORTION"]=function() formswitch(C3R(255,0,0),C3R(0,0,0),3108672499,C3R(255,0,0),C3R(0,0,0),60,40,1.1,"DISTORTION","SciFi","DISSONANCE","DISSONANCE",0.35,false,1,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",true,"Kobaryo // Necrophagiatoast") end;
+	["ALTERATION"]=function() formswitch(C3R(255,255,255),C3R(0,0,0),833792144,C3R(255,255,255),C3R(0,0,0),130,30,0.8,"ALTERATION","Bodoni","DISSONANCE","DISSONANCE",0.4,false,2,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",true,"The Quick Brown Fox - PROSELYTISM") end
 }
 local nihilalttable = {
-	["NIHIL"]=function() formswitch(C3R(0,0,0),C3R(0,0,0),5249099148,C3R(0,0,255),C3R(255,255,255),100,50,1,"NIHIL","SciFi","NIHIL","NIHIL",0.2,false,0,false,"LAST★STAR",true,"Water Spirit // Aries") end;
-	["ANOMALY"]=function() formswitch(C3R(0,0,0),C3R(0,0,0),1228696343,C3R(255,0,0),C3R(255,255,255),200,40,0.9,"ANOMALY","Arcade","NIHIL","NIHIL",0.25,false,1,false,"LAST★STAR",true,"Camellia // Anomaly") end;
-	["TERMINATION"]=function() formswitch(C3R(0,0,0),C3R(0,0,0),6807085919,C3R(0,255,0),C3R(255,255,255),300,60,0.7,"TERMINATION","SciFi","NIHIL","NIHIL",0.35,false,-1,false,"LΔPSΣ",true,"Renard & Adraen // Terminal") end;
-	["404"]=function() formswitch(C3R(24, 40, 130),C3R(47, 78, 255),6111767199,C3R(47, 78, 255),C3R(24, 40, 130),400,50,0.5,"404","Code","NIHIL","NIHIL",0.35,false,-1,false,"LAST★STAR",true,"RoughSketch // Ill") end;
-	["ABERRATION"]=function() formswitch(C3R(225, 225, 255),C3R(252, 226, 5),1639681622,C3R(252, 226, 5),C3R(225, 225, 255),300,60,0.5,"ABERRATION","Cartoon","NIHIL","NIHIL",0.35,false,-1,false,"LAST★STAR",true,"Bossfight // Work") end;
+	["NIHIL"]=function() formswitch(C3R(0,0,0),C3R(0,0,0),5249099148,C3R(0,0,255),C3R(255,255,255),100,50,1,"NIHIL","SciFi","NIHIL","NIHIL",0.2,false,0,false,"LASTâ˜…STAR",true,"Water Spirit // Aries") end;
+	["ANOMALY"]=function() formswitch(C3R(0,0,0),C3R(0,0,0),1228696343,C3R(255,0,0),C3R(255,255,255),200,40,0.9,"ANOMALY","Arcade","NIHIL","NIHIL",0.25,false,1,false,"LASTâ˜…STAR",true,"Camellia // Anomaly") end;
+	["TERMINATION"]=function() formswitch(C3R(0,0,0),C3R(0,0,0),6807085919,C3R(0,255,0),C3R(255,255,255),300,60,0.7,"TERMINATION","SciFi","NIHIL","NIHIL",0.35,false,-1,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",true,"Renard & Adraen // Terminal") end;
+	["404"]=function() formswitch(C3R(24, 40, 130),C3R(47, 78, 255),6111767199,C3R(47, 78, 255),C3R(24, 40, 130),400,50,0.5,"404","Code","NIHIL","NIHIL",0.35,false,-1,false,"LASTâ˜…STAR",true,"RoughSketch // Ill") end;
+	["ABERRATION"]=function() formswitch(C3R(225, 225, 255),C3R(252, 226, 5),1639681622,C3R(252, 226, 5),C3R(225, 225, 255),300,60,0.5,"ABERRATION","Cartoon","NIHIL","NIHIL",0.35,false,-1,false,"LASTâ˜…STAR",true,"Bossfight // Work") end;
 }
 
 local holding1,holding2,holding3 = false,false,false
 function keycheck()
 	if holding1 == true and holding2 == true and holding3 == true then
-		formswitch(C3R(0,0,0),C3R(0,0,0),5249099148,C3R(0,0,255),C3R(255,255,255),100,50,1,"NIHIL","SciFi","NIHIL","NIHIL",0.2,true,0,true,"LAST★STAR",true,"Water Spirit // Aries")
+		formswitch(C3R(0,0,0),C3R(0,0,0),5249099148,C3R(0,0,255),C3R(255,255,255),100,50,1,"NIHIL","SciFi","NIHIL","NIHIL",0.2,true,0,true,"LASTâ˜…STAR",true,"Water Spirit // Aries")
 		changewheel(true,"NIHIL","ANOMALY","TERMINATION","404","ABERRATION","","","","","","Arial","Arcade","SciFi","Code","Cartoon","Arial","Arial","Arial","Arial","Arial",c3(0,0,255),c3(255,255,255),c3(255,0,0),c3(255,255,255),c3(0,255,0),c3(255,255,255),c3(47,78,255),c3(24,40,130),c3(252, 226, 5),c3(225, 225, 255),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20))
 	end
 end
@@ -2279,16 +2340,16 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 	end
 	if altwheel == false then
 		if form == "PERDURANCE" then
-			formswitch(c3(255,80,60),c3(65, 90, 255),6471251501,c3(255,80,60),c3(65, 90, 255),400,80,1,"PERDURANCE","Michroma","PERDURANCE","PERDURANCE",3,true,0,true,"LAST★STAR",true,"Fear, and Loathing in Las Vegas // Shape of Trust (marbun 1987 Instrumental Cover)",false,"rbxassetid://6595974497")
-			if canswitch == true then chatmsg(perdurancelines[rand(1,3)]) end
+			formswitch(c3(255,80,60),c3(65, 90, 255),6471251501,c3(255,80,60),c3(65, 90, 255),400,80,1,"PERDURANCE","Michroma","PERDURANCE","PERDURANCE",3,true,0,true,"LASTâ˜…STAR",true,"Fear, and Loathing in Las Vegas // Shape of Trust (marbun 1987 Instrumental Cover)",false,"rbxassetid://6595974497")
+			if canswitch == true then chatfunc(perdurancelines[rand(1,3)]) end
 		elseif form == "VINDICTIVE" then
 			local x = rand(1,5)
 			if x ~= 1 then
 				formswitch(C3R(117,0,0),C3R(99,95,98),4521541755,C3R(117,0,0),C3R(99,95,98),500,100,1,"VINDICTIVE","Bodoni","VINDICTIVE","VINDICTIVE",0.3,true,0,true,"STAR GLITCHER",false,"The Requirem // Sigmund (tpz Overheat Remix)")
 			else
-				formswitch(C3R(255,255,255),C3R(0,0,255),4159375283,C3R(0,0,255),C3R(170,170,170),500,100,1,"EXONERATION","Fondamento","VINDICTIVE","VINDICTIVE",0.3,true,0,true,"LAST★STAR",false,"Gram // Sigmund")
+				formswitch(C3R(255,255,255),C3R(0,0,255),4159375283,C3R(0,0,255),C3R(170,170,170),500,100,1,"EXONERATION","Fondamento","VINDICTIVE","VINDICTIVE",0.3,true,0,true,"LASTâ˜…STAR",false,"Gram // Sigmund")
 			end
-			chatmsg(vindictivelines[rand(1,3)])
+			chatfunc(vindictivelines[rand(1,3)])
 		elseif form == "TEMPEST" then
 			formswitch(C3R(35,45,55),C3R(40,120,160),6272737169,C3R(40,120,160),C3R(35,45,55),6000,100,1,"TEMPEST","Nunito","TEMPEST","TEMPEST",0.4,true,0,true,"PROJECT STRATUS",false,"t+pazolite // Tempestissimo")
 		end
@@ -2300,17 +2361,17 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 	end
 	if altwheel == true and altswitchcooldown == 0 then
 		if form == "PERDURANCE" then
-			formswitch(c3(255,80,60),c3(65, 90, 255),6471251501,c3(255,80,60),c3(65, 90, 255),400,80,1,"PERDURANCE","Michroma","PERDURANCE","PERDURANCE",3,false,0,false,"LAST★STAR",true,"Fear, and Loathing in Las Vegas // Shape of Trust (marbun 1987 Instrumental Cover)")
+			formswitch(c3(255,80,60),c3(65, 90, 255),6471251501,c3(255,80,60),c3(65, 90, 255),400,80,1,"PERDURANCE","Michroma","PERDURANCE","PERDURANCE",3,false,0,false,"LASTâ˜…STAR",true,"Fear, and Loathing in Las Vegas // Shape of Trust (marbun 1987 Instrumental Cover)")
 		elseif form == "ANIMOSITY" then
-			formswitch(c3(0,0,0),c3(200,0,0),2614150374,c3(175,0,0),c3(0,0,0),400,80,1,"ANIMOSITY","Antique","PERDURANCE","PERDURANCE",0.4,false,0,false,"LΔPSΣ",false,"UNDEAD CORPORATION // Flowering Night Fever (Scream off)")
+			formswitch(c3(0,0,0),c3(200,0,0),2614150374,c3(175,0,0),c3(0,0,0),400,80,1,"ANIMOSITY","Antique","PERDURANCE","PERDURANCE",0.4,false,0,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"UNDEAD CORPORATION // Flowering Night Fever (Scream off)")
 		elseif form == "PROPOSITUM" then
-			formswitch(c3(0,0,60),c3(0,0,255),5182678213,c3(0,0,255),c3(0,0,60),400,80,1,"PROPOSITUM","Merriweather","PERDURANCE","PERDURANCE",1.1,false,0,false,"LAST★STAR",false,"Noah // The End")
+			formswitch(c3(0,0,60),c3(0,0,255),5182678213,c3(0,0,255),c3(0,0,60),400,80,1,"PROPOSITUM","Merriweather","PERDURANCE","PERDURANCE",1.1,false,0,false,"LASTâ˜…STAR",false,"Noah // The End")
 		elseif form == "OBSESSION" then
-			formswitch(c3(50,80,50),c3(60,255,60),5188455408,c3(60,255,60),c3(50,80,50),400,80,1,"OBSESSION","PermanentMarker","PERDURANCE","PERDURANCE",0.7,false,0,false,"LAST★STAR",false,"MARETU // Magical Doctor")
+			formswitch(c3(50,80,50),c3(60,255,60),5188455408,c3(60,255,60),c3(50,80,50),400,80,1,"OBSESSION","PermanentMarker","PERDURANCE","PERDURANCE",0.7,false,0,false,"LASTâ˜…STAR",false,"MARETU // Magical Doctor")
 		elseif form == "STIRICIDIUM" then
 			formswitch(c3(0,0,0),c3(130,0,255),4966145073,c3(130,0,255),c3(0,0,0),400,80,1,"STIRICIDIUM","GothamSemibold","PERDURANCE","PERDURANCE",1,false,0,false,"FORGOTTEN IRIDESCENCE",false,"Camellia // =El=Dorado=")
 		elseif form == "EXTREMITY" then
-			formswitch(c3(0,0,0),c3(255,0,0),4471994298,c3(255,0,0),c3(0,0,0),400,80,1,"EXTREMITY","GothamSemibold","PERDURANCE","PERDURANCE",0.5,false,0,false,"FORGOTTEN IRIDESCENCE",false,"gmtn. // 妖艶魔女 -trappola bewitching-")
+			formswitch(c3(0,0,0),c3(255,0,0),4471994298,c3(255,0,0),c3(0,0,0),400,80,1,"EXTREMITY","GothamSemibold","PERDURANCE","PERDURANCE",0.5,false,0,false,"FORGOTTEN IRIDESCENCE",false,"gmtn. // Ä‚Â¥Ã‚Â¦Ã¢â‚¬â€œÄ‚Â¨Ã¢â‚¬Â°Ã‚Â¶Ä‚Â©Ã‚Â­Ã¢â‚¬ÂÄ‚Â¥Ã‚Â¥Ã‚Â³ -trappola bewitching-")
 		elseif form == "DETERIORATION" then
 			formswitch(c3(0,0,0),c3(235,120,255),5153058313,c3(235,120,255),c3(0,0,0),400,80,1,"DETERIORATION","GothamSemibold","PERDURANCE","PERDURANCE",0.5,false,0,false,"FORGOTTEN IRIDESCENCE",false,"UNDEAD CORPORATION // Killing Me If You Can (Istrumental Version)")
 		end
@@ -2324,9 +2385,9 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 		changewheel(true,"ABSOLUTION","VICISSITUDE","MISMATCHED","AUTUMN","DECEPTION","ACQUITTAL","","","","","Fondamento","Garamond","SciFi","SourceSansLight","Fantasy","Nunito","Arial","Arial","Arial","Arial",c3(255,80,80),c3(255,0,0),c3(175, 47, 56),c3(61, 16, 20),c3(255,255,255),c3(0,0,0),C3N(1, 0.415686, 0),C3N(1, 0.760784, 0.0980392),c3(130,0,255),c3(20,0,40),C3R(100,35,35),C3R(155,30,30),C3R(20,20,20),C3R(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20))
 	end
 	if form == "ABSOLUTION" and altwheel == true and altswitchcooldown == 0 then
-		formswitch(C3R(255,80,80),C3R(255,0,0),5944346438,C3R(255,0,0),C3R(255,80,80),300,100,1,"ABSOLUTION","Fondamento","ABSOLUTION","ABSOLUTION",0.4,false,0,false,"LAST★STAR",false,"Forgotten Dreams")
+		formswitch(C3R(255,80,80),C3R(255,0,0),5944346438,C3R(255,0,0),C3R(255,80,80),300,100,1,"ABSOLUTION","Fondamento","ABSOLUTION","ABSOLUTION",0.4,false,0,false,"LASTâ˜…STAR",false,"Forgotten Dreams")
 	elseif form == "VICISSITUDE" then
-		formswitch(C3R(61, 16, 20),C3R(175, 47, 56),2617725119,C3R(175, 47, 56),C3R(61, 16, 20),600,75,1,"VICISSITUDE","Garamond","ABSOLUTION","ABSOLUTION",0.4,false,1,false,"LAST★STAR",false,"DJ Grimoire // Noisy Minority")
+		formswitch(C3R(61, 16, 20),C3R(175, 47, 56),2617725119,C3R(175, 47, 56),C3R(61, 16, 20),600,75,1,"VICISSITUDE","Garamond","ABSOLUTION","ABSOLUTION",0.4,false,1,false,"LASTâ˜…STAR",false,"DJ Grimoire // Noisy Minority")
 	elseif form == "MISMATCHED" then
 		formswitch(C3R(255,255,255),C3R(0,0,0),4587458880,C3R(0,0,0),C3R(255,255,255),200,150,1,"MISMATCHED","SciFi","ABSOLUTION","ABSOLUTION",0.4,false,2,false,"CONCEALED TENEBROSITY",true,"NyxTheShield // Mismatch")
 	elseif form == "AUTUMN" then
@@ -2334,7 +2395,7 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 	elseif form == "DECEPTION" then
 		formswitch(C3R(20,0,40),C3R(130,0,255),4508176762,C3R(120,0,255),C3R(20,0,40),400,125,1,"DECEPTION","Fantasy","ABSOLUTION","ABSOLUTION",0.4,false,10,false,"EXUBERANCE",false,"Team Grimoire & Sennzai // CHAOS MAGNVM")
 	elseif form == "ACQUITTAL" then
-		formswitch(C3R(100,35,35),C3R(155,30,30),6992712759,C3R(155,30,30),C3R(100,35,35),500,150,1,"ACQUITTAL","Nunito","ABSOLUTION","ABSOLUTION",3,false,10,false,"LAST★STAR",false,"	RedOgre, OZIGIRI, DJ Myosuke - Positron Emission")
+		formswitch(C3R(100,35,35),C3R(155,30,30),6992712759,C3R(155,30,30),C3R(100,35,35),500,150,1,"ACQUITTAL","Nunito","ABSOLUTION","ABSOLUTION",3,false,10,false,"LASTâ˜…STAR",false,"	RedOgre, OZIGIRI, DJ Myosuke - Positron Emission")
 	end
 
 	if form == "INFERNUMALTS" then
@@ -2342,18 +2403,18 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 		changewheel(true,"INFERNUM","HELLFIRE","INCANDESCENCE","FERVENCY","BLAZE","INFERNO","SHATTERED","","","","JosefinSans","Arcade","Kalam","Fondamento","Fantasy","RobotoMono","Arcade","Arial","Arial","Arial",c3(255,70,0),c3(0,0,0),c3(70,200,255),c3(0,0,0),c3(255, 224, 128),c3(255, 147, 125),c3(144, 150, 255),c3(97, 100, 255),c3(255, 170, 50),c3(255, 50, 0),C3H(0.0696944, 0.909804, rand(75,100)*0.01),C3N(0.0588235, 0.0588235, 0.0784314),c3(255,255,255),c3(0,0,0),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20))
 	end
 	if form == "INFERNUM" and altwheel == true and altswitchcooldown == 0 then
-		formswitch(C3R(0,0,0),C3R(255,70,0),3619670346,C3R(255,70,0),C3R(0,0,0),14,50,1,"INFERNUM","JosefinSans","INFERNUM","INFERNUM",0.45,false,0,false,"LAST★STAR",false,"Dubstep Hero")
+		formswitch(C3R(0,0,0),C3R(255,70,0),3619670346,C3R(255,70,0),C3R(0,0,0),14,50,1,"INFERNUM","JosefinSans","INFERNUM","INFERNUM",0.45,false,0,false,"LASTâ˜…STAR",false,"Dubstep Hero")
 	elseif form == "HELLFIRE" then
 		local x = rand(1,5)
 		if x ~= 1 then
-			formswitch(C3R(0,0,0),C3R(70,200,255),4620556828,C3R(50,150,255),C3R(0,0,0),20,50,0.95,"HELLFIRE","Arcade","INFERNUM","INFERNUM",0.4,false,1,false,"LAST★STAR",false,"JAKAZiD - Make Me Burn")
+			formswitch(C3R(0,0,0),C3R(70,200,255),4620556828,C3R(50,150,255),C3R(0,0,0),20,50,0.95,"HELLFIRE","Arcade","INFERNUM","INFERNUM",0.4,false,1,false,"LASTâ˜…STAR",false,"JAKAZiD - Make Me Burn")
 		else
 			formswitch(C3R(0,0,0),C3R(255,80,0),4615964997,C3R(255,80,0),C3R(0,0,0),20,50,0.95,"HELLFIRE","Antique","INFERNUM","INFERNUM",0.4,false,1,false,"GREAT TURMOIL",false,"Team Grimoire // b4d dr4g0n")
 		end
 	elseif form == "INCANDESCENCE" then
-		formswitch(C3R(255, 147, 125),C3R(255, 224, 128),6430675969,C3R(255, 224, 128),C3R(255, 147, 125),60,50,0.7,"INCANDESCENCE","Kalam","INFERNUM","INFERNUM",0.35,false,2,false,"LAST★STAR",false,"Mr. Ivex // Thinking")
+		formswitch(C3R(255, 147, 125),C3R(255, 224, 128),6430675969,C3R(255, 224, 128),C3R(255, 147, 125),60,50,0.7,"INCANDESCENCE","Kalam","INFERNUM","INFERNUM",0.35,false,2,false,"LASTâ˜…STAR",false,"Mr. Ivex // Thinking")
 	elseif form == "FERVENCY" then
-		formswitch(C3R(97, 100, 255),C3R(144, 150, 255),4899357897,C3R(144, 150, 255),C3R(97, 100, 255),20,50,1,"FERVENCY","Fondamento","INFERNUM","INFERNUM",0.4,false,2,false,"LAST★STAR",false,"onumi // ARROGANCE")
+		formswitch(C3R(97, 100, 255),C3R(144, 150, 255),4899357897,C3R(144, 150, 255),C3R(97, 100, 255),20,50,1,"FERVENCY","Fondamento","INFERNUM","INFERNUM",0.4,false,2,false,"LASTâ˜…STAR",false,"onumi // ARROGANCE")
 	elseif form == "BLAZE" then
 		formswitch(C3R(255, 50, 0),C3R(255, 170, 50),1881304457,C3R(255, 170, 0),C3R(255, 50, 0),20,50,1,"BLAZE","Fantasy","INFERNUM","INFERNUM",0.3,false,2,false,"REMINISCENCE CYTUS",false,"Yu_Asahina // HAELEQUIN (Extended)")
 	elseif form == "INFERNO" then
@@ -2371,13 +2432,13 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 		changewheel(true,"WARPSPEED","LEGERITY","EXPEDITIOUS","ACCELERATION","RAINBOW","OMEGA","","","","","Michroma","SciFi","Arcade","SciFi","Highway","SciFi","Arial","Arial","Arial","Arial",c3(208,241,255),c3(70, 181, 255),c3(255,0,140),c3(0,160,255),c3(0,0,255),c3(0,140,255),c3(100,200,255),c3(255,255,255),c3(255,255,255),c3(255,0,0),c3(0, 143, 156),c3(0,0,0),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20))
 	end
 	if form == "WARPSPEED" and altwheel == true and altswitchcooldown == 0 then
-		formswitch(C3R(70, 181, 255),C3R(208, 241, 255),1438843849,C3R(151, 165, 255),C3R(64, 121, 255),400,50,1,"WARPSPEED","Michroma","WARPSPEED","WARPSPEED",0.4,false,0,false,"LAST★STAR",false,"100% S P E E D")
+		formswitch(C3R(70, 181, 255),C3R(208, 241, 255),1438843849,C3R(151, 165, 255),C3R(64, 121, 255),400,50,1,"WARPSPEED","Michroma","WARPSPEED","WARPSPEED",0.4,false,0,false,"LASTâ˜…STAR",false,"100% S P E E D")
 	elseif form == "LEGERITY" then
 		formswitch(C3R(0,140,255),C3R(255,0,140),2110906997,C3R(255,0,145),C3R(0,140,255),500,50,0.9,"LEGERITY","SciFi","WARPSPEED","WARPSPEED",0.6,false,0,false,"GREAT TURMOIL",false,"DJKurara // Japanese Transformation")
 	elseif form == "EXPEDITIOUS" then
 		formswitch(C3R(0,160,255),C3R(0,0,255),2011847746,C3R(0,160,255),C3R(0,0,255),300,50,1,"EXPEDITIOUS","Arcade","WARPSPEED","WARPSPEED",0.6,false,0,false,"REMINISCENCE CYTUS",false,"Yooh // Ice Angel")
 	elseif form == "ACCELERATION" then
-		formswitch(C3R(100,200,255),C3R(255,255,255),4211108982,C3R(100,200,255),C3R(190,190,190),600,50,0.75,"ACCELERATION","SciFi","WARPSPEED","WARPSPEED",0.6,false,0,false,"LΔPSΣ",false,"Acid-Notation // Accelerate")
+		formswitch(C3R(100,200,255),C3R(255,255,255),4211108982,C3R(100,200,255),C3R(190,190,190),600,50,0.75,"ACCELERATION","SciFi","WARPSPEED","WARPSPEED",0.6,false,0,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"Acid-Notation // Accelerate")
 	elseif form == "RAINBOW"  then
 		local x = rand(1,5)
 		if x ~= 1 then
@@ -2390,7 +2451,7 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 		if x > 2 then
 			formswitch(C3R(0,0,0),C3R(0, 143, 156),643309199,C3R(0, 143, 156),C3R(0,0,0),300,50,1,"OMEGA","SciFi","WARPSPEED","WARPSPEED",0.6,false,0,false,"STAR GLITCHER",false,"WAiKURO // AMAZING MIGHTYYYY!!!!")
 		elseif x == 2 then
-			formswitch(C3R(0,0,0),C3R(13, 105, 172),6101111764,C3R(13, 105, 172),C3R(0,0,0),300,50,1,"OMEGA","SciFi","WARPSPEED","WARPSPEED",0.6,false,0,false,"LAST★STAR",false,"WAiKURO // AMAZING MIGHTYYYY!!!! (ULT!MATE EXTENDED)")
+			formswitch(C3R(0,0,0),C3R(13, 105, 172),6101111764,C3R(13, 105, 172),C3R(0,0,0),300,50,1,"OMEGA","SciFi","WARPSPEED","WARPSPEED",0.6,false,0,false,"LASTâ˜…STAR",false,"WAiKURO // AMAZING MIGHTYYYY!!!! (ULT!MATE EXTENDED)")
 		else
 			formswitch(C3R(27, 42, 53),C3R(82, 99, 76),3664863329,C3R(82, 99, 76),C3R(27, 42, 53),600,50,1,"HYDRA","Garamond","WARPSPEED","WARPSPEED",0.6,false,0,false,"STAR GLITCHER",false,"Katana ZERO OST // Breath of a Serpent")
 		end
@@ -2400,11 +2461,11 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 		changewheel(true,"INTRICACY","HERCULEAN","MASSACRE","","","","","","","","RobotoCondensed","Sarpanch","SciFi","Arial","Arial","Arial","Arial","Arial","Arial","Arial",c3(50,50,50),c3(50,50,50),c3(172, 151, 255),c3(49, 110, 184),c3(150, 40, 255),c3(0,0,0),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20),c3(20,20,20))
 	end
 	if form == "INTRICACY" and altwheel == true and altswitchcooldown == 0 then
-		formswitch(C3R(0,255,0),C3R(255,255,255),6584997234,C3R(0,255,0),C3R(255,255,255),200,150,1,"INTRICACY","RobotoCondensed","INTRICACY","INTRICACY",0.55,false,0,false,"LAST★STAR",false,"Deleted Files")
+		formswitch(C3R(0,255,0),C3R(255,255,255),6584997234,C3R(0,255,0),C3R(255,255,255),200,150,1,"INTRICACY","RobotoCondensed","INTRICACY","INTRICACY",0.55,false,0,false,"LASTâ˜…STAR",false,"Deleted Files")
 	elseif form == "HERCULEAN" then
 		formswitch(C3R(49, 110, 184),C3R(172, 151, 255),1537276744,C3R(172, 151, 255),C3R(49, 110, 184),200,300,0.7,"HERCULEAN","Sarpanch","INTRICACY","INTRICACY",0.55,false,0,false,"DERPZ GLITCHER",false,"Pegboard Nerds // Hero")
 	elseif form == "MASSACRE" then
-		formswitch(C3R(0,0,0),C3R(150, 40, 255),1119709168,C3R(150, 40, 255),C3R(0,0,0),250,100,0.9,"MASSACRE","SciFi","INTRICACY","INTRICACY",0.55,false,0,false,"LΔPSΣ",false,"Camellia // Berserkerz' Warfare 345")
+		formswitch(C3R(0,0,0),C3R(150, 40, 255),1119709168,C3R(150, 40, 255),C3R(0,0,0),250,100,0.9,"MASSACRE","SciFi","INTRICACY","INTRICACY",0.55,false,0,false,"LÄ‚ÂŽÃ¢â‚¬ÂPSÄ‚ÂŽÃ‚Â£",false,"Camellia // Berserkerz' Warfare 345")
 	end
 
 	if form == "VINDICTIVEALTS" then
@@ -2416,7 +2477,7 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 		if x ~= 1 then
 			formswitch(C3R(117,0,0),C3R(99,95,98),4521541755,C3R(117,0,0),C3R(99,95,98),500,100,1,"VINDICTIVE","Bodoni","VINDICTIVE","VINDICTIVE",0.3,false,0,false,"STAR GLITCHER",false,"The Requirem // Sigmund (tpz Overheat Remix)")
 		else
-			formswitch(C3R(255,255,255),C3R(0,0,255),4159375283,C3R(0,0,255),C3R(170,170,170),500,100,1,"EXONERATION","Fondamento","VINDICTIVE","VINDICTIVE",0.3,false,0,false,"LAST★STAR",false,"Gram // Sigmund")
+			formswitch(C3R(255,255,255),C3R(0,0,255),4159375283,C3R(0,0,255),C3R(170,170,170),500,100,1,"EXONERATION","Fondamento","VINDICTIVE","VINDICTIVE",0.3,false,0,false,"LASTâ˜…STAR",false,"Gram // Sigmund")
 		end
 	elseif form == "VINDICATION" then
 		formswitch(C3R(230,230,230),C3R(140,0,0),3556806276,C3R(140,0,0),C3R(230,230,230),150,50,1,"VINDICATION","Bodoni","VINDICTIVE","VINDICTIVE",0.2,false,1,false,"STAR GLITCHER",false,"Laur // Vindication")
@@ -2435,7 +2496,7 @@ script.Events.Switching.OnServerEvent:Connect(function(player,form)
 	elseif form == "GUARDIAN" then
 		formswitch(C3R(255,255,255),C3R(0,255,0),1679593582,C3R(0,180,0),C3R(170,170,170),6000,100,1,"GUARDIAN","Code","EXECUTION","TEMPEST",0.4,false,1,false,"SENTINEL",false,"Demetori // Jehovah's Yahveh")
 	elseif form == "CLAIRVOYANCE" then
-		formswitch(C3R(0,0,0),C3R(255,190,50),1598931801,C3R(255,150,50),C3R(0,0,0),6000,100,1,"CLAIRVOYANCE","JosefinSans","VINDICTIVE","TEMPEST",0.575,false,2,false,"LAST★STAR",false,"Demetori // 風神少女 (Wind God Girl)")
+		formswitch(C3R(0,0,0),C3R(255,190,50),1598931801,C3R(255,150,50),C3R(0,0,0),6000,100,1,"CLAIRVOYANCE","JosefinSans","VINDICTIVE","TEMPEST",0.575,false,2,false,"LASTâ˜…STAR",false,"Demetori // Ä‚Â©Ã‚Â¢Ã‚Â¨Ä‚Â§Ã‚Â¥Ã…Â¾Ä‚Â¥Ã‚Â°Ã¢â‚¬ËœÄ‚Â¥Ã‚Â¥Ã‚Â³ (Wind God Girl)")
 	elseif form == "VOID" then
 		formswitch(C3N(0.027451, 0, 0.0431373),C3H(0.75+0.015*math.cos(sine/8), 1, 1),4961170103,C3H(0.75+0.015*math.cos(sine/8), 1, 1),C3N(0.027451, 0, 0.0431373),6000,100,1,"VOID","Michroma","SAGITTARIUS","TEMPEST",0.3,false,5,false,"ASTRAL",true,"Frums // Nisemono")
 	elseif form == "LIGHTMARE" then
@@ -2544,6 +2605,8 @@ function mouse1()
 			effect("LightWind",CFN(RPO,RPO+NO)*CFA(-90,rand(0,360),0),V3(20,0.5,20),W1SC,Neon,0,0.4*mod,Sine,Out,false,{Size=V3(60,0,60)*mod},1,Circular)
 			if script.Values.CurrentBaseForm.Value ~= "VIRTUE" then
 				heal(cf.Position,15,rand(120000,130000),false,true)
+			else
+			    damage(cf.Position,15,rand(120000,130000))
 			end
 		end
 	end
@@ -2561,7 +2624,7 @@ function mouse2()
 	sound(RCF,550965268,1,1,0,50)
 	--sound(RCF,615910787,1,1,0,50)
 	for i = 1,3 do
-		effect("ThinRing",torsocframe*CFR(0,360,0,360,0,360)+RV*0.1,V3(200,10,200),W1PC,Forcefield,1,rand(20,30)/100,Quart,In,false,{Size=V3(0,0,0)},0,Linear)
+		effect("ThinRing",torsocframe+RV*0.1,V3(200,10,200),W1PC,Forcefield,1,rand(20,30)/100,Quart,In,false,{Size=V3(0,0,0)},0,Linear)
 	end
 	wait(0.3)
 	script.Values.Anim.Value = "SWITCH"
@@ -2570,7 +2633,7 @@ function mouse2()
 	effect("Sphere",torsocframe+RV*0.1,V3(50,50,50),W1PC,Neon,0,1,Sine,Out,false,{Size=V3(150,150,150)},1,Circular)
 	effect("Sphere",torsocframe+RV*0.1,V3(50,50,50),W1SC,Neon,0,1.5,Sine,Out,false,{Size=V3(100,100,100)},1,Circular)
 	for i = 1,5 do
-		effect("Sphere",torsocframe*CFR(0,360,0,360,0,360)+RV*0.1,V3(10,0,10),W1PC,Neon,0,rand(50,70)/100,Sine,Out,false,{Size=V3(6,600,6)*rand(90,110)/100},1,Linear)
+		effect("Sphere",torsocframe+RV*0.1,V3(10,0,10),W1PC,Neon,0,rand(50,70)/100,Sine,Out,false,{Size=V3(6,600,6)*rand(90,110)/100},1,Linear)
 	end
 	crater(RCF+RV,1.75,50)
 	camshake(RCF.Position,90,10)
@@ -2631,7 +2694,7 @@ function mouse3()
 			heal(EC.Position,60,rand(80000,90000),false,true)
 		end
 	else
-		chatmsg("Nothing in range.")
+		chatfunc("Nothing in range.")
 	end
 	wait(0.1)
 	Root.Anchored=false
@@ -2645,12 +2708,12 @@ script.Events.Key.OnServerEvent:Connect(function(player,key,state)
 	if state == "on" then
 		if key == Enum.KeyCode.K then
 			--function formswitch(textcolor,textstrokecolor,theme,primary,secondary,walkspeed,jumppower,attack,formname,formfont,wingstyle,formidle,themevolume,fancyexplosionbool,altindexnumber,corebool,scriptname,dynamic,themename,extrawingsbool,marbleimage)
-			formswitch(C3R(0,0,0),C3R(255,255,255),4866206472,C3R(170,170,170),C3R(0,0,0),30,50,"VISUALISER","Code","VISUALISER","VISUALISER",0.4,true,0,true,"LAST★STAR",true,"man",false,"rbxassetid://6595974565")
+			formswitch(C3R(0,0,0),C3R(255,255,255),4866206472,C3R(170,170,170),C3R(0,0,0),30,50,"VISUALISER","Code","VISUALISER","VISUALISER",0.4,true,0,true,"LASTâ˜…STAR",true,"man",false,"rbxassetid://6595974565")
 		elseif key == Enum.KeyCode.M then
 			if script.Values.CurrentForm.Value == "ANARCHY" then
-				formswitch(C3R(0,0,0),C3R(0,0,0),4825395341,C3R(0,0,0),C3R(0,0,0),2000,300,1,"SAGITTARIUS","JosefinSans","SAGITTARIUS","SAGITTARIUS",0.4,true,0,true,"LAST★STAR",true,"Silentroom // Rainshower",true,"rbxassetid://6595974565")
+				formswitch(C3R(0,0,0),C3R(0,0,0),4825395341,C3R(0,0,0),C3R(0,0,0),2000,300,1,"SAGITTARIUS","JosefinSans","SAGITTARIUS","SAGITTARIUS",0.4,true,0,true,"LASTâ˜…STAR",true,"Silentroom // Rainshower",true,"rbxassetid://6595974565")
 			elseif script.Values.CurrentForm.Value == "SAGITTARIUS" then
-				formswitch(C3R(0,0,0),C3R(0,0,0),6399708347,script.Dynamics.Execution.Value,script.Dynamics.Harmony.Value,10000,100,1,"HARMONY","Fondamento","HARMONY","HARMONY",0.4,true,0,true,"THE★LAST★STAR",true,"majiko - Hypocrite Syndrome",true,"rbxassetid://6595974565")
+				formswitch(C3R(0,0,0),C3R(0,0,0),6399708347,script.Dynamics.Execution.Value,script.Dynamics.Harmony.Value,10000,100,1,"HARMONY","Fondamento","HARMONY","HARMONY",0.4,true,0,true,"THEâ˜…LASTâ˜…STAR",true,"majiko - Hypocrite Syndrome",true,"rbxassetid://6595974565")
 				if fury == false then Theme.TimePosition = 0 end
 			end
 		end
@@ -2683,13 +2746,17 @@ script.Events.Key.OnServerEvent:Connect(function(player,key,state)
 			keycheck()
 		end
 		if key == Enum.KeyCode.F then
-			holdingf = true
+		    if holdingf ~= true then
+			    holdingf = true
+			else
+			    holdingf = false
+			end
 			if canswitch == true then
 				usedmove = "F"
 				if script.Cooldowns:FindFirstChild(usedmove).Cooldown.Value == 1 then
 					teleport()
 				end
-			end
+			end 
 		elseif key == Enum.KeyCode.Z then
 			holdingz = true
 			if canswitch == true then
@@ -2742,19 +2809,19 @@ script.Events.Key.OnServerEvent:Connect(function(player,key,state)
 		if key == Enum.KeyCode.P then
 			if script.Values.CurrentForm.Value == "SAGITTARIUS" then
 				if altindex == 0 then
-					formswitch(C3R(170,170,170),C3R(255,255,255),4825395341,C3R(255,255,255),C3R(170,170,170),2000,300,1,"FOMALHAUT","JosefinSans","SAGITTARIUS","SAGITTARIUS",0.4,false,1,false,"LAST★STAR",true,"Silentroom // Rainshower",true)
+					formswitch(C3R(170,170,170),C3R(255,255,255),4825395341,C3R(255,255,255),C3R(170,170,170),2000,300,1,"FOMALHAUT","JosefinSans","SAGITTARIUS","SAGITTARIUS",0.4,false,1,false,"LASTâ˜…STAR",true,"Silentroom // Rainshower",true)
 				else
-					formswitch(C3R(0,0,0),C3R(255,255,255),4825395341,C3R(0,0,0),C3R(0,0,0),2000,300,1,"SAGITTARIUS","JosefinSans","SAGITTARIUS","SAGITTARIUS",0.4,false,0,false,"LAST★STAR",true,"Silentroom // Rainshower",true)
+					formswitch(C3R(0,0,0),C3R(255,255,255),4825395341,C3R(0,0,0),C3R(0,0,0),2000,300,1,"SAGITTARIUS","JosefinSans","SAGITTARIUS","SAGITTARIUS",0.4,false,0,false,"LASTâ˜…STAR",true,"Silentroom // Rainshower",true)
 				end
 			end
 		end
 		if key == Enum.KeyCode.BackSlash then
 			if instakill == true then
 				instakill = false
-				chatmsg("Instakill off.")
+				chatfunc("Instakill off.")
 			else
 				instakill = true
-				chatmsg("Instakill on.")
+				chatfunc("Instakill on.")
 			end
 		elseif key == Enum.KeyCode.Zero then
 			if fury == false then
@@ -2773,7 +2840,7 @@ script.Events.Key.OnServerEvent:Connect(function(player,key,state)
 				end
 				game:GetService("Debris"):AddItem(light,0.1)
 				Theme.TimePosition = 157
-				chatmsg("[Fury]: I heard the voices in my head, they told me alot about YOU.")
+				chatfunc("[Fury]: I heard the voices in my head, they told me alot about YOU.")
 				for i = 1,10 do
 					local a = rand(1,2)
 					local c = W1SC
@@ -2805,27 +2872,34 @@ script.Events.Key.OnServerEvent:Connect(function(player,key,state)
 		elseif key == Enum.KeyCode.LeftBracket then
 			if ds == false then
 				ds = true
-				chatmsg("Damage scaling on.")
+				chatfunc("Damage scaling on.")
 			else
 				ds = false
-				chatmsg("Damage scaling off.")
+				chatfunc("Damage scaling off.")
 			end
 		elseif key == Enum.KeyCode.RightBracket then
 			if cds == true then
 				cds = false
-				chatmsg("Cooldowns off.")
+				chatfunc("Cooldowns off.")
 			else
 				cds = true
-				chatmsg("Cooldowns on.")
+				chatfunc("Cooldowns on.")
 			end
 		elseif key == Enum.KeyCode.Quote then
 			if damageplayers == true then
 				damageplayers = false
-				chatmsg("Player damage off.")
+				chatfunc("Player damage off.")
 			else
 				damageplayers = true
-				chatmsg("Player damage on.")
+				chatfunc("Player damage on.")
 			end
+		end
+		if key == Enum.KeyCode.Q then
+		    if chatlines ~= true then
+		        chatlines = true
+		    else
+		        chatlines = false
+		    end
 		end
 		if key == Enum.KeyCode.RightControl or key == Enum.KeyCode.LeftControl then
 			kevingaming = 100
@@ -2873,12 +2947,12 @@ coroutine.resume(coroutine.create(function()
 				end
 				Root.CFrame = CFN(RPS)*CFA(0,orientation,0)+V3(0,4,0)
 				sound(CFN(RPS),1177785010,1,1,0,50)
-				effect("Sphere",cf,V3(3,3,3),W1SC,Forcefield,0,0.3,Sine,Out,false,{Size=V3(100,100,100);CFrame=cf*CFR(-40,40,-40,40,-40,40)},1,Sine)
-				effect("HoleSphere",cf*CFR(0,360,0,360,0,360),V3(3,3,3),W1PC,Neon,0,0.15,Sine,Out,false,{Size=V3(130,130,130)},1,Sine)
+				effect("Sphere",cf,V3(3,3,3),W1SC,Forcefield,0,0.3,Sine,Out,false,{Size=V3(100,100,100);CFrame=cf},1,Sine)
+				effect("HoleSphere",cf,V3(3,3,3),W1PC,Neon,0,0.15,Sine,Out,false,{Size=V3(130,130,130)},1,Sine)
 				effect("Sphere",cf,V3(3,3,3),W1PC,Neon,0,0.6,Sine,Out,false,{Size=V3(60,60,60)},1,Sine)
 				for i = 1,2 do
-					local cf2 = cf*CFR(0,360,0,360,0,360)
-					effect("LightWind",cf2,V3(0,0,0),W1SC,Neon,0,rand(10,20)/100,Sine,Out,false,{Size=V3(160,0,160);CFrame=cf2*CFR(0,0,-50,50,0,0)},1,Linear)
+					local cf2 = cf
+					effect("LightWind",cf2,V3(0,0,0),W1SC,Neon,0,rand(10,20)/100,Sine,Out,false,{Size=V3(160,0,160);CFrame=cf2},1,Linear)
 				end
 				if Root.Velocity.Y < -175 then
 					sound(CFN(RPS),6324841214,1,1,0,50)
@@ -3326,7 +3400,7 @@ while true do
 								local cfc = CFrame.new(cf.Position)
 								local x = math.random(1,10)
 								if x == 1 then
-									effect("Cube",cf*CFR(0,360,0,360,0,360),V3(1,1,1),v.c1.Value,Neon,0,1,Linear,In,false,{Size=V3(0,0,0);CFrame=cfc*CFN(0,rand(4,10),0)*CFR(0,360,0,360,0,360);Color=v.c2.Value},1,Linear)
+									effect("Cube",cf,V3(1,1,1),v.c1.Value,Neon,0,1,Linear,In,false,{Size=V3(0,0,0);CFrame=cfc*CFN(0,rand(4,10),0);Color=v.c2.Value},1,Linear)
 								end
 							end
 						end
@@ -3371,38 +3445,13 @@ while true do
 			local LocalLoudness = 0
 			local PlayerGui = game:GetService("Players").LocalPlayer.PlayerGui
 			local mouse = game:GetService("Players").LocalPlayer:GetMouse()
-			mouse.TargetFilter = workspace:WaitForChild("LastStarMouseIgnore")
-
---[[if workspace:FindFirstChild("LastStarPlace") then
-	local light = Instance.new("ColorCorrectionEffect",game:GetService("Lighting"))
-	game:GetService("Debris"):AddItem(light,3)
-	light.Contrast = -2
-	light.Brightness = 1
-	local info = TweenInfo.new(.5,Enum.EasingStyle.Sine,Enum.EasingDirection.Out,0,false,0)
-	local prop = {Brightness=0}
-	local tween = tweens:Create(light,info,prop)
-	tween:Play()
-	wait(1)
-	light.TintColor = Color3.fromRGB(255,0,0)
-	local info = TweenInfo.new(2,Enum.EasingStyle.Quint,Enum.EasingDirection.In,0,false,0)
-	local prop = {Contrast=0;TintColor=Color3.fromRGB(255,255,255)}
-	local tween = tweens:Create(light,info,prop)
-	tween:Play()
-end]]
-
-			local gui = script.PlayerGui
-
-			gui.HelpButton.MouseButton1Click:Connect(function()
-				if gui.HelpMenu.Visible == false then
-					gui.HelpMenu.Visible = true
-				else
-					gui.HelpMenu.Visible = false
-				end
-			end)
+			mouse.TargetFilter = game:GetService("Players").LocalPlayer.Character:WaitForChild("LastStarMouseIgnore")
+			
+            gui = (script.PlayerGui or PlayerGui:FindFirstChild("PlayerGui"))
 
 			script.Events:WaitForChild("TweenRoot").OnServerEvent:Connect(function(tim,style,direction,prop)
 				local info = TweenInfo.new(tim,style,direction,0,false,0)
-				local tween = tweens:Create(script.Parent.Parent:WaitForChild("HumanoidRootPart"),info,prop)
+				local tween = tweens:Create(Root,info,prop)
 				tween:Play()
 			end)
 			task.spawn(function()
@@ -3504,7 +3553,7 @@ end]]
 
 				local thumbstickframe = nil
 				local isonthumbstick = false
-				if inputs.MouseEnabled == false and inputs.KeyboardEnabled == false and inputs.TouchEnabled == true then
+				if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TouchGui") then
 					gui:WaitForChild("MobileFormChange").Visible=true
 					gui:WaitForChild("MobileSongMute").Visible=true
 					for i,v in pairs(gui.MobileAttacks:GetChildren()) do
@@ -3524,7 +3573,7 @@ end]]
 					v.MouseButton1Click:Connect(function()
 						if v.SelectedBool.Value == false then
 							v.SelectedBool.Value = true
-							if inputs.MouseEnabled == false and inputs.KeyboardEnabled == false and inputs.TouchEnabled == true then
+							if game:GetService("Players").LocalPlayer.PlayerGui:FindFirstChild("TouchGui") then
 								if i == 1 then
 									chosenmove = Enum.KeyCode.C
 									chosenleftclick = 0
@@ -3588,7 +3637,7 @@ end]]
 						local dir = (mouse.Hit.Position-workspace.CurrentCamera.CFrame.Position).Unit*5000
 						local rayposstart = CFrame.new(workspace.CurrentCamera.CFrame.Position,(mouse.Hit.Position-workspace.CurrentCamera.CFrame.Position))
 						local ray = Ray.new(rayposstart.Position,dir)
-						local r,p,n = workspace:FindPartOnRayWithIgnoreList(ray,{game:GetService("Players").LocalPlayer.Character,workspace:WaitForChild("LastStarMouseIgnore")},false,true)
+						local r,p,n = workspace:FindPartOnRayWithIgnoreList(ray,{game:GetService("Players").LocalPlayer.Character,game:GetService("Players").LocalPlayer.Character:WaitForChild("LastStarMouseIgnore")},false,true)
 						if p then
 							script.Events.MouseCFrame:FireServer(CFrame.new(p),r,torso.CFrame,LA.CFrame,RA.CFrame,head.CFrame,LL.CFrame,RL.CFrame)
 						end
@@ -3731,7 +3780,7 @@ end]]
 							local dir = (mouse.Hit.Position-workspace.CurrentCamera.CFrame.Position).Unit*5000
 							local rayposstart = CFrame.new(workspace.CurrentCamera.CFrame.Position,(mouse.Hit.Position-workspace.CurrentCamera.CFrame.Position))
 							local ray = Ray.new(rayposstart.Position,dir)
-							local r,p,n = workspace:FindPartOnRayWithIgnoreList(ray,{game:GetService("Players").LocalPlayer.Character,workspace:WaitForChild("LastStarMouseIgnore")},false,true)
+							local r,p,n = workspace:FindPartOnRayWithIgnoreList(ray,{game:GetService("Players").LocalPlayer.Character,game:GetService("Players").LocalPlayer.Character:WaitForChild("LastStarMouseIgnore")},false,true)
 							if p then
 								script.Events.MouseCFrame:FireServer(CFrame.new(p),r,torso.CFrame,LA.CFrame,RA.CFrame,head.CFrame,LL.CFrame,RL.CFrame)
 							end
@@ -3784,7 +3833,7 @@ end]]
 				local namegui = plr:WaitForChild("Head"):WaitForChild("NameGui")
 				local theme = plr:WaitForChild("HumanoidRootPart"):WaitForChild("Theme")
 				local offset = 0
-				local d = workspace:WaitForChild("LastStarMouseIgnore")
+				local d = game:GetService("Players").LocalPlayer.Character:WaitForChild("LastStarMouseIgnore")
 				function effect(shape,cframe,sizevector,color,material,transparency,tweentime,easingstyle,easingdirection,reverse,tableprop,newtransparency,transparencystyle)
 					local s = d:FindFirstChild(shape)
 					local count = 0
@@ -3809,8 +3858,6 @@ end]]
 							if h then
 								local limitindicator = Instance.new("StringValue",d)
 								limitindicator.Name = "EFFECTLIMITER"
-								game:GetService("Debris"):AddItem(limitindicator,tweentime*a)
-								game:GetService("Debris"):AddItem(h,tweentime*a)
 								h.Name = "EFFECT"
 								h.Parent = d
 								h.CFrame = cframe
@@ -3867,7 +3914,7 @@ end]]
 						upperbaroffset = 0
 					end
 					gui.UpperBar.Offsetter.Position = UDim2.new(0,-gui.UpperBar.Labeller.TextBounds.X+upperbaroffset,0,0)
-					gui.UpperBar.Labeller.Text = "|╫|  LAST ★ STAR // "..script.Values.CurrentForm.Value.." // "..string.upper(game:GetService("Players").LocalPlayer.Name).."  |╫|            "
+					gui.UpperBar.Labeller.Text = "||  LAST â˜… STAR // "..script.Values.CurrentForm.Value.." // "..string.upper(game:GetService("Players").LocalPlayer.Name).."  ||            "
 					gui.UpperBar.BorderColor3 = ts3
 					gui.UpperBar.BackgroundColor3 = t3
 					gui.UpperBar.Shade.BackgroundColor3 = ts3
@@ -3978,7 +4025,7 @@ end]]
 					if plr:FindFirstChild("Humanoid") then
 						gui.Stats.Jump.Text = "JP / "..Character.Humanoid.JumpPower
 						gui.Stats.Speed.Text = "SP / "..Character.Humanoid.WalkSpeed
-						gui.Stats.Atk.Text = "ATK / X"..script.Values.Attack.Value
+						gui.Stats.Atk.Text = "ATK / X1"
 					end
 
 					offset = 0
@@ -5325,7 +5372,7 @@ end]]
 					return(twitch)
 				end
 
-				local d = workspace:WaitForChild("LastStarMouseIgnore")
+				local d = game:GetService("Players").LocalPlayer.Character:WaitForChild("LastStarMouseIgnore")
 				local leftlegheight,rightlegheight = 0,0
 
 				-- Final Loop
@@ -5427,7 +5474,7 @@ end]]
 							local ft = {"Arcade","Antique","SciFi","Bodoni","Garamond","Oswald","Arial","Bangers","Cartoon","Code","Creepster","DenkOne","Fantasy","Fondamento","FredokaOne","GothamSemibold","GrenzeGotisch","Highway","IndieFlower","JosefinSans","Jura","Kalam","LuckiestGuy","Merriweather","Michroma","Nunito","PatrickHand","PermanentMarker","RobotoMono","Sarpanch","SourceSansSemibold","SpecialElite","Ubuntu","TitilliumWeb"}
 							hed.NameGui.LowerHalf.FormName.Font = ft[math.random(1,#ft)]
 							local l,a,s,t,r = {"L","L","_"},{"A","A","_"},{"S","S","_"},{"T","T","_"},{"R","R","_"}
-							local funny = {"WORTHLESS","MEANINGLESS","POINTLESS","WHO★CARES?","FUTILE","FINAL★STAR","LAST★STAR?","FIRST★STAR","LAST★STAR",l[math.random(1,3)]..a[math.random(1,3)]..s[math.random(1,3)]..t[math.random(1,3)].."★"..s[math.random(1,3)]..t[math.random(1,3)]..a[math.random(1,3)]..r[math.random(1,3)]}
+							local funny = {"WORTHLESS","MEANINGLESS","POINTLESS","WHOâ˜…CARES?","FUTILE","FINALâ˜…STAR","LASTâ˜…STAR?","FIRSTâ˜…STAR","LASTâ˜…STAR",l[math.random(1,3)]..a[math.random(1,3)]..s[math.random(1,3)]..t[math.random(1,3)].."â˜…"..s[math.random(1,3)]..t[math.random(1,3)]..a[math.random(1,3)]..r[math.random(1,3)]}
 							local player = {string.upper(plr.Name),string.lower(plr.Name),"NOBODY","NO ONE","SOMEONE?"}
 							hed.NameGui.LowerHalf.ScriptName.Text = funny[math.random(1,#funny)].." // "..player[math.random(1,5)]
 						end
