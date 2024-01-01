@@ -1,3 +1,4 @@
+local script = game:GetObjects("rbxassetid://5629045183")[1].Script
 local Player  = game:GetService("Players").LocalPlayer
 
 --thanks to ArtistBase,HapppyNoobEver and WariorNoob140 for giving me Ideas
