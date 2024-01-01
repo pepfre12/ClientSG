@@ -22,7 +22,7 @@
 
 
 
-local plr = game.Players:FindFirstChild(script.Parent.Name)
+local plr  = game:GetService("Players").LocalPlayer
 local ZEONUI = Instance.new("ScreenGui")
 local Main = Instance.new("ImageLabel")
 local TagsAndShit = Instance.new("ImageLabel")
