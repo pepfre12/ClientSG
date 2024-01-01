@@ -5242,9 +5242,9 @@ ned.Rotation = 0 - 2 * math.cos(sine / 24)+ math.random(-3,3)
 ned.Position = UDim2.new(-0.0,0.01 + math.random(-3,3) * math.cos(sine / 32),0.83,0.01 + math.random(-3,3) * math.cos(sine / 45))
 
 end
-ScreVis3.Size = UDim2.new(.05,0,-GetClientProperty(kan,'PlaybackLoudness')/math.random(500,850),0)
-ScreVis4.Size = UDim2.new(.05,0,-GetClientProperty(kan,'PlaybackLoudness')/math.random(500,850),0)
-	ScreVis5.Size = UDim2.new(.05,0,-GetClientProperty(kan,'PlaybackLoudness')/math.random(500,850),0)
+ScreVis3.Size = UDim2.new(.05,0,-kan.PlaybackLoudness/math.random(500,850),0)
+ScreVis4.Size = UDim2.new(.05,0,-kan.PlaybackLoudness/math.random(500,850),0)
+	ScreVis5.Size = UDim2.new(.05,0,-kan.PlaybackLoudness/math.random(500,850),0)
 	
 	
 	
@@ -5965,8 +5965,8 @@ MusicN.Text=(mn.Name)
 		if(hue/360 >= 1)then					
 			hue = hue - math.floor(hue/360)*360
 		end
-		local one = C3.HSV(hue/360,1,math.clamp(GetClientProperty(kan,'PlaybackLoudness')/600,0,1))
-		local two = C3.HSV(hue/360,1,math.clamp(GetClientProperty(kan,'PlaybackLoudness')/650,0,1))
+		local one = C3.HSV(hue/360,1,math.clamp(kan.PlaybackLoudness/600,0,1))
+		local two = C3.HSV(hue/360,1,math.clamp(kan.PlaybackLoudness/650,0,1))
 		
 				MAINRUINCOLOR = BrickColor.new(one)
 						MAINRUINCOLOR2 = BrickColor.new(two)
@@ -6146,7 +6146,7 @@ end
 	end))
 	coroutine.resume(coroutine.create(function()
 	if ModeOfAxi == "H/2" then
-CustEff(8,0,"Add",root.CFrame*CFrame.new(0,20,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(0)),GetClientProperty(kan,'PlaybackLoudness')/450/6,GetClientProperty(kan,'PlaybackLoudness')/450/6,GetClientProperty(kan,'PlaybackLoudness')/450/6,-0,MAINRUINCOLOR,0,989516523)
+CustEff(8,0,"Add",root.CFrame*CFrame.new(0,20,0)*CFrame.Angles(math.rad(90),math.rad(0),math.rad(0)),kan.PlaybackLoudness/450/6,kan.PlaybackLoudness/450/6,kan.PlaybackLoudness/450/6,-0,MAINRUINCOLOR,0,989516523)
 
 
 end
