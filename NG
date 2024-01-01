@@ -6,7 +6,7 @@ local script = game:GetObjects("rbxassetid://7667220373")[1]["NI-CISYNIA"]
 if not script:FindFirstChild("Effects") then Instance.new("Folder",script).Name = "Effects" end
 
 plr = game:GetService("Players").LocalPlayer
-mouse = Player:GetMouse()
+mouse = plr:GetMouse()
 char = plr.Character
 
 if game:GetService("RunService"):IsStudio() then
