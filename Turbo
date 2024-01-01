@@ -1199,8 +1199,9 @@ end
 rng:Destroy()
 end))
 end
-local LoadLibrary=require(4676947833)
-local Create = LoadLibrary("RbxUtility").Create
+FELOADLIBRARY = {}
+loadstring(game:GetObjects("rbxassetid://5209815302")[1].Source)()
+local Create = FELOADLIBRARY.Create
 CFuncs = {
 Part = {
 Create = function(Parent, Material, Reflectance, Transparency, BColor, Name, Size)
