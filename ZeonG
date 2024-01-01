@@ -523,45 +523,7 @@ exitbutton.MouseButton1Down:Connect(function()
 
 
 
-	getgenv().ReanimateVersion = "v2"
 
-	loadstring(game:HttpGet("https://raw.githubusercontent.com/stangithuboffical/selexity/main/Reanimate", true))()
-
-	wait (1.50)
-
-	game.Players.LocalPlayer.Character.Humanoid:WaitForChild("Animator"):Destroy()
-
-
-
-
-
-	HumanDied = false
-	local CountSCIFIMOVIELOL = 1
-	function SCIFIMOVIELOL(Part0,Part1,Position,Angle)
-		local AlignPos = Instance.new('AlignPosition', Part1); AlignPos.Name = "AliP_"..CountSCIFIMOVIELOL
-		AlignPos.ApplyAtCenterOfMass = true;
-		AlignPos.MaxForce = 5772000-67752;
-		AlignPos.MaxVelocity = math.huge/9e110;
-		AlignPos.ReactionForceEnabled = false;
-		AlignPos.Responsiveness = 200;
-		AlignPos.RigidityEnabled = false;
-		local AlignOri = Instance.new('AlignOrientation', Part1); AlignOri.Name = "AliO_"..CountSCIFIMOVIELOL
-		AlignOri.MaxAngularVelocity = math.huge/9e110;
-		AlignOri.MaxTorque = 5772000
-		AlignOri.PrimaryAxisOnly = false;
-		AlignOri.ReactionTorqueEnabled = false;
-		AlignOri.Responsiveness = 200;
-		AlignOri.RigidityEnabled = false;
-		local AttachmentA=Instance.new('Attachment',Part1); AttachmentA.Name = "Ath_"..CountSCIFIMOVIELOL
-		local AttachmentB=Instance.new('Attachment',Part0); AttachmentB.Name = "Ath_"..CountSCIFIMOVIELOL
-		AttachmentA.Orientation = Angle or Vector3.new(0,0,0)
-		AttachmentA.Position = Position or Vector3.new(0,0,0)
-		AlignPos.Attachment1 = AttachmentA;
-		AlignPos.Attachment0 = AttachmentB;
-		AlignOri.Attachment1 = AttachmentA;
-		AlignOri.Attachment0 = AttachmentB;
-		CountSCIFIMOVIELOL = CountSCIFIMOVIELOL + 1
-		return {AlignPos,AlignOri,AttachmentA,AttachmentB}
 	end
 
 
