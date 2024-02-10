@@ -2,7 +2,8 @@
 --//====================================================\\--
 --||			   CREATED BY SHACKLUSTER
 --\\====================================================//--
-local script = game:GetObjects("rbxassetid://7667220373")[1]["Uxel"]	
+local script = game:GetObjects("rbxassetid://7667220373")[1]["Uxel"]
+
 wait(.1)
 
 function GetPlr(user)
@@ -16,7 +17,7 @@ end
 --:WaitForChild(_G.target)
 local Player  = game:GetService("Players").LocalPlayer
 local FakeMouse = Player:GetMouse()
-script.LoadLibrary.Parent = game:GetService("ReplicatedStorage")
+
 
 FELOADLIBRARY = {}
 loadstring(game:GetObjects("rbxassetid://5209815302")[1].Source)()
