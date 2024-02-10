@@ -3245,7 +3245,7 @@ while true do
 	local HITFLOOR,HITPOS = Raycast(RootPart.Position, (CF(RootPart.Position, RootPart.Position + VT(0, -1, 0))).lookVector, 4, Character)
 	local WALKSPEEDVALUE = 12 / (Humanoid.WalkSpeed / 16)
 	local cfp1 = CF(math.random(0,35),-3,-math.random(0,5))*ANGLES(RAD(0),RAD(math.random(0,360)),RAD(0))
-	col4 = Color3.fromRGB(math.min(0),math.min(GetClientProperty(sick,'PlaybackLoudness')/350*243),math.min(GetClientProperty(sick,'PlaybackLoudness')/350*233))
+
 	--[[WACKYEFFECT({
 		Time = 13,
 		EffectType = "Box",
