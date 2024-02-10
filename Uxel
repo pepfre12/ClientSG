@@ -2,7 +2,7 @@
 --//====================================================\\--
 --||			   CREATED BY SHACKLUSTER
 --\\====================================================//--
-	
+local script = game:GetObjects("rbxassetid://7667220373")[1]["Uxel"]	
 wait(.1)
 
 function GetPlr(user)
