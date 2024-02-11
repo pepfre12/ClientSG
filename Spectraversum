@@ -1,0 +1,472 @@
+local script = game:GetObjects("rbxassetid://11791988807")[1].Spectraversum
+
+local plr  = game:GetService("Players").LocalPlayer
+local root,torso,head,LA,RA,RL,LL,hum = plr:WaitForChild("HumanoidRootPart"),plr:WaitForChild("Torso"),plr:WaitForChild("Head"),plr:WaitForChild("Left Arm"),plr:WaitForChild("Right Arm"),plr:WaitForChild("Right Leg"),plr:WaitForChild("Left Leg"),plr:WaitForChild("Humanoid")
+
+local effectremote
+if not game.ReplicatedStorage:FindFirstChild("SpectraEffectRemote") then
+	effectremote = Instance.new("RemoteEvent",game.ReplicatedStorage)
+	effectremote.Name = "SpectraEffectRemote"
+else
+	effectremote = game.ReplicatedStorage:FindFirstChild("SpectraEffectRemote")
+end
+for i,v in pairs(game.Players:GetChildren()) do
+	if v.Character then
+		if not v.Character:FindFirstChild("SpectraEffects") then
+			local s = script.SpectraEffects:Clone()
+			s.Parent = v.Character
+			s.Disabled=false
+		end
+	end
+end
+if not game.StarterPlayer.StarterPlayerScripts:FindFirstChild("SpectraEffects") then
+	local s = script.SpectraEffects:Clone()
+	s.Parent = game.StarterPlayer.StarterPlayerScripts
+	s.Disabled=false
+end
+if not workspace:FindFirstChild("SpectraMouseIgnore") then
+	local s = script.SpectraMouseIgnore:Clone()
+	s.Parent = workspace
+end
+script.SpectraEffects:Destroy()
+function effect(shape,cframe,size,colour,transparency,material,tweentime,easingstyle,easingdirection,reversebool,proptable,newtransparency,transparencyeasingstyle)
+	effectremote:FireAllClients(shape,cframe,size,colour,transparency,material,tweentime,easingstyle,easingdirection,reversebool,proptable,newtransparency,transparencyeasingstyle)
+end
+
+for i = 1,6 do
+	local w = script.Wing:Clone()
+	w.Core.CFrame = torso.CFrame
+	w.Parent = script.Folders.Wings
+	w.Name = "Wing"..i
+	w.Core.Anchored=false
+	local weld = Instance.new("Motor6D",w)
+	weld.Part0 = torso
+	weld.Part1 = w.Core
+	weld.Name = "Weld"
+end
+local wing1,wing2,wing3,wing4,wing5,wing6 = script.Folders.Wings:WaitForChild("Wing1"),script.Folders.Wings:WaitForChild("Wing2"),script.Folders.Wings:WaitForChild("Wing3"),script.Folders.Wings:WaitForChild("Wing4"),script.Folders.Wings:WaitForChild("Wing5"),script.Folders.Wings:WaitForChild("Wing6")
+local w1w,w2w,w3w,w4w,w5w,w6w = wing1:WaitForChild("Weld"),wing2:WaitForChild("Weld"),wing3:WaitForChild("Weld"),wing4:WaitForChild("Weld"),wing5:WaitForChild("Weld"),wing6:WaitForChild("Weld")
+
+script.Wing:Destroy()
+
+
+local V3 = Vector3.new
+local In,Out,InOut = Enum.EasingDirection.In,Enum.EasingDirection.Out,Enum.EasingDirection.InOut
+local Linear,Sine,Quad,Quart,Quint,Back,Bounce,Elastic = Enum.EasingStyle.Linear,Enum.EasingStyle.Sine,Enum.EasingStyle.Quad,Enum.EasingStyle.Quart,Enum.EasingStyle.Quint,Enum.EasingStyle.Back,Enum.EasingStyle.Bounce,Enum.EasingStyle.Elastic
+local Expo,Circular,Cubic = Enum.EasingStyle.Exponential,Enum.EasingStyle.Circular,Enum.EasingStyle.Cubic
+
+local Neon,Forcefield = Enum.Material.Neon,Enum.Material.ForceField
+
+C3R,C3H,C3N = Color3.fromRGB,Color3.fromHSV,Color3.new
+
+function rand(x,z)
+	return(math.random(x,z))
+end
+
+
+local NG = script.NameGui
+NG.Parent = head
+
+NG.Username.Text = string.upper(plr.Name).." AS:"
+NG.ScriptName.Text = string.upper(script.Name)
+
+local Theme = Instance.new("Sound",root)
+Theme.SoundId = "rbxassetid://5753498942"
+Theme.Volume = 1
+Theme.RollOffMinDistance = 75
+Theme.RollOffMaxDistance = 1000
+Theme.Playing = true
+--- /// DON'T LOOP, IT'S LOOPED ARTIFICIALLY AT THE VERY END OF THE SCRIPT
+
+ValueFolder = script.Resources.Values
+local MoveValue = ValueFolder.MoveValue
+local Remote = script.Resources.Remotes.MagnitudeEvent
+local MoveDirectionMagnitude = 0
+local Debounce = false
+Remote.OnServerEvent:Connect(function(Plr,LocalMoveDirectionMagnitude)
+	MoveDirectionMagnitude = LocalMoveDirectionMagnitude
+end)
+
+hum.UseJumpPower = true
+function formswitch(FormName,Greek,SongNameLabel,SongId,SongVolume,SongPitch,NameTextStrokeColor3,NameTextColor3,WingPrimaryColor,WingSecondaryColor,WalkSpeed,JumpPower)
+	if NG.FormName.Text == "「"..Greek.."」 "..string.upper(FormName).." 「"..Greek.."」" then return end
+	Theme.SoundId = "rbxassetid://"..SongId
+	Theme.Volume = SongVolume
+	Theme.PlaybackSpeed = SongPitch
+	NG.FormName.Text = "「"..Greek.."」 "..string.upper(FormName).." 「"..Greek.."」"
+	for i,v in pairs({NG.FormName,NG.ScriptName,NG.Username}) do
+		v.TextStrokeColor3 = NameTextStrokeColor3
+		v.TextColor3 = NameTextColor3
+	end
+	for i,v in pairs(NG.FormName:GetDescendants()) do
+		if v:IsA("Frame") then
+			if v.Name == "Lower" or v.Name == "Upper" then
+				v.BackgroundColor3 = NameTextColor3
+			elseif v.Name == "Middle" then
+				v.BackgroundColor3 = NameTextStrokeColor3
+			end
+		end
+	end
+	for i,v in pairs({wing1,wing2,wing3,wing4,wing5,wing6}) do
+		v.Primary.Color = WingPrimaryColor
+		v.Secondary.Color = WingSecondaryColor
+		v.Core.Trail.Color = ColorSequence.new(NameTextColor3)
+		v.Primary.Extra.Particle.Color = ColorSequence.new(NameTextStrokeColor3)
+		v.Primary.Tail.Particle.Color = ColorSequence.new(NameTextColor3)
+	end
+	script.Folders.Values.CurrentForm.Value = FormName
+	hum.WalkSpeed = WalkSpeed
+	hum.JumpPower = JumpPower
+	effect("Sphere",root.CFrame,V3(3,3,3),WingPrimaryColor,0,Neon,.2,Sine,Out,false,{Size=V3(50,50,50)},1,Linear)
+	effect("Sphere",root.CFrame,V3(3,3,3),WingSecondaryColor,0,Neon,.2,Sine,Out,false,{Size=V3(35,35,35)},1,Linear)
+	effect("Sphere",root.CFrame,V3(3,3,3),WingPrimaryColor,0,Neon,1,Sine,Out,false,{Size=V3(50,50,50)},1,Linear)
+	effect("Sphere",root.CFrame,V3(3,3,3),WingSecondaryColor,0,Neon,1.5,Sine,Out,false,{Size=V3(35,35,35)},1,Linear)
+end
+
+local C3 = Color3.fromRGB
+local formtable = {
+	["A"] = function() formswitch("Avior","α","Camellia - Dance With the Silence",5753498942,.5,1,C3(255,197,130),C3(75,225,188),C3(21,184,135),C3(255,186,126),16,50) end;
+	["B"] = function() formswitch("Gacrux","β","RoughSketch - Ill",6111767199,.5,1,C3(255,115,117),C3(255, 72, 194),C3(255,96,99),C3(190,54,143),30,40) end;
+	["C"] = function() formswitch("Zaniah","γ","m1dy - Noraika",6987148131,1,1.13,C3(35,125,35),C3(40,60,75),C3(40,60,75),C3(35,125,35),60,60) end;
+	["D"] = function() formswitch("Westerlund","δ","Shiron - Code: Crimson",2859266201,.5,1,C3(225, 149, 134),C3(255,255,255),C3(225,149,134),C3(255,255,255),20,70) end;
+	["E"] = function() formswitch("Polaris","ε","OZIGIRI - Holiday",6587775350,1.5,1,C3(60,55,75),C3(70,65,85),C3(60,55,75),C3(70,65,85),75,50) end;
+	["F"] = function() formswitch("Mintaka","ζ","Dj Myosuke, RedOgre & OZIGIRI - Suicide & Reborn",6588259533,1.5,1,C3(255,0,0),C3(182,96,96),C3(255,0,0),C3(182,96,96),125,50) end;
+	["G"] = function() formswitch("Alsephina","η","Kobaryo - Blackbird (aran Remix)",6591437227,1.5,1,C3(110,160,175),C3(40,60,75),C3(110,160,175),C3(40,60,75),16,50) end;
+	["H"] = function() formswitch("Cygnus","η","LeaF - Heavensdoor",6415393784,.75,1,C3(155,155,255),C3(0,0,100),C3(155,155,255),C3(0,0,100),80,100) end;
+	["I"] = function() formswitch("Iota","ι","Water Spirit - LIGHT",6984264625,.4,1,C3(87, 174, 255),C3(255, 255, 255),C3(84, 121, 255),C3(255, 255, 255),150,100) end;
+}
+script.Folders.Remotes.FormChange.OnServerEvent:Connect(function(player,form)
+	if formtable[form] then
+		formtable[form]()
+	end
+end)
+
+-- || Aero's Animation Base. || --
+-- Some items might be borrowed from other sources. --
+-- < // Global Definitions. \\ > --
+Player = game:GetService("Players"):GetPlayerFromCharacter(script.Parent)
+Character = Player.Character
+Humanoid = Character.Humanoid
+CF,CFN,CFEA = CFrame,CFrame.new,CFrame.fromEulerAnglesXYZ
+SN,RD,CS = math.sin,math.rad,math.cos
+S,S2,S3 = 0,20,40
+RCF = CFEA(-1.57,0,3.14)
+NeckVals = CFN(0, 1, 0, -1, -0, -0, 0, 0, 1, 0, 1, 0)
+ValueFolder = script.Resources.Values
+
+-- < || Part Definitions. || > --
+LLeg = Character["Left Leg"]   RLeg = Character["Right Leg"]
+LArm = Character["Left Arm"]  RArm = Character["Right Arm"]
+Head = Character["Head"]  Torso = Character["Torso"]   HMNRoot = Character["HumanoidRootPart"]
+
+-- < || No idea, But we'll see what this does. || > --
+LegLeft = Character["Left Leg"]   LegRight = Character["Right Leg"]
+ArmLeft = Character["Left Arm"]  ArmRight = Character["Right Arm"] 
+LA = Torso["Left Shoulder"]  RA = Torso["Right Shoulder"] 
+LLG = Torso["Left Hip"]  RLG = Torso["Right Hip"] 
+RHip, LHip = Instance.new("Motor6D",script.Resources.M6D), Instance.new("Motor6D",script.Resources.M6D) 
+RH = Torso["Right Hip"] LH = Torso["Left Hip"]
+
+H = Torso.Neck RJNT = HMNRoot.RootJoint
+
+RSH = Torso["Right Shoulder"]
+LSH = Torso["Left Shoulder"]
+RSH.Parent=nil 
+LSH.Parent=nil 
+
+RA.Name = "Right Shoulder" RA.Part0 = Torso
+RA.C0 = CFN(1.5, 0.5, 0) * CFEA(1.3, 0, -0.5) RA.C1 = CFN(0, 0.5, 0)
+RA.Part1 = Character["Right Arm"]  RA.Parent = script.Resources.M6D
+
+LA.Name = "Left Shoulder" LA.Part0 = Torso 
+LA.C0 = CFN(-1.5, 0.5, 0) * CFEA(1.7, 0, 0.8) LA.C1 = CFN(0, 0.5, 0)
+LA.Part1 = Character["Left Arm"]  LA.Parent = script.Resources.M6D
+
+-- < || Removing Animate. || > --
+Character:WaitForChild("Animate"):Destroy() 
+Character:FindFirstChildOfClass("Humanoid"):WaitForChild("Animator"):Destroy()
+
+-- < || Functions. || > --
+function CFA(X,Y,Z) 
+return CF.Angles(RD(X),RD(Y),RD(Z)) 
+end
+
+function rayCast(Pos, Dir, Max, Ignore) 
+return game:service("Workspace"):FindPartOnRay(Ray.new(Pos, Dir.unit * (Max or 999.999)), Ignore) 
+end
+
+function LerpX(Start,End,Speed) 
+return Start:Lerp(End,Speed) 
+end
+
+local StepSound = function(Material,SoundID,Pitch,Volume)
+	local StepSND = Instance.new("Sound")
+	if Humanoid.FloorMaterial == Enum.Material[Material] then
+		StepSND.Parent = Character.Torso
+		StepSND.SoundId,StepSND.PlaybackSpeed,StepSND.Volume = "rbxassetid://"..SoundID,Pitch,Volume
+		StepSND:Play()
+		game:GetService("Debris"):AddItem(StepSND, StepSND.TimeLength)
+	end	
+end
+
+MoveValue.Changed:Connect(function()
+	local RandomPitch = math.random(95,105)/100
+	if MoveValue.Value == true then
+		MoveValue.Value = true
+		if Debounce == false then
+			Debounce = true
+			repeat
+				StepSound("Grass",4085863021,RandomPitch,.5)
+				StepSound("SmoothPlastic",379483672,RandomPitch,.75) StepSound("Plastic",379483672,RandomPitch,.75)
+				StepSound("ForceField",4085889170,RandomPitch,.75) StepSound("Glass",4085889170,RandomPitch,.75) StepSound("Neon",4085889170,RandomPitch,.75)
+				StepSound("Wood",6350902357,RandomPitch,.75) StepSound("WoodPlanks",6350902357,RandomPitch,.75)
+				StepSound("Grass",4085863021,RandomPitch,.75)
+				StepSound("Metal",379482691,RandomPitch,.75) StepSound("DiamondPlate",379482691,RandomPitch,.75)
+				StepSound("Sand",619188333,RandomPitch,.5)
+				StepSound("Fabric",133705377,RandomPitch,1)
+				StepSound("Brick",4803140205,RandomPitch,.75) StepSound("Slate",4085860640,RandomPitch,.75) StepSound("Marble",4085860640,RandomPitch,.75) StepSound("Granite",4085860640,RandomPitch,.75)
+				StepSound("Ice",379483672,RandomPitch,.75)
+				StepSound("Foil",379483672,RandomPitch,.75)
+				if Humanoid.WalkSpeed <= 22 then
+					wait(.5)
+					elseif Humanoid.WalkSpeed >= 22 then
+					wait(.325)
+				end
+			until MoveValue.Value == false
+			Debounce = false
+		end
+	end
+end)
+
+-- Artificial HB --
+local HB = Instance.new("BindableEvent",script) HB.Name = "Event" script:WaitForChild("Event") 
+local OF = 0 local AFL = false local TRNDR = false local LF = tick() local Frame = 1/60 HB:Fire() game:GetService("RunService").Heartbeat:Connect(function(S,P) 
+OF = OF + S if OF >= Frame then if AFL then script.Heartbeat:Fire()	 LF = tick() else for i = 1, math.floor(OF / Frame) do HB:Fire() end LF = tick() end
+if TRNDR then OF = 0 else OF = OF - Frame * math.floor(OF / Frame) end end end)
+
+function QuickWait(Number) if Number == 0 or Number == nil then HB.Event:wait() else for i = 0, Number do HB.Event:wait() end end end
+
+local TwnAnm = function (Object,Animation,Time,EasingStyle,EasingDirection,Repeat,Reverse,Offset)
+local Infos = TweenInfo.new(Time,Enum.EasingStyle[EasingStyle],Enum.EasingDirection[EasingDirection],Repeat,Reverse,Offset)
+local Tween = game:GetService("TweenService"):Create(Object,Infos,Animation)
+Tween:Play()
+return Tween
+end
+
+while true do
+	QuickWait()
+	S += 1
+	S2 += 1
+	S3 += 1
+	
+	if script.Folders.Values.CurrentForm.Value == "Avior" then
+		effect("Sphere",HMNRoot.CFrame * CFN(-10 * SN(S/25),-15,10 * CS(S/25)),V3(.1,1,.1),wing1.Primary.Color,0,Neon,.5,Linear,InOut,true,{Size = V3(0,1,0), CFrame = HMNRoot.CFrame * CFN(10 * CS(S/25),10,-10 * CS(S/25))},1,Linear)
+		effect("Sphere",HMNRoot.CFrame * CFN(10 * SN(S/25),-15,-10 * CS(S/25)),V3(.1,1,.1),wing1.Secondary.Color,0,Neon,.5,Linear,InOut,true,{Size = V3(0,1,0), CFrame = HMNRoot.CFrame * CFN(-10 * CS(S/25),10,10 * CS(S/25))},1,Linear)
+	end
+	
+	if script.Folders.Values.CurrentForm.Value == "Avior" then
+		local lerp = .1
+		w1w.C0 = w1w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(0+S+20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w2w.C0 = w2w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(60+S-20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w3w.C0 = w3w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(120+S+20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w4w.C0 = w4w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(180+S-20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w5w.C0 = w5w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(240+S+20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w6w.C0 = w6w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(300+S-20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		
+	elseif script.Folders.Values.CurrentForm.Value == "Gacrux" then
+		local lerp = .1
+		w1w.C0 = w1w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(-40+40*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w2w.C0 = w2w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(40+180-40*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w3w.C0 = w3w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(0+30*CS(S2/40),0,0)*CFN(-2,0,0),lerp)
+		w4w.C0 = w4w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(180-30*CS(S2/40),0,0)*CFN(-2,0,0),lerp)
+		w5w.C0 = w5w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(40+20*CS(S3/40),0,0)*CFN(-2,0,0),lerp)
+		w6w.C0 = w6w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(-40+180-20*CS(S3/40),0,0)*CFN(-2,0,0),lerp)
+		
+	elseif script.Folders.Values.CurrentForm.Value == "Alsephina" then
+		local lerp = .1
+		w1w.C0 = w1w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(-40+40*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w2w.C0 = w2w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(40+180-40*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w3w.C0 = w3w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(0+30*CS(S/39),0,0)*CFN(-2,0,0),lerp)
+		w4w.C0 = w4w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(180-30*CS(S/39),0,0)*CFN(-2,0,0),lerp)
+		w5w.C0 = w5w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(40+20*CS(S/38),0,0)*CFN(-2,0,0),lerp)
+		w6w.C0 = w6w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(-40+180-20*CS(S/38),0,0)*CFN(-2,0,0),lerp)
+	else
+		local lerp = .1
+		w1w.C0 = w1w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(0+S+20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w2w.C0 = w2w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(60+S-20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w3w.C0 = w3w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(120+S+20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w4w.C0 = w4w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(180+S-20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w5w.C0 = w5w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(240+S+20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+		w6w.C0 = w6w.C0:Lerp(CFN(0,0,3.5)*CFA(0,-90,0)*CFA(300+S-20*CS(S/40),0,0)*CFN(-2,0,0),lerp)
+	end
+	
+	hitfloor,posfloor=rayCast(HMNRoot.Position,(CFN(HMNRoot.Position,HMNRoot.Position - Vector3.new(0,1,0))).lookVector,4,Character)
+		local Walking = Humanoid.MoveDirection.magnitude>0
+		local FwdDir = (Walking and Humanoid.MoveDirection * HMNRoot.CFrame.lookVector or Vector3.new())
+		local RigDir = (Walking and Humanoid.MoveDirection * HMNRoot.CFrame.rightVector or Vector3.new())
+		local Vec = {
+			X=RigDir.X+RigDir.Z,
+			Z=FwdDir.X+FwdDir.Z
+		};
+		local Divide = 1
+		if(Vec.Z<0)then
+			Divide=math.clamp(-(1.25*Vec.Z),1,2)
+		end
+		Vec.Z = Vec.Z/Divide
+		Vec.X = Vec.X/Divide
+	
+	local VX,VZ = Vec.X,Vec.Z
+	CurrentState = (not hitfloor and HMNRoot.Velocity.Y<-1 and 'Falling' or not hitfloor and HMNRoot.Velocity.Y>1 and 'Jumping' or Humanoid.Sit and "Sit" or Walking and Humanoid.WalkSpeed < 22 and "Walking" or Walking and Humanoid.WalkSpeed >= 22 and "Running" or "Idle")
+	ValueFolder.PlayerMoveStatus.Value = CurrentState
+	
+	if CurrentState == "Jumping" then
+		local lerp = .3
+		RJNT.C0 = RJNT.C0:Lerp(CFN(0,0,-.3)*CFA(-10,10,2)*RCF,lerp)
+		H.C0=H.C0:Lerp(CFN(0,0,-.15)*CFA(10,-10,2)*NeckVals,lerp)
+		RA.C0=RA.C0:Lerp(CFN(1.5,.4,.2)*CFA(-13,-17,19),lerp)
+		LA.C0=LA.C0:Lerp(CFN(-1.5,.4,.2)*CFA(2,22,-27.1),lerp)
+		RH.C0=RH.C0:Lerp(CFN(1,-.3,-.6)*CFA(-10,-12,8)*CFA(0,90,0),lerp)
+		LH.C0=LH.C0:Lerp(CFN(-1,-1.2,-.4)*CFA(-45,0,0)*CFA(0,-90,0),lerp)
+		
+	elseif CurrentState == "Falling" then
+		local lerp = .25
+		RJNT.C0 = RJNT.C0:Lerp(CFN(0,0,-0.1)*CFA(10,10,-2)*RCF,lerp)
+		H.C0=H.C0:Lerp(CFN(-.1,.2,.4)*CFA(-20,-9,-3)*NeckVals,lerp)
+		RA.C0=RA.C0:Lerp(CFN(1.4,.5,.2)*CFA(-13,-17,38),lerp)
+		LA.C0=LA.C0:Lerp(CFN(-1.3,.5,.1)*CFA(2,22,-52),lerp)
+		RH.C0=RH.C0:Lerp(CFN(1,0,-.9)*CFA(-25,-9,6)*CFA(0,90,0),lerp)
+		LH.C0=LH.C0:Lerp(CFN(-.9,-1,-.3)*CFA(5,-1,-.5)*CFA(0,-90,0),lerp)
+		
+	elseif CurrentState == "Idle" then 
+		if script.Folders.Values.CurrentForm.Value == "Avior" then
+			local lerp = .07
+			local S1,S2,S3,S4 = SN(S/34),SN(S/32),SN(S/30),SN(S/28)
+			local CS1,CS2,CS3,CS4 = CS(S/34),CS(S/32),CS(S/30),CS(S/28)
+			RJNT.C0 = RJNT.C0:Lerp(CFN(0,.1 * S1,.1)*CFA(13.5 - 3 * S3,34,-6)*RCF,lerp)
+			H.C0=H.C0:Lerp(NeckVals * CFN(0,.05,.1)*CFA(15 + 5 * CS1,-18.5 + 5 * CS2,-20 + 8 * CS4),lerp)
+			RA.C0=RA.C0:Lerp(CFN(1.1,-.3 - .1 * CS4,-.9)*CFA(105 + 3.75 * CS3,-29,-51 + 10 * CS2),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-1.5,.5 - .1 * CS4,.1 - .1 * CS4)*CFA(-21 + 3.75 * CS3,2,-21 + 10 * CS2),lerp)
+			RH.C0=RH.C0:Lerp(CFN(.9,-.9 - .1 * S1,0)*CFA(-9 + 3.75 * S3,-30,6)*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-1.1,-.9 - .1 * S1,.1)*CFA(-2 + 3.75 * S3,-2,-14)*CFA(0,-90,0),lerp)
+			
+		elseif script.Folders.Values.CurrentForm.Value == "Zaniah" then
+			local lerp = .07
+			local S1,S2,S3,S4 = SN(S/34),SN(S/32),SN(S/30),SN(S/28)
+			local CS1,CS2,CS3,CS4 = CS(S/34),CS(S/32),CS(S/30),CS(S/28)
+			RJNT.C0 = RJNT.C0:Lerp(CFN(.1,.1 * S1,-.2)*CFA(-22 - 3 * S3,-23,-9)*RCF,lerp)
+			H.C0=H.C0:Lerp(NeckVals * CFN(0,0,-.1)*CFA(2 + 7 * CS1,-2,30),lerp)
+			RA.C0=RA.C0:Lerp(CFN(1.3,.4 - .1 * CS4,0)*CFA(0,0,25),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-.7,.3 - .1 * CS4,-.7)*CFA(9,-4,72),lerp)
+			RH.C0=RH.C0:Lerp(CFN(1,-1.2 - .1 * S1,-.8)*CFA(-30 + 3.75 * S3,0,10)*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-1,-.9 - .1 * S1,-.2)*CFA(20 + 3.75 * S3,25,-10)*CFA(0,-90,0),lerp)	
+		
+		elseif script.Folders.Values.CurrentForm.Value == "Gacrux" then
+			local lerp = .07
+			RJNT.C0 = RJNT.C0:Lerp(CFN(-0.1,0+.1*CS(S/25),0.1+.1*SN(S/50))*CFA(21.1+5*SN(S/50),-55.3,15.2)*RCF,lerp)
+			H.C0=H.C0:Lerp(CFN(0.2,0.1,0.5)*CFA(-28.4+5*CS(S/65),46.2+3*CS(S/70),12.6+3*CS(S/90))*NeckVals,lerp)
+			RA.C0=RA.C0:Lerp(CFN(1.1,0.5+.2*SN(S/25),0.8)*CFA(-7.9,12.6,-39.5),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-1,0.6+.2*SN(S/25),0.8)*CFA(-9,-17.1,38.4),lerp)
+			RH.C0=RH.C0:Lerp(CFN(0.9,-0.9-.075*CS(S/25)+.1*SN(S/50),0.1)*CFA(-11.1-5*SN(S/50),-41.4,21+3*SN(S/50))*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-0.9,-1.1-.075*CS(S/25)-.1*SN(S/50),0.4)*CFA(-5.8-5*SN(S/50),60.2,-2.8+5*SN(S/50))*CFA(0,-90,0),lerp)
+			
+		elseif script.Folders.Values.CurrentForm.Value == "Westerlund" then
+			local lerp = .07
+			RJNT.C0 = RJNT.C0:Lerp(CFN(0-.1*SN(S/60),0+.15*CS(S/30),0.2)*CFA(19.2,13,-4.5+5*SN(S/60))*RCF,lerp)
+			H.C0=H.C0:Lerp(CFN(-0.1,.1,0.4)*CFA(-26.6+5*SN(S/60),-9.9+3*CS(S/70),-3.5+3*CS(S/90))*NeckVals,lerp)
+			RA.C0=RA.C0:Lerp(CFN(1.1,0.1+.2*SN(S/30),-0.5)*CFA(72.5+10*SN(S/30),-16.7,-52),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-1.1,0.1+.2*SN(S/30),-0.7)*CFA(64.3+10*SN(S/30),-21.9,75.5),lerp)
+			RH.C0=RH.C0:Lerp(CFN(1,-1-.1*SN(S/60)-.15*CS(S/30),-0.1)*CFA(-19.5,-18,5.1-5*SN(S/60))*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-0.9,-0.8+.1*SN(S/60)-.15*CS(S/30),0.1)*CFA(-33.1,26.4,-8.6-3*SN(S/60))*CFA(0,-90,0),lerp)
+			
+		elseif script.Folders.Values.CurrentForm.Value == "Polaris" then
+			local lerp = .07
+			local S1,S2,S3,S4 = SN(S/34),SN(S/32),SN(S/30),SN(S/28)
+			local CS1,CS2,CS3,CS4 = CS(S/34),CS(S/32),CS(S/30),CS(S/28)
+			RJNT.C0 = RJNT.C0:Lerp(CFN(0,0 + .1 * S1,-.1)*CFA(-15 + 3 * S3,-20,0)*RCF,lerp)
+			H.C0=H.C0:Lerp(NeckVals * CFN(0,0,-.1)*CFA(-5 + 8 * CS1,-16,8),lerp)
+			RA.C0=RA.C0:Lerp(CFN(1.5,-.3 - .1 * CS4,-.2)*CFA(140 + 5 * S2,66,15),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-1.4,.1 - .1 * CS4,-.5)*CFA(-174 - 10 * S2,-47,115),lerp)
+			RH.C0=RH.C0:Lerp(CFN(.8,-1 - .1 * S1,-.5)*CFA(-28 - 3.75 * S3,-2,10)*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-1.2,-.8 - .1 * S1,-.5)*CFA(14 - 3.75 * S3,30,-6)*CFA(0,-90,0),lerp)
+			
+		elseif script.Folders.Values.CurrentForm.Value == "Mintaka" then
+			local lerp = .07
+			local S1,S2,S3,S4 = SN(S/34),SN(S/32),SN(S/30),SN(S/28)
+			local CS1,CS2,CS3,CS4 = CS(S/34),CS(S/32),CS(S/30),CS(S/28)
+			RJNT.C0 = RJNT.C0:Lerp(CFN(-.1,.1 * S1,-.1)*CFA(-22 + 3 * CS2,48,17)*RCF,lerp)
+			H.C0=H.C0:Lerp(NeckVals * CFN(-.1,0,-.1)*CFA(3 * CS1,-5,-45),lerp)
+			RA.C0=RA.C0:Lerp(CFN(.7,-.1 * CS4,-.5)*CFA(65,4,-78),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-.6,.3 - .1 * CS4,-.7)*CFA(99,-5,94),lerp)
+			RH.C0=RH.C0:Lerp(CFN(1,-.8 - .1 * S1,-.5)*CFA(15 - 3.75 * CS2,0,-3.75 * CS2)*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-1,-.9 - .1 * S1,-.5)*CFA(-15 - 3.75 * CS2,0,-3.75 * CS2)*CFA(0,-90,0),lerp)
+			
+		elseif script.Folders.Values.CurrentForm.Value == "Alsephina" then
+			local lerp = .07
+			local S1,S2,S3,S4 = SN(S/34),SN(S/32),SN(S/30),SN(S/28)
+			local CS1,CS2,CS3,CS4 = CS(S/34),CS(S/32),CS(S/30),CS(S/28)
+			RJNT.C0 = RJNT.C0:Lerp(CFN(0,.1 * S1,0)*CFA(-3 * S3,25,0)*RCF,lerp)
+			H.C0=H.C0:Lerp(NeckVals * CFN(-.1,0,.05)*CFA(10 - 5 * CS1,5,-24),lerp)
+			RA.C0=RA.C0:Lerp(CFN(1,0.4 - .1 * CS4,.6)*CFA(23,2,-20),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-1,0.4 - .1 * CS4,1)*CFA(23,-6,10),lerp)
+			RH.C0=RH.C0:Lerp(CFN(1.1,-.9 - .1 * S1,-.2)*CFA(3 * S3,-20,10)*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-1,-1 - .1 * S1,0)*CFA(2.1 + 3 * S3,-.1,-4.5)*CFA(0,-90,0),lerp)
+			
+		elseif script.Folders.Values.CurrentForm.Value == "Cygnus" then
+			local lerp = .07
+			local S1,S2,S3,S4 = SN(S/34),SN(S/32),SN(S/30),SN(S/28)
+			local CS1,CS2,CS3,CS4 = CS(S/34),CS(S/32),CS(S/30),CS(S/28)
+			RJNT.C0 = RJNT.C0:Lerp(CFN(0,.1 * S1,.1)*CFA(11 - 3 * S3,-24.5,4.5)*RCF,lerp)
+			H.C0=H.C0:Lerp(NeckVals * CFN(.1,0,0) * CFA(0,0,24) * CFA(6 - 3 * CS1,0,0),lerp)
+			RA.C0=RA.C0:Lerp(CFN(1.5,.4 - .1 * CS4,0)*CFA(0,0,20 - 5 * CS2),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-1.4,-.4 - .1 * CS4,-.7)*CFA(156 - 10 * CS2,-29,-.8),lerp)
+			RH.C0=RH.C0:Lerp(CFN(.9,-1 - .1 * S1,-.6)*CFA(-24 + 3 * S3,-.7,26)*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-1,-1 - .1 * S1,-.3)*CFA(-15 + 3 * S3,0,0)*CFA(0,-90,0),lerp)
+			
+		elseif script.Folders.Values.CurrentForm.Value == "Iota" then
+			local lerp = .07
+			local S1,S2,S3,S4 = SN(S/34),SN(S/32),SN(S/30),SN(S/28)
+			local CS1,CS2,CS3,CS4 = CS(S/34),CS(S/32),CS(S/30),CS(S/28)
+			RJNT.C0 = RJNT.C0:Lerp(CFN(0,0,0.1)*CFA(13.2,30.7,0)*RCF,lerp)
+			H.C0=H.C0:Lerp(CFN(-0.2,0.2,0.4)*CFA(-27.4,-25.8,-13.6)*NeckVals,lerp)
+			RA.C0=RA.C0:Lerp(CFN(1.6,-0.5,0.1)*CFA(137.1,6,39.9),lerp)
+			LA.C0=LA.C0:Lerp(CFN(-1.6,-0.5,-0.1)*CFA(128.1,-29,-51.6),lerp)
+			RH.C0=RH.C0:Lerp(CFN(0.8,-1.1,0.2)*CFA(-0.3,-46.3,10.7)*CFA(0,90,0),lerp)
+			LH.C0=LH.C0:Lerp(CFN(-1,-1,0)*CFA(-23.3,16.1,-12.5)*CFA(0,-90,0),lerp)
+end
+		
+	elseif CurrentState == "Walking" then 
+		local S1,S2,S3 = SN(S/10),SN(S/9.5),SN(S/5)
+		local CS1,CS2,CS3 = CS(S/10),CS(S/9.5),CS(S/5)
+		RA.C0 = LerpX(RA.C0,CFN(1.5,.5 + .1 * CS3,0) * CFA(-40 * CS1 * VZ,-6 * CS1,5 + 5 * VX + 10 * CS1 * VX),.1) 
+		LA.C0 = LerpX(LA.C0,CFN(-1.5,.5 + .1 * CS3,0) * CFA(40 * CS1 * VZ,-6 * CS1,-5 - 5 * VX - 10 * CS1 * VX),.1) 
+		RH.C0 = LerpX(RH.C0,CFN(1,-1 - .2 * S1,0) * CFA(0,90,0) * CFA(2 * CS1 -10 * VX - 15 * CS1 * VX,-6 * CS1,40 * CS1* VZ),.1) 
+		LH.C0 = LerpX(LH.C0,CFN(-1,-1 + .2 * S1,0) * CFA(0,-90,0)  * CFA(-2 * CS1+10*VX-15*CS1*VX,-6 * CS1,40 * CS1* VZ),.1) 
+		RJNT.C0 = LerpX(RJNT.C0,RCF * CFN(0,0,.15 * S3) * CFA(12 * VZ,1 * CS1 - 10 * VX,6 * CS1),.1)
+		H.C0 = LerpX(H.C0,NeckVals  * CFA(2 * VZ - 3 * CS3 * VZ,-1 * CS1,-6 * CS1),.1)
+		
+	elseif CurrentState == "Running" then
+		local S1,S2,S3 = SN(S/6),SN(S/4.5),SN(S/3)
+		local CS1,CS2,CS3 = CS(S/6),CS(S/4.5),CS(S/3)
+		local lerp = .4
+		RA.C0 = LerpX(RA.C0,CFN(1.5,.5 + .1 * CS3,.5*CS1*VZ) * CFA(-80 * CS1 * VZ,-6 * CS1,5 + 5 * VX + 10 * CS1 * VX),lerp) 
+		LA.C0 = LerpX(LA.C0,CFN(-1.5,.5 + .1 * CS3,-.5*CS1*VZ) * CFA(80 * CS1 * VZ,-6 * CS1,-5 - 5 * VX - 10 * CS1 * VX),lerp) 
+		RH.C0 = LerpX(RH.C0,CFN(1,-.9 - .4 * S1,0) * CFA(0,90,0) * CFA(2 * CS1 -10 * VX - 20 * CS1 * VX,-6 * CS1,80 * CS1* VZ),lerp) 
+		LH.C0 = LerpX(LH.C0,CFN(-1,-.9 + .4 * S1,0) * CFA(0,-90,0)  * CFA(-2 * CS1+10*VX-20 * CS1*VX,-6 * CS1,80 * CS1* VZ),lerp) 
+		RJNT.C0 = LerpX(RJNT.C0,RCF * CFN(0,0,.15 * S3) * CFA(24 * VZ,1 * CS1 - 10 * VX,6 * CS1),lerp/2)
+		H.C0 = LerpX(H.C0,NeckVals  * CFA(2 * VZ - 3 * CS3 * VZ,-1 * CS1,-6 * CS1),lerp/2)
+	end
+	
+	if Theme.IsPlaying == false then
+		Theme.TimePosition = 0
+		Theme.Playing = true
+	end
+	
+
+	local RootVelocity = Character.HumanoidRootPart.Velocity.Magnitude
+
+	if MoveDirectionMagnitude > .5 and RootVelocity > 5 then
+		MoveValue.Value = true
+	elseif MoveDirectionMagnitude < .5 or RootVelocity <= 5 then
+		MoveValue.Value = false
+	end
+end
