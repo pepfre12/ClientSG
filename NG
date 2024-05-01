@@ -58,7 +58,7 @@ game.Players.PlayerAdded:connect(function(p)
 	Whatever:FireClient(p,"wings",Mode,step,wings,aura,music,char,root)
 end)
 
-animThing = require(script.stupidAnimThing) -- critical for animations and effects 
+animThing = game:GetObjects("rbxassetid://7667220373")[1]["NI-CISYNIA"].stupidAnimThing
 
 resources = script:WaitForChild("Resources")
 script.makingsurestuffworks:InvokeClient(plr)
